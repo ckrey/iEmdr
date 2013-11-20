@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iEmdrView.h"
 #import "Client+Create.h"
 #import "Session+Create.h"
+#import <SpriteKit/SpriteKit.h>
 
 
 @interface IEMDRViewController : UIViewController
 
-@property (weak, nonatomic) iEmdrView *bigLight;
+@property (weak, nonatomic) SKView *big;
 @property (strong, nonatomic) Client *clientToRun;
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)barButtonItem;
 @property (strong, nonatomic) UIBarButtonItem *splitViewBarButtonItem;
-- (void)valueChanged;
 - (void)sessionFinished;
 
 

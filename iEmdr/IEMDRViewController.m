@@ -7,11 +7,13 @@
 //
 
 #import "IEMDRViewController.h"
-#import "iEmdrView.h"
 #import "iEmdrAppDelegate.h"
 #import "Client+Create.h"
 #import "Session+Create.h"
 #include <math.h>
+
+#import <SpriteKit/SpriteKit.h>
+#import "IEMDRScene.h"
 
 @interface IEMDRViewController ()
 
@@ -38,13 +40,36 @@
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 @property (weak, nonatomic) IBOutlet UITextField *durationText;
 @property (weak, nonatomic) IBOutlet UISlider *durationSlider;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *formSegment;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *playButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *stopButton;
 
-@property (weak, nonatomic) IBOutlet iEmdrView *light;
+@property (nonatomic) NSTimeInterval duration;
+@property (strong, nonatomic) NSTimer *passingTimer;
+@property (strong, nonatomic) NSDate *started;
+
 
 @end
+
+#define BPM_MAX 180.0
+#define BPM_MIN 10.0
+#define BPM_DEFAULT 30.0
+
+#define RADIUS_MAX 100.0
+#define RADIUS_MIN 5.0
+#define RADIUS_DEFAULT 25.0
+
+#define BACKGROUND_MAX 1.0
+#define BACKGROUND_MIN 0.0
+#define BACKGROUND_DEFAULT 0.2
+
+#define DURATION_MAX 600.0
+#define DURATION_MIN 10.0
+#define DURATION_DEFAULT 60.0
+
+#define HUE_DEFAULT 0.9
+
 
 @implementation IEMDRViewController
 
@@ -62,36 +87,49 @@
     [self setClientName];
 }
 
+- (void)setBig:(SKView *)big
+{
+    _big = big;
+    if (big) {
+        IEMDRScene *scene = [[IEMDRScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
+        [big presentScene:scene];
+    }
+}
+
 - (void)viewDidLoad
 {
     IEMDRAppDelegate *iemdrAD = [UIApplication sharedApplication].delegate;
     iemdrAD.iemdrVC = self;
     [self setClientName];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     
-    self.durationSlider.minimumValue = [iEmdrView minDuration];
-    self.durationSlider.maximumValue = [iEmdrView maxDuration];
-    self.durationSlider.value = [iEmdrView defaultDuration];
+    self.durationSlider.minimumValue = DURATION_MIN;
+    self.durationSlider.maximumValue = DURATION_MAX;
+    self.durationSlider.value = DURATION_DEFAULT;
     
-    self.backgroundSlider.minimumValue = [iEmdrView minBackground];
-    self.backgroundSlider.maximumValue = [iEmdrView maxBackground];
-    self.backgroundSlider.value = [iEmdrView defaultBackground];
+    self.backgroundSlider.minimumValue = BACKGROUND_MIN;
+    self.backgroundSlider.maximumValue = BACKGROUND_MAX;
+    self.backgroundSlider.value = BACKGROUND_DEFAULT;
     
-    self.sizeSlider.minimumValue = [iEmdrView minRadius];
-    self.sizeSlider.maximumValue = [iEmdrView maxRadius];
-    self.sizeSlider.value = [iEmdrView defaultRadius];
+    self.sizeSlider.minimumValue = RADIUS_MIN;
+    self.sizeSlider.maximumValue = RADIUS_MAX;
+    self.sizeSlider.value = RADIUS_DEFAULT;
     
-    self.light.color = [UIColor redColor];
-    CGFloat hue, saturation, brightness, alpha;
-    [[UIColor redColor] getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
-    self.hueSlider.value = hue;
+    self.hueSlider.value = HUE_DEFAULT;
+
     
-    self.speedSlider.minimumValue = [iEmdrView minBpm];
-    self.speedSlider.maximumValue = [iEmdrView maxBpm];
-    self.speedSlider.value = [iEmdrView defaultBpm];
+    self.speedSlider.minimumValue = BPM_MIN;
+    self.speedSlider.maximumValue = BPM_MAX;
+    self.speedSlider.value = BPM_DEFAULT;
     
     if (self.clientToRun && self.clientToRun.hasSessions && [self.clientToRun.hasSessions count]) {
         Session *newestSession;
@@ -118,50 +156,22 @@
     [self hueChanged:self.hueSlider];
     [self speedChanged:self.speedSlider];
     
-    self.light.observer = self;
-    self.light.on = FALSE;
-    
-    self.playButton.enabled = TRUE;
-    self.stopButton.enabled = FALSE;
-    
-    [self.light setNeedsDisplay];
-    
-    [self setBigLight:self.bigLight];
-    [self.bigLight setNeedsDisplay];
-    
-}
-
-- (void)setBigLight:(iEmdrView *)bigLight
-{
-    _bigLight = bigLight;
-    
-    if (_bigLight) {
-        _bigLight.background = self.light.background;
-        _bigLight.color = self.light.color;
-        _bigLight.radius = self.light.radius;
-        _bigLight.duration = self.light.duration;
-        _bigLight.bpm = self.light.bpm;
-        _bigLight.on = self.light.on;
-    }
+    [self stopped:nil];
 }
 
 - (IBAction)durationChanged:(UISlider *)sender {
-    self.light.duration = sender.value;
-    self.durationText.text = [NSString stringWithFormat:@"%3.0f", self.light.duration];
-    [self setBigLight:self.bigLight];
+    self.duration = sender.value;
+    self.durationText.text = [NSString stringWithFormat:@"%3.0f", self.duration];
 }
 
-- (void)valueChanged
+- (void)timePassed:(NSTimer *)timer
 {
-    double value = self.light.progress;
+    float value = [[NSDate date] timeIntervalSinceDate:self.started] / self.durationSlider.value;
+    NSLog(@"ticker %f", value);
     [self.progress setProgress:value animated:YES];
     
-    if (self.light.on) {
-        self.playButton.enabled = FALSE;
-        self.stopButton.enabled = TRUE;
-    } else {
-        self.playButton.enabled = TRUE;
-        self.stopButton.enabled = FALSE;
+    if (value >= 1.0) {
+        [self stopped:nil];
     }
 }
 
@@ -179,9 +189,12 @@
     self.durationLabel.textColor = textColor;
     self.durationText.textColor = textColor;
     
-    self.light.background = sender.value;
     self.backgroundText.text = [NSString stringWithFormat:@"%2.1f", sender.value];
-    [self setBigLight:self.bigLight];
+    
+    SKView *spriteView = (SKView *)self.view;
+    spriteView.scene.backgroundColor = [UIColor colorWithHue:1.0 saturation:0.0 brightness:sender.value alpha:1.0];
+    self.big.scene.backgroundColor = [UIColor colorWithHue:1.0 saturation:0.0 brightness:sender.value alpha:1.0];
+
 }
 - (IBAction)paused:(UIBarButtonItem *)sender {
     BOOL hidden = self.sizeLabel.isHidden ?
@@ -207,58 +220,161 @@
     self.durationText.hidden = hidden;
     self.durationSlider.hidden = hidden;
     
+    self.formSegment.hidden = hidden;
+    
     [self.navigationController setNavigationBarHidden:hidden animated:YES];
 }
 
 - (IBAction)sizeChanged:(UISlider *)sender {
-    self.light.radius = sender.value;
-    self.sizeText.text = [NSString stringWithFormat:@"%3.0f", self.light.radius];
-    [self setBigLight:self.bigLight];
+    self.sizeText.text = [NSString stringWithFormat:@"%3.0f", self.sizeSlider.value];
+    
+    SKView *spriteView = (SKView *) self.view;
+    SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
+    node.path = CGPathCreateWithEllipseInRect(CGRectMake(-sender.value, -sender.value, sender.value*2, sender.value*2), NULL);
+    
+    SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
+    nodeBig.path = CGPathCreateWithEllipseInRect(CGRectMake(-sender.value, -sender.value, sender.value*2, sender.value*2), NULL);
 }
 
 - (IBAction)hueChanged:(UISlider *)sender {
-    CGFloat hue, saturation, brightness, alpha;
-    [self.light.color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
-    self.light.color = [UIColor colorWithHue:sender.value saturation:saturation brightness:brightness alpha:alpha];
     self.hueText.text = [NSString stringWithFormat:@"%2.1f", sender.value];
-    [self setBigLight:self.bigLight];
+    
+    SKView *spriteView = (SKView *) self.view;
+    SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
+    node.fillColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
+    node.strokeColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
+
+    SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
+    nodeBig.fillColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
+    nodeBig.strokeColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
+
 }
 
 - (IBAction)speedChanged:(UISlider *)sender {
-    self.light.bpm = sender.value;
-    self.speedText.text = [NSString stringWithFormat:@"%3.0f", self.light.bpm];
-    [self setBigLight:self.bigLight];
+    self.speedText.text = [NSString stringWithFormat:@"%3.0f", sender.value];
+
+    SKView *spriteView = (SKView *) self.view;
+    SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
+    node.speed = sender.value / 6;
+    
+    SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
+    nodeBig.speed = sender.value / 6;
+
 }
 
 - (IBAction)played:(UIBarButtonItem *)sender {
+    
+    self.passingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                         target:self
+                                                       selector:@selector(timePassed:)
+                                                       userInfo:nil
+                                                        repeats:YES];
     self.playButton.enabled = FALSE;
     self.stopButton.enabled = TRUE;
-    self.light.on = TRUE;
-    [self setBigLight:self.bigLight];
+    self.started = [NSDate date];
+
+    SKView *spriteView = (SKView *) self.view;
+    SKNode *node = [spriteView.scene childNodeWithName:@"node"];
+    node.paused = FALSE;
+
+    SKNode *nodeBig = [self.big.scene childNodeWithName:@"node"];
+    nodeBig.paused = FALSE;
 }
 
 - (IBAction)stopped:(UIBarButtonItem *)sender {
+    if (self.passingTimer) {
+        [self.passingTimer invalidate];
+    }
     self.playButton.enabled = TRUE;
     self.stopButton.enabled = FALSE;
-    self.light.on = FALSE;
-    [self setBigLight:self.bigLight];
     [self sessionFinished];
+
+    SKView *spriteView = (SKView *)self.view;
+    SKNode *node = [spriteView.scene childNodeWithName:@"node"];
+    [node removeAllActions];
+
+    float w = spriteView.scene.frame.size.width;
+    float h = spriteView.scene.frame.size.height;
+    SKAction *reset = [SKAction moveTo:CGPointMake(w/2, h/2) duration:0.25];
+    [node runAction:reset completion:^{
+        [self setNode:(SKView *)self.view];
+        node.paused = TRUE;
+    }];
+
+    SKNode *nodeBig = [self.big.scene childNodeWithName:@"node"];
+    [nodeBig removeAllActions];
+
+    float wBig = self.big.scene.frame.size.width;
+    float hBig = self.big.scene.frame.size.height;
+    SKAction *resetBig = [SKAction moveTo:CGPointMake(wBig/2, hBig/2) duration:0.25];
+    [nodeBig runAction:resetBig completion:^{
+        [self setNode:self.big];
+        nodeBig.paused = TRUE;
+    }];
+
 }
 
+- (IBAction)formChanged:(UISegmentedControl *)sender {
+    [self setNode:(SKView *)self.view];
+    [self setNode:self.big];
+}
+
+- (void)setNode:(SKView *)view
+{
+    SKNode *node = [view.scene childNodeWithName:@"node"];
+    [node removeAllActions];
+    float w = view.scene.frame.size.width;
+    float h = view.scene.frame.size.height;
+    
+    SKAction *reset = [SKAction moveTo:CGPointMake(w/2, h/2) duration:0];
+    
+    struct CGPath *path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    
+    switch (self.formSegment.selectedSegmentIndex) {
+        case 3:
+            CGPathAddLineToPoint(path, NULL, -w/4, w/4);
+            CGPathAddArc(path, NULL, -w/4, 0, w/4, M_PI/2, 2*M_PI-M_PI/2, NO);
+            CGPathAddLineToPoint(path, NULL, w/4, w/4);
+            CGPathAddArc(path, NULL, w/4, 0, w/4, M_PI/2, -M_PI/2, YES);
+            CGPathCloseSubpath(path);
+            break;
+        case 2:
+            CGPathAddLineToPoint(path, NULL, -(w/2), (h/2));
+            CGPathAddLineToPoint(path, NULL, w/2, -h/2);
+            CGPathCloseSubpath(path);
+            break;
+        case 1:
+            CGPathAddLineToPoint(path, NULL, -(w/2), -(h/2));
+            CGPathAddLineToPoint(path, NULL, w/2, h/2);
+            CGPathCloseSubpath(path);
+            break;
+        case 0:
+        default:
+            CGPathAddLineToPoint(path, NULL, -w/2, 0);
+            CGPathAddLineToPoint(path, NULL, w/2, 0);
+            CGPathCloseSubpath(path);
+            break;
+    }
+    
+    SKAction *sound = [SKAction playSoundFileNamed:@"Kognitionen.m4a" waitForCompletion:NO];
+    SKAction *action = [SKAction followPath:path duration:10.0];
+    SKAction *sequence = [SKAction sequence:@[sound, reset, action]];
+    
+    [node runAction:[SKAction repeatActionForever:sequence]];
+}
 
 - (void)sessionFinished
 {
     if (self.clientToRun) {
-        CGFloat hue, saturation, brightness, alpha;
-        [self.light.color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
-        
         (void)[Session sessionWithTimestamp:[NSDate date]
-                                   duration:@(self.light.duration)
-                             actualDuration:@(self.light.progress)
-                                     canvas:@(self.light.background)
-                                        hue:@(hue)
-                                       size:@(self.light.radius)
-                                  frequency:@(self.light.bpm)
+                                   duration:@(self.durationSlider.value)
+                             actualDuration:@([[NSDate date] timeIntervalSinceDate:self.started] / self.durationSlider.value)
+                                     canvas:@(self.backgroundSlider.value)
+                                        hue:@(self.hueSlider.value)
+                                       size:@(self.sizeSlider.value)
+                                  frequency:@(self.speedSlider.value)
+                                  form:@(self.formSegment.selectedSegmentIndex)
                                      client:self.clientToRun
                      inManagedObjectContext:self.clientToRun.managedObjectContext];
     }
@@ -266,10 +382,17 @@
 
 - (void)viewDidLayoutSubviews
 {
+    [super viewDidLayoutSubviews];
+    
     NSMutableArray *barItems = [self.toolbar.items mutableCopy];
     if (_splitViewBarButtonItem) [barItems removeObject:_splitViewBarButtonItem];
     if (_splitViewBarButtonItem) [barItems insertObject:_splitViewBarButtonItem atIndex:0];
     self.toolbar.items = barItems;
+    
+    SKView *spriteView = (SKView *) self.view;    
+    IEMDRScene *scene = [[IEMDRScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
+    [spriteView presentScene:scene];
+
 }
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)barButtonItem

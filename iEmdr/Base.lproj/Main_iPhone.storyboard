@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aWh-Df-nAE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--I Emdr ClientTVC - iEmdr-->
@@ -72,7 +72,7 @@
                         <viewControllerLayoutGuide type="top" id="bcN-nl-9qm"/>
                         <viewControllerLayoutGuide type="bottom" id="kOJ-jZ-qYL"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hd5-zD-LPK">
+                    <view key="view" contentMode="scaleToFill" id="hd5-zD-LPK" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -98,15 +98,6 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvw-Il-NXt" customClass="iEmdrView">
-                                <rect key="frame" x="110" y="234" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="FBz-xZ-ez4"/>
-                                    <constraint firstAttribute="width" constant="100" id="v7o-Vm-lrK"/>
-                                </constraints>
-                            </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="43P-xA-Tgy">
                                 <rect key="frame" x="0.0" y="522" width="320" height="3"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -242,6 +233,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vhE-hJ-IrH">
+                                <rect key="frame" x="20" y="283" width="280" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="LEG-pN-M3q"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="-"/>
+                                    <segment title="/"/>
+                                    <segment title="\"/>
+                                    <segment title="∞"/>
+                                </segments>
+                                <connections>
+                                    <action selector="formChanged:" destination="2X4-GY-zBZ" eventType="valueChanged" id="vSj-vj-pSb"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -252,15 +259,16 @@
                             <constraint firstAttribute="trailing" secondItem="FGd-sU-C8h" secondAttribute="trailing" constant="20" symbolic="YES" id="3jU-qn-lBJ"/>
                             <constraint firstItem="82f-xU-bd1" firstAttribute="leading" secondItem="ETX-Ws-eHn" secondAttribute="trailing" constant="8" symbolic="YES" id="4FX-WA-Nyk"/>
                             <constraint firstItem="nFg-ku-tyz" firstAttribute="centerY" secondItem="GAW-R6-1ub" secondAttribute="centerY" id="4RU-lU-XgL"/>
+                            <constraint firstItem="Jh2-Ex-Ibs" firstAttribute="top" secondItem="vhE-hJ-IrH" secondAttribute="bottom" constant="8" symbolic="YES" id="68P-eV-yU5"/>
                             <constraint firstItem="j1D-3g-bGU" firstAttribute="leading" secondItem="82f-xU-bd1" secondAttribute="trailing" constant="8" symbolic="YES" id="6mI-uR-1mr"/>
                             <constraint firstItem="nFg-ku-tyz" firstAttribute="leading" secondItem="HHD-cu-0qP" secondAttribute="trailing" constant="8" symbolic="YES" id="6xu-nT-UIo"/>
                             <constraint firstAttribute="trailing" secondItem="Nxj-zC-dxQ" secondAttribute="trailing" constant="20" symbolic="YES" id="7J4-Fh-vh9"/>
                             <constraint firstItem="c6Z-jP-5Ta" firstAttribute="leading" secondItem="hd5-zD-LPK" secondAttribute="leading" constant="20" symbolic="YES" id="8iX-OJ-sPB"/>
                             <constraint firstItem="ETX-Ws-eHn" firstAttribute="leading" secondItem="hd5-zD-LPK" secondAttribute="leading" constant="20" symbolic="YES" id="95X-Cw-uGm"/>
                             <constraint firstItem="43P-xA-Tgy" firstAttribute="top" secondItem="Bb0-kE-im3" secondAttribute="bottom" constant="8" symbolic="YES" id="9bT-Be-Cxr"/>
+                            <constraint firstAttribute="trailing" secondItem="vhE-hJ-IrH" secondAttribute="trailing" constant="20" symbolic="YES" id="AlN-dy-fXE"/>
                             <constraint firstItem="HHD-cu-0qP" firstAttribute="leading" secondItem="GAW-R6-1ub" secondAttribute="trailing" constant="8" symbolic="YES" id="Czb-Ia-XeX"/>
                             <constraint firstItem="Rz7-Wo-nuu" firstAttribute="leading" secondItem="hd5-zD-LPK" secondAttribute="leading" constant="20" symbolic="YES" id="DTi-ki-NF8"/>
-                            <constraint firstAttribute="centerX" secondItem="Gvw-Il-NXt" secondAttribute="centerX" id="Faj-Dp-kbO"/>
                             <constraint firstItem="TiW-4t-YmR" firstAttribute="centerY" secondItem="Bb0-kE-im3" secondAttribute="centerY" id="IpZ-Vn-pYz"/>
                             <constraint firstItem="nFg-ku-tyz" firstAttribute="top" secondItem="FGd-sU-C8h" secondAttribute="bottom" constant="8" symbolic="YES" id="IwF-UD-TF9"/>
                             <constraint firstItem="ZkN-wd-qDI" firstAttribute="leading" secondItem="c6Z-jP-5Ta" secondAttribute="trailing" constant="8" symbolic="YES" id="J3J-kb-Lkx"/>
@@ -275,10 +283,10 @@
                             <constraint firstItem="FGd-sU-C8h" firstAttribute="top" secondItem="j1D-3g-bGU" secondAttribute="bottom" constant="8" symbolic="YES" id="eDM-Bo-5gF"/>
                             <constraint firstItem="Bb0-kE-im3" firstAttribute="top" secondItem="nFg-ku-tyz" secondAttribute="bottom" constant="8" symbolic="YES" id="eRL-o8-YO9"/>
                             <constraint firstItem="j1D-3g-bGU" firstAttribute="centerY" secondItem="82f-xU-bd1" secondAttribute="centerY" id="gSk-iZ-rBA"/>
-                            <constraint firstAttribute="centerY" secondItem="Gvw-Il-NXt" secondAttribute="centerY" id="hKY-R2-8jb"/>
                             <constraint firstAttribute="trailing" secondItem="nFg-ku-tyz" secondAttribute="trailing" constant="20" symbolic="YES" id="jfL-jc-m4I"/>
                             <constraint firstAttribute="trailing" secondItem="l5I-VD-YPH" secondAttribute="trailing" id="jhP-L8-Vur"/>
                             <constraint firstItem="c6Z-jP-5Ta" firstAttribute="centerY" secondItem="ZkN-wd-qDI" secondAttribute="centerY" id="kbo-yx-3DN"/>
+                            <constraint firstItem="vhE-hJ-IrH" firstAttribute="leading" secondItem="hd5-zD-LPK" secondAttribute="leading" constant="20" symbolic="YES" id="knd-pm-Yv1"/>
                             <constraint firstItem="Nxj-zC-dxQ" firstAttribute="leading" secondItem="Jh2-Ex-Ibs" secondAttribute="trailing" constant="8" symbolic="YES" id="lQe-Ul-2y5"/>
                             <constraint firstItem="Nxj-zC-dxQ" firstAttribute="centerY" secondItem="Rz7-Wo-nuu" secondAttribute="centerY" id="mQh-yq-UqJ"/>
                             <constraint firstItem="c6Z-jP-5Ta" firstAttribute="centerY" secondItem="FGd-sU-C8h" secondAttribute="centerY" id="qtu-mz-4Wx"/>
@@ -304,10 +312,10 @@
                         <outlet property="durationLabel" destination="TiW-4t-YmR" id="OyD-BD-l4h"/>
                         <outlet property="durationSlider" destination="Bb0-kE-im3" id="zQK-gB-pqa"/>
                         <outlet property="durationText" destination="GxD-dn-6iM" id="KWn-E9-OOi"/>
+                        <outlet property="formSegment" destination="vhE-hJ-IrH" id="kS9-7r-qcD"/>
                         <outlet property="hueLabel" destination="c6Z-jP-5Ta" id="ErV-HT-tJR"/>
                         <outlet property="hueSlider" destination="FGd-sU-C8h" id="0bD-Tx-oB1"/>
                         <outlet property="hueText" destination="ZkN-wd-qDI" id="wmF-mI-Hnp"/>
-                        <outlet property="light" destination="Gvw-Il-NXt" id="DNL-v6-s13"/>
                         <outlet property="playButton" destination="cxO-gj-OWb" id="Oq7-r4-sNa"/>
                         <outlet property="progress" destination="43P-xA-Tgy" id="Zmc-LS-Rnd"/>
                         <outlet property="sizeLabel" destination="Rz7-Wo-nuu" id="pCJ-dA-qRf"/>

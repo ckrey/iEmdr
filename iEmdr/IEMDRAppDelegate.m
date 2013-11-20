@@ -7,12 +7,10 @@
 //
 
 #import "IEMDRAppDelegate.h"
-#import "iEmdrShowOnlyVC.h"
 
 @interface IEMDRAppDelegate()
 
 @property (strong, nonatomic) UIWindow *secondWindow;
-@property (strong, nonatomic) iEmdrShowOnlyVC *iemdrSOVC;
 
 @end
 
@@ -95,7 +93,7 @@
         self.secondWindow.hidden = YES;
         self.secondWindow = nil;
     }
-    self.iemdrVC.bigLight = nil;
+    self.iemdrVC.big = nil;
 }
 
 - (void)checkForExistingScreenAndInitializeIfPresent
@@ -109,11 +107,14 @@
         
         self.secondWindow = [[UIWindow alloc] initWithFrame:screenBounds];
         self.secondWindow.screen = secondScreen;
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:[NSBundle mainBundle]];
-        self.iemdrSOVC = [storyboard instantiateViewControllerWithIdentifier:@"iEmdr Show Only"];
-        [self.iemdrSOVC.view layoutSubviews];
-        self.secondWindow.rootViewController = self.iemdrSOVC;
-        self.iemdrVC.bigLight = self.iemdrSOVC.light;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"big" bundle:[NSBundle mainBundle]];
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"big"];
+        self.secondWindow.rootViewController = viewController;
+        SKView *skView = (SKView *)viewController.view;
+        self.iemdrVC.big = skView;
+        skView.showsDrawCount = TRUE;
+        skView.showsFPS = TRUE;
+        skView.showsNodeCount = TRUE;
         
         // Go ahead and show the window.
         self.secondWindow.hidden = NO;

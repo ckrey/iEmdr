@@ -2,11 +2,12 @@
 //  Session.m
 //  iEmdr
 //
-//  Created by Christoph Krey on 25.10.13.
+//  Created by Christoph Krey on 19.11.13.
 //  Copyright (c) 2013 Christoph Krey. All rights reserved.
 //
 
 #import "Session.h"
+#import "Client.h"
 
 
 @implementation Session
@@ -18,6 +19,7 @@
 @dynamic hue;
 @dynamic size;
 @dynamic timestamp;
+@dynamic form;
 @dynamic hasClient;
 
 @end

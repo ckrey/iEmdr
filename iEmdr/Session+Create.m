@@ -17,6 +17,7 @@
                               hue:(NSNumber *)hue
                              size:(NSNumber *)size
                         frequency:(NSNumber *)frequency
+                             form:(NSNumber *)form
                            client:(Client *)client
         inManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -44,6 +45,7 @@
         session.hue = hue;
         session.size = size;
         session.frequency = frequency;
+        session.form = form;
         
         session.hasClient = client;
     } else {

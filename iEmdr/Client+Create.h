@@ -12,6 +12,8 @@
 @interface Client (Create)
 + (Client *)clientWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
 + (ABAddressBookRef)theABRef;
++ (void)error:(NSString *)message;
+
 
 
 @end

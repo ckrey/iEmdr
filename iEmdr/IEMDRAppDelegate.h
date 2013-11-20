@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iEmdrView.h"
 #import "IEMDRViewController.h"
 #import "iEmdrCoreData.h"
 

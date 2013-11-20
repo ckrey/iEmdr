@@ -18,6 +18,7 @@
                               hue:(NSNumber *)hue
                              size:(NSNumber *)size
                         frequency:(NSNumber *)frequency
+                             form:(NSNumber *)form
                            client:(Client *)client
            inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

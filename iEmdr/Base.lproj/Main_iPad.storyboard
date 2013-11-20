@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BqT-Ae-wZH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Split View Controller-->
@@ -26,15 +26,10 @@
                         <viewControllerLayoutGuide type="top" id="3JI-Ta-zzF"/>
                         <viewControllerLayoutGuide type="bottom" id="zSh-sr-hNQ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NLW-rI-0li">
+                    <view key="view" contentMode="scaleToFill" id="NLW-rI-0li" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4lO-Bx-khk" customClass="iEmdrView">
-                                <rect key="frame" x="334" y="462" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qy-Iu-oi8">
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -202,6 +197,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yzV-3f-HTT">
+                                <rect key="frame" x="20" y="737" width="728" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="S74-To-0qz"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="-"/>
+                                    <segment title="/"/>
+                                    <segment title="\"/>
+                                    <segment title="∞"/>
+                                </segments>
+                                <connections>
+                                    <action selector="formChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="7Dc-Hn-sjv"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -215,6 +226,7 @@
                             <constraint firstItem="bDy-tV-AJn" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" constant="20" symbolic="YES" id="BIW-AN-AZW"/>
                             <constraint firstItem="cDw-Hd-v1D" firstAttribute="leading" secondItem="K7E-zx-QNj" secondAttribute="trailing" constant="8" symbolic="YES" id="Bh0-57-Nhl"/>
                             <constraint firstAttribute="trailing" secondItem="9qy-Iu-oi8" secondAttribute="trailing" id="D0t-sC-yml"/>
+                            <constraint firstItem="yzV-3f-HTT" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" constant="20" symbolic="YES" id="Dad-pZ-N9M"/>
                             <constraint firstItem="duS-ak-4hC" firstAttribute="centerY" secondItem="TL9-zj-t5I" secondAttribute="centerY" id="DeR-a4-PYO"/>
                             <constraint firstAttribute="trailing" secondItem="TL9-zj-t5I" secondAttribute="trailing" constant="20" symbolic="YES" id="Eh4-QK-yoc"/>
                             <constraint firstItem="xuS-08-mGp" firstAttribute="leading" secondItem="duS-ak-4hC" secondAttribute="trailing" constant="8" symbolic="YES" id="EtF-6D-0A9"/>
@@ -229,6 +241,7 @@
                             <constraint firstItem="jIt-42-7Wr" firstAttribute="leading" secondItem="bDy-tV-AJn" secondAttribute="trailing" constant="8" symbolic="YES" id="T8D-aZ-Tek"/>
                             <constraint firstAttribute="trailing" secondItem="pnr-jV-N29" secondAttribute="trailing" id="TIT-R7-DYL"/>
                             <constraint firstItem="pnr-jV-N29" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" id="Tw3-WQ-8Z0"/>
+                            <constraint firstAttribute="trailing" secondItem="yzV-3f-HTT" secondAttribute="trailing" constant="20" symbolic="YES" id="Xqa-Tf-VHc"/>
                             <constraint firstItem="vII-Ri-f2y" firstAttribute="top" secondItem="cDw-Hd-v1D" secondAttribute="bottom" constant="8" symbolic="YES" id="XyQ-zR-Nmy"/>
                             <constraint firstItem="ZTv-gx-chU" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" constant="20" symbolic="YES" id="aHW-Bo-DB5"/>
                             <constraint firstItem="st0-ij-8vm" firstAttribute="centerY" secondItem="ZTv-gx-chU" secondAttribute="centerY" id="abl-Sr-nKf"/>
@@ -239,6 +252,7 @@
                             <constraint firstItem="TM9-x8-vx9" firstAttribute="centerY" secondItem="xZY-7C-4Rf" secondAttribute="centerY" id="efM-T4-be0"/>
                             <constraint firstAttribute="trailing" secondItem="st0-ij-8vm" secondAttribute="trailing" constant="20" symbolic="YES" id="gQE-ti-iCR"/>
                             <constraint firstItem="xZY-7C-4Rf" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" constant="20" symbolic="YES" id="iKF-z7-e6r"/>
+                            <constraint firstItem="TM9-x8-vx9" firstAttribute="top" secondItem="yzV-3f-HTT" secondAttribute="bottom" constant="8" symbolic="YES" id="ibN-hF-TLn"/>
                             <constraint firstItem="bDy-tV-AJn" firstAttribute="centerY" secondItem="jIt-42-7Wr" secondAttribute="centerY" id="jsj-tL-5IB"/>
                             <constraint firstItem="pnr-jV-N29" firstAttribute="top" secondItem="TL9-zj-t5I" secondAttribute="bottom" constant="8" symbolic="YES" id="k7R-oQ-5Xj"/>
                             <constraint firstItem="K7E-zx-QNj" firstAttribute="leading" secondItem="ERy-jZ-Asc" secondAttribute="trailing" constant="8" symbolic="YES" id="l8k-3A-MIp"/>
@@ -256,10 +270,10 @@
                         <outlet property="durationLabel" destination="duS-ak-4hC" id="BhE-5d-Wue"/>
                         <outlet property="durationSlider" destination="TL9-zj-t5I" id="rsc-QH-g8E"/>
                         <outlet property="durationText" destination="xuS-08-mGp" id="YKt-77-lcc"/>
+                        <outlet property="formSegment" destination="yzV-3f-HTT" id="GQ3-cG-BEK"/>
                         <outlet property="hueLabel" destination="ERy-jZ-Asc" id="fqe-y2-ni5"/>
                         <outlet property="hueSlider" destination="cDw-Hd-v1D" id="iXp-H8-nvh"/>
                         <outlet property="hueText" destination="K7E-zx-QNj" id="8SI-Yi-u9e"/>
-                        <outlet property="light" destination="4lO-Bx-khk" id="Zag-OH-Qm3"/>
                         <outlet property="playButton" destination="fKC-ol-6Fr" id="CN2-pk-jcf"/>
                         <outlet property="progress" destination="pnr-jV-N29" id="ccc-3b-OE2"/>
                         <outlet property="sizeLabel" destination="xZY-7C-4Rf" id="Z3h-PW-71B"/>

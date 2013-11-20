@@ -49,17 +49,57 @@
 #ifdef DEBUG
             NSLog(@"ABAddressBookCreateWithOptions");
 #endif
-            CFErrorRef error;
-            ab = ABAddressBookCreateWithOptions(NULL, &error);
-            if (!ab) {
-                CFStringRef errorDescription = CFErrorCopyDescription(error);
-                NSLog(@"ABAddressBookCreateWithOptions not successfull %@", errorDescription);
+            CFErrorRef cfError;
+            ab = ABAddressBookCreateWithOptions(NULL, &cfError);
+            if (ab) {
+#ifdef DEBUG
+                NSLog(@"ABAddressBookCreateWithOptions successful");
+#endif
+            } else {
+                CFStringRef errorDescription = CFErrorCopyDescription(cfError);
+                [Client error:[NSString stringWithFormat:@"ABAddressBookCreateWithOptions not successfull %@", errorDescription]];
                 CFRelease(errorDescription);
                 isGranted = NO;
             }
+            
+#ifdef DEBUG
+            NSLog(@"ABAddressBookRequestAccessWithCompletion");
+#endif
+            
+            ABAddressBookRequestAccessWithCompletion(ab, ^(bool granted, CFErrorRef error) {
+                if (granted) {
+#ifdef DEBUG
+                    NSLog(@"ABAddressBookRequestAccessCompletionHandler successful");
+#endif
+                } else {
+                    isGranted = NO;
+                    CFRelease(ab);
+                    ab = nil;
+                }
+            });
+        } else {
+            [Client error:[NSString stringWithFormat:@"ABAddressBookRequestAccessWithCompletion not successfull"]];
         }
+        
     }
+    
     return ab;
+}
+
++ (void)error:(NSString *)message
+{
+#ifdef DEBUG
+    NSLog(@"Client error %@", message);
+#endif
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSBundle mainBundle].infoDictionary[@"CFBundleName"]
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    
+    [alertView show];
+    
 }
 
 

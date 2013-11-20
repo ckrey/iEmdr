@@ -2,13 +2,14 @@
 //  Session.h
 //  iEmdr
 //
-//  Created by Christoph Krey on 25.10.13.
+//  Created by Christoph Krey on 19.11.13.
 //  Copyright (c) 2013 Christoph Krey. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Client;
 
 @interface Session : NSManagedObject
 
@@ -19,6 +20,7 @@
 @property (nonatomic, retain) NSNumber * hue;
 @property (nonatomic, retain) NSNumber * size;
 @property (nonatomic, retain) NSDate * timestamp;
-@property (nonatomic, retain) NSManagedObject *hasClient;
+@property (nonatomic, retain) NSNumber * form;
+@property (nonatomic, retain) Client *hasClient;
 
 @end
