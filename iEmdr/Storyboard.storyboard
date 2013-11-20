@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="taO-mk-cK2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+    </dependencies>
+    <scenes>
+        <!--I Emdr Show OnlyVC-->
+        <scene sceneID="n5k-6s-ELX">
+            <objects>
+                <viewController storyboardIdentifier="iEmdr Show Only" id="taO-mk-cK2" customClass="iEmdrShowOnlyVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pp4-lL-zom"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sc6-cd-ANN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ff4-XI-vln">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNZ-na-CR1" customClass="iEmdrView">
+                                <rect key="frame" x="110" y="234" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="1Wg-0X-Lrp"/>
+                                    <constraint firstAttribute="height" constant="100" id="Fij-dN-GN7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="xNZ-na-CR1" secondAttribute="centerY" id="3to-lc-rf7"/>
+                            <constraint firstAttribute="centerX" secondItem="xNZ-na-CR1" secondAttribute="centerX" id="DMD-da-FvT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="light" destination="xNZ-na-CR1" id="UPY-nk-qEG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="STR-Td-SPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="287" y="-10"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
