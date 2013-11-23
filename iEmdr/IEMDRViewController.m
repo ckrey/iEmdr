@@ -15,6 +15,8 @@
 #import <SpriteKit/SpriteKit.h>
 #import "IEMDRScene.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 @interface IEMDRViewController ()
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -41,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *durationText;
 @property (weak, nonatomic) IBOutlet UISlider *durationSlider;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *formSegment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *soundSegment;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *playButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *stopButton;
@@ -49,6 +52,7 @@
 @property (strong, nonatomic) NSTimer *passingTimer;
 @property (strong, nonatomic) NSDate *started;
 
+@property (nonatomic) AVAudioPlayer * backgroundMusicPlayer;
 
 @end
 
@@ -70,6 +74,8 @@
 
 #define HUE_DEFAULT 0.9
 
+#define FORM_DEFAULT 0
+#define SOUND_DEFAULT 0
 
 @implementation IEMDRViewController
 
@@ -90,27 +96,20 @@
 - (void)setBig:(SKView *)big
 {
     _big = big;
-    if (big) {
-        IEMDRScene *scene = [[IEMDRScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
-        [big presentScene:scene];
-    }
 }
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+
     IEMDRAppDelegate *iemdrAD = [UIApplication sharedApplication].delegate;
     iemdrAD.iemdrVC = self;
     [self setClientName];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
+    [super viewWillAppear:animated];
     
     self.durationSlider.minimumValue = DURATION_MIN;
     self.durationSlider.maximumValue = DURATION_MAX;
@@ -125,11 +124,13 @@
     self.sizeSlider.value = RADIUS_DEFAULT;
     
     self.hueSlider.value = HUE_DEFAULT;
-
     
     self.speedSlider.minimumValue = BPM_MIN;
     self.speedSlider.maximumValue = BPM_MAX;
     self.speedSlider.value = BPM_DEFAULT;
+    
+    self.formSegment.selectedSegmentIndex = FORM_DEFAULT;
+    self.soundSegment.selectedSegmentIndex = SOUND_DEFAULT;
     
     if (self.clientToRun && self.clientToRun.hasSessions && [self.clientToRun.hasSessions count]) {
         Session *newestSession;
@@ -143,20 +144,35 @@
                 }
             }
         }
+        self.soundSegment.selectedSegmentIndex = [newestSession.sound intValue];
+        self.formSegment.selectedSegmentIndex = [newestSession.form intValue];
         self.durationSlider.value = [newestSession.duration intValue];
         self.backgroundSlider.value = [newestSession.canvas floatValue];
         self.sizeSlider.value = [newestSession.size intValue];
         self.hueSlider.value = [newestSession.hue floatValue];
         self.speedSlider.value = [newestSession.frequency intValue];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self resetSprites];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
+    [self soundChanged:self.soundSegment];
+    [self formChanged:self.formSegment];
     [self durationChanged:self.durationSlider];
     [self backgroundChanged:self.backgroundSlider];
     [self sizeChanged:self.sizeSlider];
     [self hueChanged:self.hueSlider];
     [self speedChanged:self.speedSlider];
     
-    [self stopped:nil];
+    [self resetSprites];
 }
 
 - (IBAction)durationChanged:(UISlider *)sender {
@@ -221,6 +237,7 @@
     self.durationSlider.hidden = hidden;
     
     self.formSegment.hidden = hidden;
+    self.soundSegment.hidden = hidden;
     
     [self.navigationController setNavigationBarHidden:hidden animated:YES];
 }
@@ -273,22 +290,24 @@
     self.stopButton.enabled = TRUE;
     self.started = [NSDate date];
 
-    SKView *spriteView = (SKView *) self.view;
-    SKNode *node = [spriteView.scene childNodeWithName:@"node"];
-    node.paused = FALSE;
-
-    SKNode *nodeBig = [self.big.scene childNodeWithName:@"node"];
-    nodeBig.paused = FALSE;
+    [self setNode:(SKView *)self.view];
+    [self setNode:self.big];
 }
 
 - (IBAction)stopped:(UIBarButtonItem *)sender {
+    [self sessionFinished];
+    [self resetSprites];
+}
+
+- (void)resetSprites
+{
     if (self.passingTimer) {
         [self.passingTimer invalidate];
     }
+
     self.playButton.enabled = TRUE;
     self.stopButton.enabled = FALSE;
-    [self sessionFinished];
-
+    
     SKView *spriteView = (SKView *)self.view;
     SKNode *node = [spriteView.scene childNodeWithName:@"node"];
     [node removeAllActions];
@@ -296,10 +315,7 @@
     float w = spriteView.scene.frame.size.width;
     float h = spriteView.scene.frame.size.height;
     SKAction *reset = [SKAction moveTo:CGPointMake(w/2, h/2) duration:0.25];
-    [node runAction:reset completion:^{
-        [self setNode:(SKView *)self.view];
-        node.paused = TRUE;
-    }];
+    [node runAction:reset];
 
     SKNode *nodeBig = [self.big.scene childNodeWithName:@"node"];
     [nodeBig removeAllActions];
@@ -307,18 +323,18 @@
     float wBig = self.big.scene.frame.size.width;
     float hBig = self.big.scene.frame.size.height;
     SKAction *resetBig = [SKAction moveTo:CGPointMake(wBig/2, hBig/2) duration:0.25];
-    [nodeBig runAction:resetBig completion:^{
-        [self setNode:self.big];
-        nodeBig.paused = TRUE;
-    }];
+    [nodeBig runAction:resetBig];
+}
 
+- (IBAction)soundChanged:(UISegmentedControl *)sender {
+    [self resetSprites];
 }
 
 - (IBAction)formChanged:(UISegmentedControl *)sender {
-    [self setNode:(SKView *)self.view];
-    [self setNode:self.big];
+    [self resetSprites];
 }
 
+#define FLAT 0.75
 - (void)setNode:(SKView *)view
 {
     SKNode *node = [view.scene childNodeWithName:@"node"];
@@ -326,40 +342,92 @@
     float w = view.scene.frame.size.width;
     float h = view.scene.frame.size.height;
     
-    SKAction *reset = [SKAction moveTo:CGPointMake(w/2, h/2) duration:0];
+    struct CGPath *pathl = CGPathCreateMutable();
+    CGPathMoveToPoint(pathl, NULL, 0, 0);
+
+    struct CGPath *pathr = CGPathCreateMutable();
+    CGPathMoveToPoint(pathr, NULL, 0, 0);
     
-    struct CGPath *path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 0, 0);
+    SKAction *reset;
     
     switch (self.formSegment.selectedSegmentIndex) {
+        case 4:
+            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
+            
+            CGPathAddArc(pathl, NULL, +w/4, 0, w/4, M_PI, 2*M_PI, NO);
+            CGPathAddArc(pathl, NULL, +w/4*3, 0, w/4, M_PI, 0, YES);
+            
+            CGPathAddArc(pathr, NULL, -w/4, 0, w/4, 0, M_PI, YES);
+            CGPathAddArc(pathr, NULL, -w/4*3, 0, w/4, 2*M_PI, M_PI, NO);
+            
+            break;
         case 3:
-            CGPathAddLineToPoint(path, NULL, -w/4, w/4);
-            CGPathAddArc(path, NULL, -w/4, 0, w/4, M_PI/2, 2*M_PI-M_PI/2, NO);
-            CGPathAddLineToPoint(path, NULL, w/4, w/4);
-            CGPathAddArc(path, NULL, w/4, 0, w/4, M_PI/2, -M_PI/2, YES);
-            CGPathCloseSubpath(path);
+            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
+            
+            CGPathAddArc(pathl, NULL, w*FLAT/4, 0, w*FLAT/4, M_PI, M_PI/2*3, NO);
+            CGPathAddLineToPoint(pathl, NULL, w-w*FLAT/4, w*FLAT/4);
+            CGPathAddArc(pathl, NULL, w-w*FLAT/4, 0, w*FLAT/4, M_PI/2, 0, YES);
+            
+            CGPathAddArc(pathr, NULL, -w*FLAT/4, 0, w*FLAT/4, 0, M_PI*3/2, YES);
+            CGPathAddLineToPoint(pathr, NULL, -(w-w*FLAT/4), w*FLAT/4);
+            CGPathAddArc(pathr, NULL, -(w-w*FLAT/4), 0, w*FLAT/4, M_PI/2, M_PI, NO);
+
             break;
         case 2:
-            CGPathAddLineToPoint(path, NULL, -(w/2), (h/2));
-            CGPathAddLineToPoint(path, NULL, w/2, -h/2);
-            CGPathCloseSubpath(path);
+            reset = [SKAction moveTo:CGPointMake(0, h-h/2*(1-FLAT)) duration:0];
+            
+            CGPathAddLineToPoint(pathl, NULL, w, -h*FLAT);
+            
+            CGPathAddLineToPoint(pathr, NULL, -w, h*FLAT);
             break;
         case 1:
-            CGPathAddLineToPoint(path, NULL, -(w/2), -(h/2));
-            CGPathAddLineToPoint(path, NULL, w/2, h/2);
-            CGPathCloseSubpath(path);
+            reset = [SKAction moveTo:CGPointMake(0, h/2*(1-FLAT)) duration:0];
+            
+            CGPathAddLineToPoint(pathl, NULL, w, h*FLAT);
+
+            CGPathAddLineToPoint(pathr, NULL, -w, -h*FLAT);
             break;
         case 0:
         default:
-            CGPathAddLineToPoint(path, NULL, -w/2, 0);
-            CGPathAddLineToPoint(path, NULL, w/2, 0);
-            CGPathCloseSubpath(path);
+            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
+            
+            CGPathAddLineToPoint(pathl, NULL, w, 0);
+
+            CGPathAddLineToPoint(pathr, NULL, -w, 0);
             break;
     }
     
-    SKAction *sound = [SKAction playSoundFileNamed:@"Kognitionen.m4a" waitForCompletion:NO];
-    SKAction *action = [SKAction followPath:path duration:10.0];
-    SKAction *sequence = [SKAction sequence:@[sound, reset, action]];
+    SKAction *soundl;
+    SKAction *soundr;
+    
+    switch (self.soundSegment.selectedSegmentIndex) {
+        case 4:
+            soundl = [SKAction playSoundFileNamed:@"snipl.m4a" waitForCompletion:NO];
+            soundr = [SKAction playSoundFileNamed:@"snipr.m4a" waitForCompletion:NO];
+            break;
+        case 3:
+            soundl = [SKAction playSoundFileNamed:@"dingl.m4a" waitForCompletion:NO];
+            soundr = [SKAction playSoundFileNamed:@"dingr.m4a" waitForCompletion:NO];
+            break;
+        case 2:
+            soundl = [SKAction playSoundFileNamed:@"bassdrum.m4a" waitForCompletion:NO];
+            soundr = [SKAction playSoundFileNamed:@"snaire.m4a" waitForCompletion:NO];
+            break;
+        case 1:
+            soundl = [SKAction playSoundFileNamed:@"pingl.m4a" waitForCompletion:NO];
+            soundr = [SKAction playSoundFileNamed:@"pingr.m4a" waitForCompletion:NO];
+            break;
+        case 0:
+        default:
+            soundl = [SKAction playSoundFileNamed:@"tick.m4a" waitForCompletion:NO];
+            soundr = [SKAction playSoundFileNamed:@"tock.m4a" waitForCompletion:NO];
+            break;
+    }
+    
+    SKAction *actionl = [SKAction followPath:pathl duration:5.0];
+    SKAction *actionr = [SKAction followPath:pathr duration:5.0];
+
+    SKAction *sequence = [SKAction sequence:@[reset, soundl, actionl, soundr, actionr]];
     
     [node runAction:[SKAction repeatActionForever:sequence]];
 }
@@ -374,25 +442,35 @@
                                         hue:@(self.hueSlider.value)
                                        size:@(self.sizeSlider.value)
                                   frequency:@(self.speedSlider.value)
-                                  form:@(self.formSegment.selectedSegmentIndex)
+                                       form:@(self.formSegment.selectedSegmentIndex)
+                                       sound:@(self.soundSegment.selectedSegmentIndex)
                                      client:self.clientToRun
                      inManagedObjectContext:self.clientToRun.managedObjectContext];
     }
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    NSMutableArray *barItems = [self.toolbar.items mutableCopy];
-    if (_splitViewBarButtonItem) [barItems removeObject:_splitViewBarButtonItem];
-    if (_splitViewBarButtonItem) [barItems insertObject:_splitViewBarButtonItem atIndex:0];
-    self.toolbar.items = barItems;
-    
-    SKView *spriteView = (SKView *) self.view;    
+    SKView *spriteView = (SKView *) self.view;
     IEMDRScene *scene = [[IEMDRScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
     [spriteView presentScene:scene];
-
+    
+    [self soundChanged:self.soundSegment];
+    [self formChanged:self.formSegment];
+    [self durationChanged:self.durationSlider];
+    [self backgroundChanged:self.backgroundSlider];
+    [self sizeChanged:self.sizeSlider];
+    [self hueChanged:self.hueSlider];
+    [self speedChanged:self.speedSlider];
+    
+    [self resetSprites];
 }
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)barButtonItem

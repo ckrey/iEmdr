@@ -19,6 +19,7 @@
                              size:(NSNumber *)size
                         frequency:(NSNumber *)frequency
                              form:(NSNumber *)form
+                            sound:(NSNumber *)sound
                            client:(Client *)client
            inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

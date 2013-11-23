@@ -112,10 +112,6 @@
         self.secondWindow.rootViewController = viewController;
         SKView *skView = (SKView *)viewController.view;
         self.iemdrVC.big = skView;
-        skView.showsDrawCount = TRUE;
-        skView.showsFPS = TRUE;
-        skView.showsNodeCount = TRUE;
-        
         // Go ahead and show the window.
         self.secondWindow.hidden = NO;
     }

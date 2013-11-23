@@ -25,7 +25,7 @@
 
 - (void)createSceneContents
 {
-    self.backgroundColor = [SKColor blueColor];
+    self.backgroundColor = [SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     [self addChild: [self newNode]];
 }
@@ -37,8 +37,8 @@
     node.path = CGPathCreateWithEllipseInRect(CGRectMake(-25, -25, 50, 50), NULL);
     node.antialiased = NO;
     node.blendMode = SKBlendModeAlpha;
-    node.fillColor = [UIColor redColor];
-    node.strokeColor = [UIColor redColor];
+    node.fillColor = [UIColor blackColor];
+    node.strokeColor = [UIColor blackColor];
     node.glowWidth = 0.0;
     node.lineWidth = 1.0;
     return node;

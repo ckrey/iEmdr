@@ -43,14 +43,16 @@
     cell.textLabel.text = [NSDateFormatter localizedStringFromDate:session.timestamp
                                            dateStyle:NSDateFormatterShortStyle
                                            timeStyle:NSDateFormatterMediumStyle];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%3ds %3.0f%% %3dhz %3d %4.2f %4.2f",
-                                                  [session.duration intValue],
-                                                  [session.actualDuration floatValue] * 100,
-                                                  [session.frequency intValue],
-                                                  [session.size intValue],
-                                                  [session.hue floatValue],
-                                                  [session.canvas floatValue]
-                                                  ];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%3ds %3.0f%% %3dhz %3dpx h%4.2f c%4.2f f#%1d s#%1d",
+                                 [session.duration intValue],
+                                 [session.actualDuration floatValue] * 100,
+                                 [session.frequency intValue],
+                                 [session.size intValue],
+                                 [session.hue floatValue],
+                                 [session.canvas floatValue],
+                                 [session.form intValue],
+                                 [session.sound intValue]
+                                 ];
 
     
     return cell;
@@ -76,10 +78,10 @@
     
     [picker setSubject:[NSString stringWithFormat:@"iEmdr Sessions %@", self.client.name]];
     
-    NSString *string = @"Date,Duration(s),Actual_Duration(%),Frequency(hz),Size(points),Hue(%),Canvas(%)\n";
+    NSString *string = @"Date,Duration(s),Actual_Duration(%),Frequency(hz),Size(points),Hue(%),Canvas(%),Form#,Sound#\n";
     
     for (Session *session in self.fetchedResultsController.fetchedObjects) {
-        string = [string  stringByAppendingFormat:@"\"%@\",\"%d\",\"%@\",\"%d\",\"%d\",\"%@\",\"%@\"\n",
+        string = [string  stringByAppendingFormat:@"\"%@\",\"%d\",\"%@\",\"%d\",\"%d\",\"%@\",\"%@\",\"%d\",\"%d\"\n",
                   [NSDateFormatter localizedStringFromDate:session.timestamp
                                                  dateStyle:NSDateFormatterShortStyle
                                                  timeStyle:NSDateFormatterMediumStyle],
@@ -88,7 +90,9 @@
                   [session.frequency intValue],
                   [session.size intValue],
                   [session.hue descriptionWithLocale:[NSLocale currentLocale]],
-                  [session.canvas descriptionWithLocale:[NSLocale currentLocale]]
+                  [session.canvas descriptionWithLocale:[NSLocale currentLocale]],
+                  [session.form intValue],
+                  [session.sound intValue]
                   ];
     }
     

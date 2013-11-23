@@ -204,13 +204,31 @@
                                     <constraint firstAttribute="height" constant="28" id="S74-To-0qz"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="-"/>
-                                    <segment title="/"/>
-                                    <segment title="\"/>
-                                    <segment title="∞"/>
+                                    <segment title=" Horizontal (-)"/>
+                                    <segment title="Diagonal Up (/)"/>
+                                    <segment title="Diagonal Down (\)"/>
+                                    <segment title="infinity (∞)"/>
+                                    <segment title="Figure 8"/>
                                 </segments>
                                 <connections>
                                     <action selector="formChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="7Dc-Hn-sjv"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MMc-0U-ywd">
+                                <rect key="frame" x="20" y="701" width="728" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Ltv-Mv-bjR"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="TicToc"/>
+                                    <segment title="Dong"/>
+                                    <segment title="Drums"/>
+                                    <segment title="Ding"/>
+                                    <segment title="Snip"/>
+                                </segments>
+                                <connections>
+                                    <action selector="soundChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="ZxW-ZL-cta"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
@@ -248,14 +266,17 @@
                             <constraint firstItem="bDy-tV-AJn" firstAttribute="centerY" secondItem="vII-Ri-f2y" secondAttribute="centerY" id="awz-rc-uWK"/>
                             <constraint firstItem="st0-ij-8vm" firstAttribute="leading" secondItem="xp4-L2-J0Z" secondAttribute="trailing" constant="8" symbolic="YES" id="bOk-be-0ym"/>
                             <constraint firstAttribute="trailing" secondItem="TM9-x8-vx9" secondAttribute="trailing" constant="20" symbolic="YES" id="bVw-JN-Y2n"/>
+                            <constraint firstAttribute="trailing" secondItem="MMc-0U-ywd" secondAttribute="trailing" constant="20" symbolic="YES" id="cAk-ys-lo4"/>
                             <constraint firstItem="cDw-Hd-v1D" firstAttribute="top" secondItem="st0-ij-8vm" secondAttribute="bottom" constant="8" symbolic="YES" id="cEl-u1-LPJ"/>
                             <constraint firstItem="TM9-x8-vx9" firstAttribute="centerY" secondItem="xZY-7C-4Rf" secondAttribute="centerY" id="efM-T4-be0"/>
+                            <constraint firstItem="MMc-0U-ywd" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" constant="20" symbolic="YES" id="ehV-Ht-KAX"/>
                             <constraint firstAttribute="trailing" secondItem="st0-ij-8vm" secondAttribute="trailing" constant="20" symbolic="YES" id="gQE-ti-iCR"/>
                             <constraint firstItem="xZY-7C-4Rf" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" constant="20" symbolic="YES" id="iKF-z7-e6r"/>
                             <constraint firstItem="TM9-x8-vx9" firstAttribute="top" secondItem="yzV-3f-HTT" secondAttribute="bottom" constant="8" symbolic="YES" id="ibN-hF-TLn"/>
                             <constraint firstItem="bDy-tV-AJn" firstAttribute="centerY" secondItem="jIt-42-7Wr" secondAttribute="centerY" id="jsj-tL-5IB"/>
                             <constraint firstItem="pnr-jV-N29" firstAttribute="top" secondItem="TL9-zj-t5I" secondAttribute="bottom" constant="8" symbolic="YES" id="k7R-oQ-5Xj"/>
                             <constraint firstItem="K7E-zx-QNj" firstAttribute="leading" secondItem="ERy-jZ-Asc" secondAttribute="trailing" constant="8" symbolic="YES" id="l8k-3A-MIp"/>
+                            <constraint firstItem="yzV-3f-HTT" firstAttribute="top" secondItem="MMc-0U-ywd" secondAttribute="bottom" constant="8" symbolic="YES" id="l9k-eR-Rg8"/>
                             <constraint firstItem="ERy-jZ-Asc" firstAttribute="leading" secondItem="NLW-rI-0li" secondAttribute="leading" constant="20" symbolic="YES" id="mVj-5W-tqj"/>
                             <constraint firstAttribute="trailing" secondItem="vII-Ri-f2y" secondAttribute="trailing" constant="20" symbolic="YES" id="u3c-vE-5Gr"/>
                             <constraint firstItem="JVP-6O-d8O" firstAttribute="leading" secondItem="xZY-7C-4Rf" secondAttribute="trailing" constant="8" symbolic="YES" id="wpS-n7-aEs"/>
@@ -279,6 +300,7 @@
                         <outlet property="sizeLabel" destination="xZY-7C-4Rf" id="Z3h-PW-71B"/>
                         <outlet property="sizeSlider" destination="TM9-x8-vx9" id="TPR-n7-RPA"/>
                         <outlet property="sizeText" destination="JVP-6O-d8O" id="nif-Qg-Jfy"/>
+                        <outlet property="soundSegment" destination="MMc-0U-ywd" id="BJa-ns-cGq"/>
                         <outlet property="speedLabel" destination="bDy-tV-AJn" id="9FO-LN-9Dz"/>
                         <outlet property="speedSlider" destination="vII-Ri-f2y" id="wE1-1l-tWv"/>
                         <outlet property="speedText" destination="jIt-42-7Wr" id="ZSU-U7-Oty"/>

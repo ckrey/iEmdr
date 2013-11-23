@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		847946E9183C225000402ABC /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 847946E8183C225000402ABC /* Session.m */; };
+		8423594B183E580900782AD1 /* pingl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84235949183E580300782AD1 /* pingl.m4a */; };
+		8423594C183E580900782AD1 /* pingr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423594A183E580300782AD1 /* pingr.m4a */; };
+		84235956183FBD3400782AD1 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 84235955183FBD3400782AD1 /* Client.m */; };
+		8423595E183FC0C700782AD1 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 8423595D183FC0C700782AD1 /* Session.m */; };
+		8423595F183FC1D500782AD1 /* bassdrum.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423594D183FBC2E00782AD1 /* bassdrum.m4a */; };
+		84235960183FC1D500782AD1 /* dingl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423594E183FBC2E00782AD1 /* dingl.m4a */; };
+		84235961183FC1D500782AD1 /* dingr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423594F183FBC2E00782AD1 /* dingr.m4a */; };
+		84235962183FC1D500782AD1 /* snaire.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84235950183FBC2E00782AD1 /* snaire.m4a */; };
+		84235963183FC1D500782AD1 /* tick.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84235951183FBC2E00782AD1 /* tick.m4a */; };
+		84235964183FC1D500782AD1 /* tock.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84235952183FBC2E00782AD1 /* tock.m4a */; };
+		84235965183FC1D500782AD1 /* snipl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423595A183FC00D00782AD1 /* snipl.m4a */; };
+		84235966183FC1D500782AD1 /* snipr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423595B183FC00D00782AD1 /* snipr.m4a */; };
 		84AF6DA5181AA93B0087D2B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA4181AA93B0087D2B5 /* Foundation.framework */; };
 		84AF6DA7181AA93B0087D2B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */; };
 		84AF6DA9181AA93B0087D2B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA8181AA93B0087D2B5 /* UIKit.framework */; };
@@ -24,7 +35,6 @@
 		84AF6DD1181AA93B0087D2B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6DCF181AA93B0087D2B5 /* InfoPlist.strings */; };
 		84AF6DD3181AA93B0087D2B5 /* iEmdrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DD2181AA93B0087D2B5 /* iEmdrTests.m */; };
 		84AF6DDE181AACF10087D2B5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DDC181AACF10087D2B5 /* Model.xcdatamodeld */; };
-		84AF6DE4181AAE0B0087D2B5 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DE3181AAE0B0087D2B5 /* Client.m */; };
 		84AF6DEB181AAE330087D2B5 /* Client+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DE6181AAE330087D2B5 /* Client+Create.m */; };
 		84AF6DED181AAE330087D2B5 /* Session+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DEA181AAE330087D2B5 /* Session+Create.m */; };
 		84AF6DEF181AAE470087D2B5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DEE181AAE470087D2B5 /* CoreData.framework */; };
@@ -37,6 +47,7 @@
 		84AF6E1C181AC0D20087D2B5 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6E15181AC0D20087D2B5 /* CoreDataTableViewController.m */; };
 		84AF6E1D181AC0D20087D2B5 /* iEmdrClientTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6E17181AC0D20087D2B5 /* iEmdrClientTVC.m */; };
 		84B1C73F183B8D380062D1EE /* IEMDRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B1C73E183B8D380062D1EE /* IEMDRScene.m */; };
+		84D7558B18402CB5002613E2 /* IEMDRBigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D7558A18402CB5002613E2 /* IEMDRBigViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +62,22 @@
 
 /* Begin PBXFileReference section */
 		841227E7182416C800DF7658 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		84235949183E580300782AD1 /* pingl.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pingl.m4a; sourceTree = "<group>"; };
+		8423594A183E580300782AD1 /* pingr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pingr.m4a; sourceTree = "<group>"; };
+		8423594D183FBC2E00782AD1 /* bassdrum.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bassdrum.m4a; sourceTree = "<group>"; };
+		8423594E183FBC2E00782AD1 /* dingl.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dingl.m4a; sourceTree = "<group>"; };
+		8423594F183FBC2E00782AD1 /* dingr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dingr.m4a; sourceTree = "<group>"; };
+		84235950183FBC2E00782AD1 /* snaire.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snaire.m4a; sourceTree = "<group>"; };
+		84235951183FBC2E00782AD1 /* tick.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = tick.m4a; sourceTree = "<group>"; };
+		84235952183FBC2E00782AD1 /* tock.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = tock.m4a; sourceTree = "<group>"; };
+		84235953183FBC8900782AD1 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
+		84235954183FBD3400782AD1 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		84235955183FBD3400782AD1 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
+		8423595A183FC00D00782AD1 /* snipl.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snipl.m4a; sourceTree = "<group>"; };
+		8423595B183FC00D00782AD1 /* snipr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snipr.m4a; sourceTree = "<group>"; };
+		8423595C183FC0C700782AD1 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		8423595D183FC0C700782AD1 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		847946E6183C21CB00402ABC /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
-		847946E7183C225000402ABC /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
-		847946E8183C225000402ABC /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		84AF6DA1181AA93B0087D2B5 /* iEmdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEmdr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AF6DA4181AA93B0087D2B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -75,8 +99,6 @@
 		84AF6DD0181AA93B0087D2B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84AF6DD2181AA93B0087D2B5 /* iEmdrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iEmdrTests.m; sourceTree = "<group>"; };
 		84AF6DDD181AACF10087D2B5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		84AF6DE2181AAE0B0087D2B5 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
-		84AF6DE3181AAE0B0087D2B5 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 		84AF6DE5181AAE330087D2B5 /* Client+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Client+Create.h"; sourceTree = "<group>"; };
 		84AF6DE6181AAE330087D2B5 /* Client+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Client+Create.m"; sourceTree = "<group>"; };
 		84AF6DE9181AAE330087D2B5 /* Session+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Session+Create.h"; sourceTree = "<group>"; };
@@ -96,6 +118,8 @@
 		84AF6E17181AC0D20087D2B5 /* iEmdrClientTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iEmdrClientTVC.m; sourceTree = SOURCE_ROOT; };
 		84B1C73D183B8D380062D1EE /* IEMDRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEMDRScene.h; sourceTree = "<group>"; };
 		84B1C73E183B8D380062D1EE /* IEMDRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEMDRScene.m; sourceTree = "<group>"; };
+		84D7558918402CB5002613E2 /* IEMDRBigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEMDRBigViewController.h; sourceTree = "<group>"; };
+		84D7558A18402CB5002613E2 /* IEMDRBigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEMDRBigViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +150,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8423592B183E335B00782AD1 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				84235949183E580300782AD1 /* pingl.m4a */,
+				8423594A183E580300782AD1 /* pingr.m4a */,
+				8423594D183FBC2E00782AD1 /* bassdrum.m4a */,
+				8423594E183FBC2E00782AD1 /* dingl.m4a */,
+				8423594F183FBC2E00782AD1 /* dingr.m4a */,
+				84235950183FBC2E00782AD1 /* snaire.m4a */,
+				84235951183FBC2E00782AD1 /* tick.m4a */,
+				84235952183FBC2E00782AD1 /* tock.m4a */,
+				8423595A183FC00D00782AD1 /* snipl.m4a */,
+				8423595B183FC00D00782AD1 /* snipr.m4a */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		84235930183E340700782AD1 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				84AF6E0B181AC0A60087D2B5 /* iEmdrCoreData.h */,
+				84AF6E0C181AC0A60087D2B5 /* iEmdrCoreData.m */,
+				8423595C183FC0C700782AD1 /* Session.h */,
+				8423595D183FC0C700782AD1 /* Session.m */,
+				84AF6DDC181AACF10087D2B5 /* Model.xcdatamodeld */,
+				84235954183FBD3400782AD1 /* Client.h */,
+				84235955183FBD3400782AD1 /* Client.m */,
+				84AF6DE5181AAE330087D2B5 /* Client+Create.h */,
+				84AF6DE6181AAE330087D2B5 /* Client+Create.m */,
+				84AF6DE9181AAE330087D2B5 /* Session+Create.h */,
+				84AF6DEA181AAE330087D2B5 /* Session+Create.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		84AF6D98181AA93B0087D2B5 = {
 			isa = PBXGroup;
 			children = (
@@ -163,12 +222,11 @@
 		84AF6DAA181AA93B0087D2B5 /* iEmdr */ = {
 			isa = PBXGroup;
 			children = (
+				8423592B183E335B00782AD1 /* Sounds */,
 				84AF6E14181AC0D20087D2B5 /* CoreDataTableViewController.h */,
 				84AF6E15181AC0D20087D2B5 /* CoreDataTableViewController.m */,
 				84AF6E16181AC0D20087D2B5 /* iEmdrClientTVC.h */,
 				84AF6E17181AC0D20087D2B5 /* iEmdrClientTVC.m */,
-				84AF6E0B181AC0A60087D2B5 /* iEmdrCoreData.h */,
-				84AF6E0C181AC0A60087D2B5 /* iEmdrCoreData.m */,
 				84AF6E0D181AC0A60087D2B5 /* iEmdrSessionTVC.h */,
 				84AF6E0E181AC0A60087D2B5 /* iEmdrSessionTVC.m */,
 				84AF6DB3181AA93B0087D2B5 /* IEMDRAppDelegate.h */,
@@ -178,18 +236,12 @@
 				84AF6DB9181AA93B0087D2B5 /* Main_iPad.storyboard */,
 				84AF6DBC181AA93B0087D2B5 /* IEMDRViewController.h */,
 				84AF6DBD181AA93B0087D2B5 /* IEMDRViewController.m */,
+				84D7558918402CB5002613E2 /* IEMDRBigViewController.h */,
+				84D7558A18402CB5002613E2 /* IEMDRBigViewController.m */,
 				84B1C73D183B8D380062D1EE /* IEMDRScene.h */,
 				84B1C73E183B8D380062D1EE /* IEMDRScene.m */,
 				84AF6DBF181AA93B0087D2B5 /* Images.xcassets */,
-				84AF6DDC181AACF10087D2B5 /* Model.xcdatamodeld */,
-				847946E7183C225000402ABC /* Session.h */,
-				847946E8183C225000402ABC /* Session.m */,
-				84AF6DE2181AAE0B0087D2B5 /* Client.h */,
-				84AF6DE5181AAE330087D2B5 /* Client+Create.h */,
-				84AF6DE6181AAE330087D2B5 /* Client+Create.m */,
-				84AF6DE9181AAE330087D2B5 /* Session+Create.h */,
-				84AF6DEA181AAE330087D2B5 /* Session+Create.m */,
-				84AF6DE3181AAE0B0087D2B5 /* Client.m */,
+				84235930183E340700782AD1 /* CoreData */,
 				84AF6DAB181AA93B0087D2B5 /* Supporting Files */,
 			);
 			path = iEmdr;
@@ -301,6 +353,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8423595F183FC1D500782AD1 /* bassdrum.m4a in Resources */,
+				84235960183FC1D500782AD1 /* dingl.m4a in Resources */,
+				84235961183FC1D500782AD1 /* dingr.m4a in Resources */,
+				84235962183FC1D500782AD1 /* snaire.m4a in Resources */,
+				84235963183FC1D500782AD1 /* tick.m4a in Resources */,
+				84235964183FC1D500782AD1 /* tock.m4a in Resources */,
+				84235965183FC1D500782AD1 /* snipl.m4a in Resources */,
+				84235966183FC1D500782AD1 /* snipr.m4a in Resources */,
+				8423594B183E580900782AD1 /* pingl.m4a in Resources */,
+				8423594C183E580900782AD1 /* pingr.m4a in Resources */,
 				84AF6DBB181AA93B0087D2B5 /* Main_iPad.storyboard in Resources */,
 				84AF6DC0181AA93B0087D2B5 /* Images.xcassets in Resources */,
 				84AF6DB8181AA93B0087D2B5 /* Main_iPhone.storyboard in Resources */,
@@ -327,12 +389,13 @@
 				84AF6E12181AC0A60087D2B5 /* iEmdrSessionTVC.m in Sources */,
 				84AF6DBE181AA93B0087D2B5 /* IEMDRViewController.m in Sources */,
 				84AF6E1C181AC0D20087D2B5 /* CoreDataTableViewController.m in Sources */,
-				847946E9183C225000402ABC /* Session.m in Sources */,
+				8423595E183FC0C700782AD1 /* Session.m in Sources */,
+				84235956183FBD3400782AD1 /* Client.m in Sources */,
 				84B1C73F183B8D380062D1EE /* IEMDRScene.m in Sources */,
-				84AF6DE4181AAE0B0087D2B5 /* Client.m in Sources */,
 				84AF6E1D181AC0D20087D2B5 /* iEmdrClientTVC.m in Sources */,
 				84AF6DB5181AA93B0087D2B5 /* IEMDRAppDelegate.m in Sources */,
 				84AF6E11181AC0A60087D2B5 /* iEmdrCoreData.m in Sources */,
+				84D7558B18402CB5002613E2 /* IEMDRBigViewController.m in Sources */,
 				84AF6DEB181AAE330087D2B5 /* Client+Create.m in Sources */,
 				84AF6DB1181AA93B0087D2B5 /* main.m in Sources */,
 				84AF6DED181AAE330087D2B5 /* Session+Create.m in Sources */,
@@ -574,9 +637,10 @@
 			children = (
 				841227E7182416C800DF7658 /* Model 2.xcdatamodel */,
 				847946E6183C21CB00402ABC /* Model 3.xcdatamodel */,
+				84235953183FBC8900782AD1 /* Model 4.xcdatamodel */,
 				84AF6DDD181AACF10087D2B5 /* Model.xcdatamodel */,
 			);
-			currentVersion = 847946E6183C21CB00402ABC /* Model 3.xcdatamodel */;
+			currentVersion = 84235953183FBC8900782AD1 /* Model 4.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

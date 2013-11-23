@@ -18,6 +18,7 @@
                              size:(NSNumber *)size
                         frequency:(NSNumber *)frequency
                              form:(NSNumber *)form
+                            sound:(NSNumber *)sound
                            client:(Client *)client
         inManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -46,6 +47,7 @@
         session.size = size;
         session.frequency = frequency;
         session.form = form;
+        session.sound = sound;
         
         session.hasClient = client;
     } else {

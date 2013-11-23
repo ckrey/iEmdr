@@ -2,7 +2,7 @@
 //  Client.h
 //  iEmdr
 //
-//  Created by Christoph Krey on 25.10.13.
+//  Created by Christoph Krey on 22.11.13.
 //  Copyright (c) 2013 Christoph Krey. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 
 @interface Client : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * abRef;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *hasSessions;
 @end
 
