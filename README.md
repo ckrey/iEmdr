@@ -1,4 +1,4 @@
 iEmdr
 =====
 
-<a href=>Wiki</a>
+<a href=https://github.com/ckrey/iEmdr/wiki>Wiki</a>
