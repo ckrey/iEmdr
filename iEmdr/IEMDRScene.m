@@ -36,9 +36,9 @@
     node.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
     node.path = CGPathCreateWithEllipseInRect(CGRectMake(-25, -25, 50, 50), NULL);
     node.antialiased = NO;
-    node.blendMode = SKBlendModeAlpha;
+    node.blendMode = SKBlendModeReplace;
     node.fillColor = [UIColor blackColor];
-    node.strokeColor = [UIColor blackColor];
+    node.strokeColor = [UIColor clearColor];
     node.glowWidth = 0.0;
     node.lineWidth = 1.0;
     return node;
