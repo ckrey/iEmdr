@@ -8,11 +8,6 @@
 
 #import "iEmdrCoreData.h"
 
-@interface iEmdrCoreData()
-
-
-@end
-
 @implementation iEmdrCoreData
 
 - (id)init

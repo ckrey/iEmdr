@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BqT-Ae-wZH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BqT-Ae-wZH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Split View Controller-->
@@ -32,11 +33,10 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qy-Iu-oi8">
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem enabled="NO" title="Client" id="pLJ-LA-Up8"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Sln-M0-EAE"/>
-                                    <barButtonItem title="Item" systemItem="play" id="fKC-ol-6Fr">
+                                    <barButtonItem systemItem="play" id="fKC-ol-6Fr">
                                         <connections>
                                             <action selector="played:" destination="OO1-SX-4Mg" id="bk0-36-ahd"/>
                                         </connections>
@@ -54,48 +54,41 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pnr-jV-N29">
-                                <rect key="frame" x="0.0" y="978" width="768" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pnr-jV-N29">
+                                <rect key="frame" x="0.0" y="978" width="768" height="3"/>
                             </progressView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="TL9-zj-t5I">
-                                <rect key="frame" x="184" y="937" width="566" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="184" y="940" width="566" height="31"/>
                                 <connections>
                                     <action selector="durationChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="MoW-mB-zJ6"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vII-Ri-f2y">
-                                <rect key="frame" x="184" y="896" width="566" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="184" y="902" width="566" height="31"/>
                                 <connections>
                                     <action selector="speedChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="NO5-bk-Y84"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="cDw-Hd-v1D">
-                                <rect key="frame" x="184" y="855" width="566" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="184" y="864" width="566" height="31"/>
                                 <connections>
                                     <action selector="hueChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="iBp-5n-pJO"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="st0-ij-8vm">
-                                <rect key="frame" x="184" y="814" width="566" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="184" y="826" width="566" height="31"/>
                                 <connections>
                                     <action selector="backgroundChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="yfn-as-Cd0"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="TM9-x8-vx9">
-                                <rect key="frame" x="184" y="773" width="566" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="184" y="788" width="566" height="31"/>
                                 <connections>
                                     <action selector="sizeChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="faU-5f-ype"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duS-ak-4hC">
-                                <rect key="frame" x="20" y="943" width="100" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="945" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="pKn-l0-aZJ"/>
                                 </constraints>
@@ -104,8 +97,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDy-tV-AJn">
-                                <rect key="frame" x="20" y="902" width="100" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="907" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Ztm-Uk-kZN"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="gI6-6L-ecn"/>
@@ -115,8 +107,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERy-jZ-Asc">
-                                <rect key="frame" x="20" y="861" width="100" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="869" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="qie-Jw-c4X"/>
                                     <constraint firstAttribute="width" constant="100" id="vQz-dJ-IKK"/>
@@ -126,8 +117,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Canvas" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTv-gx-chU">
-                                <rect key="frame" x="20" y="820" width="100" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="831" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="3gE-PO-qWx"/>
                                     <constraint firstAttribute="width" constant="100" id="hVf-gh-IIK"/>
@@ -137,8 +127,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZY-7C-4Rf">
-                                <rect key="frame" x="20" y="779" width="100" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="793" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="frf-s2-o65"/>
                                     <constraint firstAttribute="width" constant="100" id="xwS-cn-Wma"/>
@@ -148,8 +137,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xuS-08-mGp">
-                                <rect key="frame" x="128" y="939" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="128" y="940" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="1iT-Ko-8ir"/>
                                     <constraint firstAttribute="height" constant="30" id="1kn-sH-qfO"/>
@@ -158,8 +146,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jIt-42-7Wr">
-                                <rect key="frame" x="128" y="898" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="128" y="902" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="VtH-gu-a2U"/>
                                     <constraint firstAttribute="width" constant="50" id="tBX-6A-ab4"/>
@@ -168,8 +155,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7E-zx-QNj">
-                                <rect key="frame" x="128" y="857" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="128" y="864" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="avq-6d-qVK"/>
                                     <constraint firstAttribute="height" constant="30" id="cdk-qb-FAQ"/>
@@ -178,8 +164,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xp4-L2-J0Z">
-                                <rect key="frame" x="128" y="816" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="128" y="826" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="bpm-jV-ieH"/>
                                     <constraint firstAttribute="width" constant="50" id="rlU-Nq-Ji6"/>
@@ -188,8 +173,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVP-6O-d8O">
-                                <rect key="frame" x="128" y="775" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="128" y="788" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="IXK-3p-2Gg"/>
                                     <constraint firstAttribute="height" constant="30" id="QkL-zx-cV2"/>
@@ -198,8 +182,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yzV-3f-HTT">
-                                <rect key="frame" x="20" y="737" width="728" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="752" width="728" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="S74-To-0qz"/>
                                 </constraints>
@@ -209,14 +192,14 @@
                                     <segment title="Diagonal Down (\)"/>
                                     <segment title="infinity (∞)"/>
                                     <segment title="Figure 8"/>
+                                    <segment title="Vertical"/>
                                 </segments>
                                 <connections>
                                     <action selector="formChanged:" destination="OO1-SX-4Mg" eventType="valueChanged" id="7Dc-Hn-sjv"/>
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MMc-0U-ywd">
-                                <rect key="frame" x="20" y="701" width="728" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="716" width="728" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="Ltv-Mv-bjR"/>
                                 </constraints>
@@ -313,12 +296,12 @@
             </objects>
             <point key="canvasLocation" x="2317" y="563"/>
         </scene>
-        <!--I Emdr ClientTVC - iEmdr-->
+        <!--iEmdr-->
         <scene sceneID="eJp-6B-pTW">
             <objects>
                 <tableViewController id="ddh-gT-UPI" customClass="iEmdrClientTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="R8y-nN-SpD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -373,12 +356,12 @@
             </objects>
             <point key="canvasLocation" x="1821" y="-416"/>
         </scene>
-        <!--I Emdr SessionTVC - Client-->
+        <!--Client-->
         <scene sceneID="QHl-jZ-X5f">
             <objects>
                 <tableViewController id="cEb-B5-R45" customClass="iEmdrSessionTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="U50-K0-61R">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

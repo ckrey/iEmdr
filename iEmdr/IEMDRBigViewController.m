@@ -16,12 +16,14 @@
 
 @implementation IEMDRBigViewController
 
-- (void)viewDidLayoutSubviews
-{
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+}
+
+- (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
     IEMDRScene *scene = [[IEMDRScene alloc] initWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
-    
     SKView *view = (SKView *)self.view;
     [view presentScene:scene];
 }

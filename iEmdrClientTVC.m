@@ -168,24 +168,11 @@
     return detail;
 }
 
-- (id)splitViewDetailWithBig
-{
-    id detail = [self.splitViewController.viewControllers lastObject];
-    if (![detail respondsToSelector:@selector(setBig:)] ||
-        ![detail respondsToSelector:@selector(big)]) detail = nil;
-    return detail;
-}
-
-
 - (void)transferSplitViewBarButtonItemToViewController:(id)destinationViewController
 {
     UIBarButtonItem *splitViewBarButtonItem = [[self splitViewDetailWithBarButtonItem] performSelector:@selector(splitViewBarButtonItem)];
     [[self splitViewDetailWithBarButtonItem] setSplitViewBarButtonItem:nil];
     if (splitViewBarButtonItem) [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
-    
-    id big = [[self splitViewDetailWithBig] performSelector:@selector(big)];
-    [[self splitViewDetailWithBig] setBig:nil];
-    if (big) [destinationViewController setBig:big];
 }
 
 @end

@@ -14,10 +14,10 @@
 
 @interface IEMDRViewController : UIViewController
 
-@property (weak, nonatomic) SKView *big;
 @property (strong, nonatomic) Client *clientToRun;
-- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)barButtonItem;
 @property (strong, nonatomic) UIBarButtonItem *splitViewBarButtonItem;
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)barButtonItem;
 - (void)sessionFinished;
 
 

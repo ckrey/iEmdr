@@ -54,6 +54,10 @@
 
 @property (nonatomic) AVAudioPlayer * backgroundMusicPlayer;
 
+@property (weak, nonatomic) SKView *big;
+@property (strong, nonatomic) UIWindow *secondWindow;
+
+
 @end
 
 #define BPM_MAX 180.0
@@ -93,17 +97,17 @@
     [self setClientName];
 }
 
-- (void)setBig:(SKView *)big
-{
-    _big = big;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    IEMDRAppDelegate *iemdrAD = [UIApplication sharedApplication].delegate;
-    iemdrAD.iemdrVC = self;
+    
+    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+    
+    [center addObserver:self selector:@selector(handleScreenConnectNotification:)
+                   name:UIScreenDidConnectNotification object:nil];
+    [center addObserver:self selector:@selector(handleScreenDisconnectNotification:)
+                   name:UIScreenDidDisconnectNotification object:nil];
+    
     [self setClientName];
 }
 
@@ -152,6 +156,7 @@
         self.hueSlider.value = [newestSession.hue floatValue];
         self.speedSlider.value = [newestSession.frequency intValue];
     }
+    [self checkForExistingScreenAndInitializeIfPresent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -163,7 +168,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    [self setup];
+}
+
+- (void)setup {
     [self soundChanged:self.soundSegment];
     [self formChanged:self.formSegment];
     [self durationChanged:self.durationSlider];
@@ -171,8 +179,9 @@
     [self sizeChanged:self.sizeSlider];
     [self hueChanged:self.hueSlider];
     [self speedChanged:self.speedSlider];
-    
+
     [self resetSprites];
+    [self.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
 }
 
 - (IBAction)durationChanged:(UISlider *)sender {
@@ -280,7 +289,7 @@
 }
 
 - (IBAction)played:(UIBarButtonItem *)sender {
-    
+    [self resetSprites];
     self.passingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                          target:self
                                                        selector:@selector(timePassed:)
@@ -351,6 +360,14 @@
     SKAction *reset;
     
     switch (self.formSegment.selectedSegmentIndex) {
+        case 5:
+            reset = [SKAction moveTo:CGPointMake(w/2, 0) duration:0];
+            
+            CGPathAddLineToPoint(pathl, NULL, 0, h);
+            
+            CGPathAddLineToPoint(pathr, NULL, 0, -h);
+            break;
+
         case 4:
             reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
             
@@ -482,5 +499,51 @@
     _splitViewBarButtonItem = barButtonItem;
     
 }
+
+- (void)handleScreenConnectNotification:(NSNotification *)notification {
+    UIScreen *screen = (UIScreen *)notification.object;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Second Screen"
+                                                        message:[NSString stringWithFormat:@"connected %.0f x %.0f pixels",
+                                                                 screen.bounds.size.width,
+                                                                 screen.bounds.size.height]
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+    [alertView show];
+    
+    [self checkForExistingScreenAndInitializeIfPresent];
+}
+
+- (void)handleScreenDisconnectNotification:(NSNotification *)notification {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Second Screen"
+                                                        message:@"disconnected"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+    [alertView show];
+    if (self.secondWindow) {
+        self.secondWindow.hidden = YES;
+        self.secondWindow = nil;
+    }
+    self.big = nil;
+}
+
+- (void)checkForExistingScreenAndInitializeIfPresent {
+    NSArray *screens = [UIScreen screens];
+    if ([screens count] > 1) {
+        UIScreen *secondScreen = (UIScreen *)screens[1];
+        CGRect screenBounds = secondScreen.bounds;
+        self.secondWindow = [[UIWindow alloc] initWithFrame:screenBounds];
+        self.secondWindow.screen = secondScreen;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"big" bundle:[NSBundle mainBundle]];
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"big"];
+        self.secondWindow.rootViewController = viewController;
+        SKView *skView = (SKView *)viewController.view;
+        self.big = skView;
+        self.secondWindow.hidden = NO;
+        [self setup];
+    }
+}
+
 
 @end
