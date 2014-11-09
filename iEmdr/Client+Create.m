@@ -57,8 +57,7 @@
 #endif
             } else {
                 CFStringRef errorDescription = CFErrorCopyDescription(cfError);
-                [Client error:[NSString stringWithFormat:@"ABAddressBookCreateWithOptions not successfull %@", errorDescription]];
-                CFRelease(errorDescription);
+                NSLog(@"ABAddressBookCreateWithOptions not successfull %@", errorDescription);
                 isGranted = NO;
             }
             
@@ -73,35 +72,16 @@
 #endif
                 } else {
                     isGranted = NO;
-                    CFRelease(ab);
                     ab = nil;
                 }
             });
         } else {
-            [Client error:[NSString stringWithFormat:@"ABAddressBookRequestAccessWithCompletion not successfull"]];
+           NSLog(@"ABAddressBookRequestAccessWithCompletion not successfull");
         }
         
     }
     
     return ab;
 }
-
-+ (void)error:(NSString *)message
-{
-#ifdef DEBUG
-    NSLog(@"Client error %@", message);
-#endif
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSBundle mainBundle].infoDictionary[@"CFBundleName"]
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-    
-    [alertView show];
-    
-}
-
-
 
 @end

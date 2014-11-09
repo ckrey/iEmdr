@@ -14,6 +14,7 @@
 
 @interface iEmdrClientTVC()
 @property (nonatomic) BOOL started;
+@property (strong, nonatomic) UIAlertView *alertview;
 @end
 
 @implementation iEmdrClientTVC
@@ -100,10 +101,21 @@
 }
 
 - (IBAction)newClient:(UIBarButtonItem *)sender {
-    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-    picker.peoplePickerDelegate = self;
-    picker.addressBook = [Client theABRef];
-    [self presentViewController:picker animated:YES completion:nil];    
+    ABAddressBookRef ab = [Client theABRef];
+    if (ab) {
+        ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+        picker.peoplePickerDelegate = self;
+        picker.addressBook = ab;
+        [self presentViewController:picker animated:YES completion:nil];
+    } else {
+        self.alertview = [[UIAlertView alloc] initWithTitle:@"Addressbook Access blocked"
+                                                    message:@"please adjust Settings/Privacy/Contacts"
+                                                   delegate:nil
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"OK", nil];
+        
+        [self.alertview show];
+    }
 }
 
 - (IBAction)withoutClient:(UIBarButtonItem *)sender {
@@ -112,6 +124,8 @@
 
 
 #pragma ABPeoplePickerNavigationControllerDelegate
+
+// IOS < 8.0
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
 {
     IEMDRAppDelegate *delegate = [UIApplication sharedApplication].delegate;
@@ -123,15 +137,28 @@
     return NO;
 }
 
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
 {
     return NO;
 }
 
+// IOS < 8.0 and >= 8.0
 -(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+// IOS >= 8.0
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
+    IEMDRAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    
+    NSString *name = CFBridgingRelease(ABRecordCopyCompositeName(person));
+    (void)[Client clientWithName:name inManagedObjectContext:delegate.data.managedObjectContext];
+    [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 
 #pragma SplitViewDelegate
 
