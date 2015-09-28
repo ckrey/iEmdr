@@ -20,6 +20,7 @@
 		84235964183FC1D500782AD1 /* tock.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84235952183FBC2E00782AD1 /* tock.m4a */; };
 		84235965183FC1D500782AD1 /* snipl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423595A183FC00D00782AD1 /* snipl.m4a */; };
 		84235966183FC1D500782AD1 /* snipr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8423595B183FC00D00782AD1 /* snipr.m4a */; };
+		84469C431BB99C9B00C8C1DA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84469C421BB99C9B00C8C1DA /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		84AF6DA5181AA93B0087D2B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA4181AA93B0087D2B5 /* Foundation.framework */; };
 		84AF6DA7181AA93B0087D2B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */; };
 		84AF6DA9181AA93B0087D2B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA8181AA93B0087D2B5 /* UIKit.framework */; };
@@ -84,6 +85,7 @@
 		8423595B183FC00D00782AD1 /* snipr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snipr.m4a; sourceTree = "<group>"; };
 		8423595C183FC0C700782AD1 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		8423595D183FC0C700782AD1 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		84469C421BB99C9B00C8C1DA /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		847946E6183C21CB00402ABC /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
 		84AF6DA1181AA93B0087D2B5 /* iEmdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEmdr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AF6DA4181AA93B0087D2B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -266,6 +268,7 @@
 				84E4BC891BB6F833005E0B54 /* big.storyboard */,
 				84AF6DB9181AA93B0087D2B5 /* Main.storyboard */,
 				84E4BC8B1BB6F839005E0B54 /* Main_iPhone.storyboard */,
+				84469C421BB99C9B00C8C1DA /* Launch Screen.storyboard */,
 				84AF6DBC181AA93B0087D2B5 /* IemdrVC.h */,
 				84AF6DBD181AA93B0087D2B5 /* IemdrVC.m */,
 				84D7558918402CB5002613E2 /* IemdrBigVC.h */,
@@ -421,6 +424,7 @@
 				84235964183FC1D500782AD1 /* tock.m4a in Resources */,
 				84235965183FC1D500782AD1 /* snipl.m4a in Resources */,
 				84235966183FC1D500782AD1 /* snipr.m4a in Resources */,
+				84469C431BB99C9B00C8C1DA /* Launch Screen.storyboard in Resources */,
 				8423594B183E580900782AD1 /* pingl.m4a in Resources */,
 				8423594C183E580900782AD1 /* pingr.m4a in Resources */,
 				84AF6DBB181AA93B0087D2B5 /* Main.storyboard in Resources */,
@@ -682,7 +686,7 @@
 				INFOPLIST_FILE = iEmdrTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdrTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -705,7 +709,7 @@
 				INFOPLIST_FILE = iEmdrTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdrTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
