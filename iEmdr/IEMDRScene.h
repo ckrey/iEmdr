@@ -8,6 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface IEMDRScene : SKScene
+@interface IemdrScene : SKScene
 
 @end

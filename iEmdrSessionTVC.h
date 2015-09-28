@@ -6,12 +6,11 @@
 //  Copyright (c) 2013 Christoph Krey. All rights reserved.
 //
 
-#import "CoreDataTableViewController.h"
-#import <MessageUI/MessageUI.h>
+#import "CoreDataTVC.h"
 #import "Client.h"
 
 
-@interface iEmdrSessionTVC : CoreDataTableViewController <MFMailComposeViewControllerDelegate>
+@interface iEmdrSessionTVC : CoreDataTVC <UIDocumentInteractionControllerDelegate>
 
 @property (weak, nonatomic) Client *client;
 @end

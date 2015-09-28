@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Christoph Krey. All rights reserved.
 //
 
-#import "CoreDataTableViewController.h"
+#import "CoreDataTVC.h"
 #import "Session+Create.h"
 #import <AddressBookUI/AddressBookUI.h>
 
 
-@interface iEmdrClientTVC : CoreDataTableViewController <ABPeoplePickerNavigationControllerDelegate, UISplitViewControllerDelegate>
+@interface iEmdrClientTVC : CoreDataTVC
 @end

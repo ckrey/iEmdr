@@ -10,7 +10,7 @@
 #import "Session.h"
 
 @interface iEmdrSessionTVC ()
-
+@property (strong, nonatomic) UIDocumentInteractionController *dic;
 @end
 
 @implementation iEmdrSessionTVC
@@ -73,10 +73,15 @@
 
 - (IBAction)action:(UIBarButtonItem *)sender
 {
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    picker.mailComposeDelegate = self;
+    NSError *error;
+    NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
+                                                                 inDomain:NSUserDomainMask
+                                                        appropriateForURL:nil
+                                                                   create:YES
+                                                                    error:&error];
     
-    [picker setSubject:[NSString stringWithFormat:@"iEmdr Sessions %@", self.client.name]];
+    NSString *fileName = [NSString stringWithFormat:@"iEmdr-Sessions-%@.csv", self.client.name];
+    NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
     
     NSString *string = @"Date,Duration(s),Actual_Duration(%),Frequency(hz),Size(points),Hue(%),Canvas(%),Form#,Sound#\n";
     
@@ -97,26 +102,14 @@
     }
     
     NSData *myData =  [string dataUsingEncoding:NSUTF8StringEncoding];
-    [picker addAttachmentData:myData mimeType:@"text/csv"
-                     fileName:[NSString stringWithFormat:@"iEmdr-Sessions-%@.csv", self.client.name]];
+
+    [[NSFileManager defaultManager] createFileAtPath:[fileURL path]
+                                            contents:myData
+                                          attributes:nil];
     
-    NSString *emailBody = @"see attached file";
-    [picker setMessageBody:emailBody isHTML:NO];
-        
-    [self presentViewController:picker animated:YES completion:^{
-        // done
-    }];
+    self.dic = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    self.dic.delegate = self;
+    [self.dic presentOptionsMenuFromBarButtonItem:sender animated:YES];
 }
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error
-{
-    [controller dismissViewControllerAnimated:YES completion:^{
-        // done
-    }];
-}
-
-
 
 @end

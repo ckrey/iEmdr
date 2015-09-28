@@ -8,22 +8,22 @@
 
 #import "iEmdrClientTVC.h"
 #import "iEmdrSessionTVC.h"
-#import "iEmdrAppDelegate.h"
+#import "iEmdrAD.h"
 #import "Client+Create.h"
 #import "Session+Create.h"
+#import "IemdrPersonTVC.h"
+#import "IemdrVC.h"
 
 @interface iEmdrClientTVC()
-@property (nonatomic) BOOL started;
 @property (strong, nonatomic) UIAlertView *alertview;
 @end
 
 @implementation iEmdrClientTVC
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    IEMDRAppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    IemdrAD *delegate = [UIApplication sharedApplication].delegate;
         
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Client"];
     
@@ -32,11 +32,6 @@
                                                                         managedObjectContext:delegate.data.managedObjectContext
                                                                           sectionNameKeyPath:nil
                                                                                     cacheName:nil];
-    if (!self.started) {
-        self.started = TRUE;
-        if (!self.splitViewController) {
-        }
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,6 +46,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSLog(@"prepareForSegue %@ %@ %@ %@", segue, segue.identifier, segue.sourceViewController, segue.destinationViewController);
     NSIndexPath *indexPath = nil;
     
     if ([sender isKindOfClass:[UITableViewCell class]]) {
@@ -58,13 +54,6 @@
     }
     
     if (indexPath) {
-        if ([segue.identifier isEqualToString:@"setClientToRun:"]) {
-            Client *client = [self.fetchedResultsController objectAtIndexPath:indexPath];
-            if ([segue.destinationViewController respondsToSelector:@selector(setClientToRun:)]) {
-                [segue.destinationViewController performSelector:@selector(setClientToRun:) withObject:client];
-            }
-            [self transferSplitViewBarButtonItemToViewController:segue.destinationViewController];
-        }
         if ([segue.identifier isEqualToString:@"setClient:"]) {
             Client *client = [self.fetchedResultsController objectAtIndexPath:indexPath];
             if ([segue.destinationViewController respondsToSelector:@selector(setClient:)]) {
@@ -88,119 +77,27 @@
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath {
-    
-    [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
-    UITableViewCell *cell = [theTableView cellForRowAtIndexPath:newIndexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryNone) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        // Reflect selection in data model
-    } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        // Reflect deselection in data model
+    NSArray *vcs = self.splitViewController.viewControllers;
+    UIViewController *detailVC = vcs[1];
+    if ([detailVC respondsToSelector:@selector(setClientToRun:)]) {
+        Client *client = [self.fetchedResultsController objectAtIndexPath:newIndexPath];
+        [detailVC performSelector:@selector(setClientToRun:) withObject:client];
     }
-}
-
-- (IBAction)newClient:(UIBarButtonItem *)sender {
-    ABAddressBookRef ab = [Client theABRef];
-    if (ab) {
-        ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-        picker.peoplePickerDelegate = self;
-        picker.addressBook = ab;
-        [self presentViewController:picker animated:YES completion:nil];
-    } else {
-        self.alertview = [[UIAlertView alloc] initWithTitle:@"Addressbook Access blocked"
-                                                    message:@"please adjust Settings/Privacy/Contacts"
-                                                   delegate:nil
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles:@"OK", nil];
-        
-        [self.alertview show];
-    }
+    [self.splitViewController showDetailViewController:detailVC sender:nil];
 }
 
 - (IBAction)withoutClient:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"setClientToRun:" sender:nil];
+    NSArray *vcs = self.splitViewController.viewControllers;
+    [self.splitViewController showDetailViewController:vcs[1] sender:sender];
 }
 
 
-#pragma ABPeoplePickerNavigationControllerDelegate
-
-// IOS < 8.0
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
-{
-    IEMDRAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-
-    NSString *name = CFBridgingRelease(ABRecordCopyCompositeName(person));
-    (void)[Client clientWithName:name inManagedObjectContext:delegate.data.managedObjectContext];
-    [self.tableView reloadData];
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    return NO;
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
-{
-    return NO;
-}
-
-// IOS < 8.0 and >= 8.0
--(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-// IOS >= 8.0
-- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person {
-    IEMDRAppDelegate *delegate = [UIApplication sharedApplication].delegate;
-    
-    NSString *name = CFBridgingRelease(ABRecordCopyCompositeName(person));
-    (void)[Client clientWithName:name inManagedObjectContext:delegate.data.managedObjectContext];
-    [self.tableView reloadData];
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-
-
-#pragma SplitViewDelegate
-
-- (void)awakeFromNib
-{
-    if (self.splitViewController) {
-        self.splitViewController.delegate = self;
+- (IBAction)clientSelected:(UIStoryboardSegue *)unwindSegue {
+    if ([unwindSegue.sourceViewController respondsToSelector:@selector(selectedPersonName)]) {
+        NSString *name = [unwindSegue.sourceViewController performSelector:@selector(selectedPersonName)];
+        IemdrAD *delegate = [UIApplication sharedApplication].delegate;
+        [Client clientWithName:name inManagedObjectContext:delegate.data.managedObjectContext];
     }
 }
-
-- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
-{
-    return YES;
-}
-
-- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    id detailViewController = [self.splitViewController.viewControllers lastObject];
-    [detailViewController setSplitViewBarButtonItem:nil];
-}
-
-- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
-{
-    barButtonItem.title = @"Clients";
-    id detailViewController = [self.splitViewController.viewControllers lastObject];
-    [detailViewController setSplitViewBarButtonItem:barButtonItem];
-}
-
-- (id)splitViewDetailWithBarButtonItem
-{
-    id detail = [self.splitViewController.viewControllers lastObject];
-    if (![detail respondsToSelector:@selector(setSplitViewBarButtonItem:)] ||
-        ![detail respondsToSelector:@selector(splitViewBarButtonItem)]) detail = nil;
-    return detail;
-}
-
-- (void)transferSplitViewBarButtonItemToViewController:(id)destinationViewController
-{
-    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewDetailWithBarButtonItem] performSelector:@selector(splitViewBarButtonItem)];
-    [[self splitViewDetailWithBarButtonItem] setSplitViewBarButtonItem:nil];
-    if (splitViewBarButtonItem) [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
-}
-
 @end
 

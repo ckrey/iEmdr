@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HueVal</key>
+	<integer>1</integer>
+	<key>HueMax</key>
+	<integer>1</integer>
+	<key>HueMin</key>
+	<integer>0</integer>
+	<key>DurationVal</key>
+	<integer>60</integer>
+	<key>DurationMax</key>
+	<integer>600</integer>
+	<key>DurationMin</key>
+	<integer>10</integer>
+	<key>BPMVal</key>
+	<integer>30</integer>
+	<key>BPMMax</key>
+	<integer>180</integer>
+	<key>BPMMin</key>
+	<integer>10</integer>
+	<key>RadiusVal</key>
+	<integer>50</integer>
+	<key>RadiusMax</key>
+	<integer>200</integer>
+	<key>RadiusMin</key>
+	<integer>5</integer>
+	<key>SoundVal</key>
+	<integer>0</integer>
+	<key>FormVal</key>
+	<integer>0</integer>
+	<key>CanvasVal</key>
+	<integer>1</integer>
+	<key>CanvasMin</key>
+	<integer>0</integer>
+	<key>CanvasMax</key>
+	<integer>1</integer>
+	<key>Blank</key>
+	<false/>
+</dict>
+</plist>

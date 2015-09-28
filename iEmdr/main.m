@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "IEMDRAppDelegate.h"
+#import "IemdrAD.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([IEMDRAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([IemdrAD class]));
     }
 }

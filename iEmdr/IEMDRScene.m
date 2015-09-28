@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Christoph Krey. All rights reserved.
 //
 
-#import "IEMDRScene.h"
+#import "IemdrScene.h"
 
-@interface IEMDRScene ()
+@interface IemdrScene ()
 @property BOOL contentCreated;
 @end
 
-@implementation IEMDRScene
+@implementation IemdrScene
 
 - (void)didMoveToView: (SKView *) view
 {
