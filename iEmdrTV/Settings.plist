@@ -8,24 +8,40 @@
 	<integer>1</integer>
 	<key>HueMin</key>
 	<integer>0</integer>
+	<key>HueInc</key>
+	<real>0.05</real>
+	<key>HueFac</key>
+	<integer>1</integer>
 	<key>DurationVal</key>
 	<integer>60</integer>
 	<key>DurationMax</key>
-	<integer>600</integer>
+	<integer>960</integer>
 	<key>DurationMin</key>
-	<integer>10</integer>
+	<integer>15</integer>
+	<key>DurationInc</key>
+	<integer>0</integer>
+	<key>DurationFac</key>
+	<integer>2</integer>
 	<key>BPMVal</key>
-	<integer>30</integer>
+	<integer>60</integer>
 	<key>BPMMax</key>
-	<integer>180</integer>
+	<integer>240</integer>
 	<key>BPMMin</key>
-	<integer>10</integer>
+	<integer>15</integer>
+	<key>BPMInc</key>
+	<integer>0</integer>
+	<key>BPMFac</key>
+	<integer>2</integer>
 	<key>RadiusVal</key>
 	<integer>50</integer>
 	<key>RadiusMax</key>
-	<integer>200</integer>
+	<integer>320</integer>
 	<key>RadiusMin</key>
 	<integer>5</integer>
+	<key>RadiusInc</key>
+	<integer>0</integer>
+	<key>RadiusFac</key>
+	<real>1.5</real>
 	<key>SoundVal</key>
 	<integer>0</integer>
 	<key>FormVal</key>
@@ -36,7 +52,9 @@
 	<integer>0</integer>
 	<key>CanvasMax</key>
 	<integer>1</integer>
-	<key>Blank</key>
-	<false/>
+	<key>CanvasInc</key>
+	<real>0.05</real>
+	<key>CanvasFac</key>
+	<integer>1</integer>
 </dict>
 </plist>

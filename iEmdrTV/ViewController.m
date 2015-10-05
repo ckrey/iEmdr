@@ -15,9 +15,9 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UIProgressView *progress;
-@property (weak, nonatomic) IBOutlet UIButton *button;
+@property (weak, nonatomic) IBOutlet UIButton *start;
 @property (weak, nonatomic) IBOutlet UIButton *stop;
-@property (weak, nonatomic) IBOutlet UIButton *blank;
+@property (weak, nonatomic) IBOutlet UIButton *sample;
 
 @property (weak, nonatomic) IBOutlet UIButton *canvasPlus;
 @property (weak, nonatomic) IBOutlet UIButton *canvasMinus;
@@ -36,20 +36,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *durationMinus;
 @property (weak, nonatomic) IBOutlet UIButton *durationPlus;
 
-@property (weak, nonatomic) IBOutlet UIButton *snip;
-@property (weak, nonatomic) IBOutlet UIButton *ding;
-@property (weak, nonatomic) IBOutlet UIButton *drums;
-@property (weak, nonatomic) IBOutlet UIButton *dong;
-@property (weak, nonatomic) IBOutlet UIButton *tictoc;
-
-@property (weak, nonatomic) IBOutlet UIButton *horizontal;
-@property (weak, nonatomic) IBOutlet UIButton *up;
-@property (weak, nonatomic) IBOutlet UIButton *down;
-@property (weak, nonatomic) IBOutlet UIButton *infinity;
-@property (weak, nonatomic) IBOutlet UIButton *eight;
-@property (weak, nonatomic) IBOutlet UIButton *vertical;
+@property (weak, nonatomic) IBOutlet UILabel *sound;
+@property (weak, nonatomic) IBOutlet UILabel *form;
+@property (weak, nonatomic) IBOutlet UIButton *formSelect;
+@property (weak, nonatomic) IBOutlet UIButton *soundSelect;
 
 @property (nonatomic) NSTimeInterval timePassed;
+@property (nonatomic) BOOL blank;
 @property (strong, nonatomic) NSTimer *passingTimer;
 @property (strong, nonatomic) NSDate *started;
 @property (nonatomic) AVAudioPlayer * backgroundMusicPlayer;
@@ -60,25 +53,36 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.blank = FALSE;
     [self resetSprites];
 }
 
-- (IBAction)blankPressed:(id)sender {
-    BOOL blank = [[NSUserDefaults standardUserDefaults] boolForKey:@"Blank"];
-    blank = !blank;
-    [[NSUserDefaults standardUserDefaults] setObject:@(blank) forKey:@"Blank"];
-    [self.view setNeedsLayout];
+- (IBAction)startPressed:(UIButton *)sender {
+    self.blank = TRUE;
+    [self startEmdr];
+}
+
+- (IBAction)samplePressed:(id)sender {
+    self.blank = FALSE;
+    [self startEmdr];
+}
+
+- (IBAction)tapped:(UITapGestureRecognizer *)sender {
+    [self stopEmdr];
 }
 
 - (IBAction)stopPressed:(id)sender {
+    [self stopEmdr];
+}
+
+- (void)stopEmdr {
     [self resetSprites];
     self.started = nil;
 
     self.progress.hidden = true;
     self.stop.hidden = true;
-
-    self.button.hidden = false;
-    self.blank.hidden = false;
+    self.start.hidden = false;
+    self.sample.hidden = false;
 
     self.huePlus.hidden = false;
     self.hueMinus.hidden = false;
@@ -97,35 +101,28 @@
     self.durationMinus.hidden = false;
     self.durationPlus.hidden = false;
 
-    self.vertical.hidden = false;
-    self.up.hidden = false;
-    self.down.hidden = false;
-    self.infinity.hidden = false;
-    self.eight.hidden = false;
-    self.horizontal.hidden = false;
+    self.sound.hidden = false;
+    self.soundSelect.hidden = false;
+    self.form.hidden = false;
+    self.formSelect.hidden = false;
 
-    self.tictoc.hidden = false;
-    self.dong.hidden = false;
-    self.drums.hidden = false;
-    self.ding.hidden = false;
-    self.snip.hidden = false;
     [self.view setNeedsFocusUpdate];
 }
 
-- (IBAction)buttonPressed:(UIButton *)sender {
+- (void)startEmdr {
     [self resetSprites];
     self.started = [NSDate date];
+    [self.progress setProgress:0.0 animated:YES];
 
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Blank"]) {
+    if (self.blank) {
         self.progress.hidden = true;
         self.stop.hidden = true;
     } else {
         self.progress.hidden = false;
         self.stop.hidden = false;
     }
-
-    self.button.hidden = true;
-    self.blank.hidden = true;
+    self.start.hidden = true;
+    self.sample.hidden = true;
 
     self.huePlus.hidden = true;
     self.hueMinus.hidden = true;
@@ -144,18 +141,10 @@
     self.durationMinus.hidden = true;
     self.durationPlus.hidden = true;
 
-    self.vertical.hidden = true;
-    self.up.hidden = true;
-    self.down.hidden = true;
-    self.infinity.hidden = true;
-    self.eight.hidden = true;
-    self.horizontal.hidden = true;
-
-    self.tictoc.hidden = true;
-    self.dong.hidden = true;
-    self.drums.hidden = true;
-    self.ding.hidden = true;
-    self.snip.hidden = true;
+    self.sound.hidden = true;
+    self.soundSelect.hidden = true;
+    self.form.hidden = true;
+    self.formSelect.hidden = true;
 
     self.passingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                          target:self
@@ -167,7 +156,7 @@
 }
 
 - (UIView *)preferredFocusedView {
-    return self.button;
+    return self.start;
 }
 
 - (void)timePassed:(NSTimer *)timer
@@ -214,137 +203,96 @@
 }
 - (IBAction)canvasPlus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasVal"];
-    double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasMin"];
     double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasMax"];
-    val = MIN(max,(val + (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasFac"];
+    val = MIN(max,(val * fac + inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"CanvasVal"];
     [self.view setNeedsLayout];
 }
 - (IBAction)canvasMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasMin"];
-    double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasMax"];
-    val = MAX(min,(val - (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasFac"];
+    val = MAX(min,(val / fac - inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"CanvasVal"];
     [self.view setNeedsLayout];
 }
 
 - (IBAction)huePlus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueVal"];
-    double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueMin"];
     double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueMax"];
-    val = MIN(max,(val + (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueFac"];
+    val = MIN(max,(val * fac + inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"HueVal"];
     [self.view setNeedsLayout];
 }
 - (IBAction)hueMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueMin"];
-    double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueMax"];
-    val = MAX(min,(val - (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueFac"];
+    val = MAX(min,(val / fac - inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"HueVal"];
     [self.view setNeedsLayout];
 }
 
 - (IBAction)sizePlus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusVal"];
-    double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusMin"];
     double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusMax"];
-    val = MIN(max,(val + (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusFac"];
+
+    val = MIN(max,(val * fac + inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"RadiusVal"];
     [self.view setNeedsLayout];
 }
 - (IBAction)sizeMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusMin"];
-    double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusMax"];
-    val = MAX(min,(val - (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusFac"];
+    val = MAX(min,(val / fac - inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"RadiusVal"];
     [self.view setNeedsLayout];
 }
 - (IBAction)bpmPlus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"];
-    double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMMin"];
     double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMMax"];
-    val = MIN(max,(val + (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMFac"];
+    val = MIN(max,(val * fac + inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"BPMVal"];
     [self.view setNeedsLayout];
 }
 - (IBAction)bpmMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMMin"];
-    double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMMax"];
-    val = MAX(min,(val - (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMFac"];
+    val = MAX(min,(val / fac - inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"BPMVal"];
     [self.view setNeedsLayout];
 }
 - (IBAction)durationPlus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationVal"];
-    double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationMin"];
     double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationMax"];
-    val = MIN(max,(val + (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationFac"];
+    val = MIN(max,(val * fac + inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"DurationVal"];
     [self.view setNeedsLayout];
 }
 - (IBAction)durationMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationMin"];
-    double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationMax"];
-    val = MAX(min,(val - (max - min) / 16));
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationFac"];
+    val = MAX(min,(val / fac - inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"DurationVal"];
     [self.view setNeedsLayout];
-}
-- (IBAction)tictoc:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(0) forKey:@"SoundVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)dong:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:@"SoundVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)drums:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:@"SoundVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)ding:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(3) forKey:@"SoundVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)snip:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(4) forKey:@"SoundVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)vertical:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(5) forKey:@"FormVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)eight:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(4) forKey:@"FormVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)infinity:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(3) forKey:@"FormVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)down:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:@"FormVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)up:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:@"FormVal"];
-    [self.view setNeedsLayout];
-}
-- (IBAction)horizontal:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(0) forKey:@"FormVal"];
-    [self.view setNeedsLayout];
-}
-
-- (IBAction)soundChanged:(UISegmentedControl *)sender {
-    [self resetSprites];
-}
-
-- (IBAction)formChanged:(UISegmentedControl *)sender {
-    [self resetSprites];
 }
 
 #define FLAT 0.75
@@ -465,29 +413,24 @@
     self.bpmLabel.text = [NSString stringWithFormat:@"%.0f",
                           [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"]
                           ];
-    self.durationLabel.text = [NSString stringWithFormat:@"%.0f",
+    self.durationLabel.text = [NSString stringWithFormat:@"%.0f sec",
                                [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationVal"]
                                ];
 
-    NSInteger form = [[NSUserDefaults standardUserDefaults] integerForKey:@"FormVal"];
-    self.horizontal.tintColor = (form == 0 )? [UIColor redColor] : [UIColor whiteColor];
-    self.up.tintColor = (form == 1 )? [UIColor redColor] : [UIColor whiteColor];
-    self.down.tintColor = (form == 2 )? [UIColor redColor] : [UIColor whiteColor];
-    self.infinity.tintColor = (form == 3 )? [UIColor redColor] : [UIColor whiteColor];
-    self.eight.tintColor = (form == 4 )? [UIColor redColor] : [UIColor whiteColor];
-    self.vertical.tintColor = (form == 5 )? [UIColor redColor] : [UIColor whiteColor];
-
     NSInteger sound = [[NSUserDefaults standardUserDefaults] integerForKey:@"SoundVal"];
-    self.tictoc.tintColor = (sound == 0 )? [UIColor redColor] : [UIColor whiteColor];
-    self.dong.tintColor = (sound == 1 )? [UIColor redColor] : [UIColor whiteColor];
-    self.drums.tintColor = (sound == 2 )? [UIColor redColor] : [UIColor whiteColor];
-    self.ding.tintColor = (sound == 3 )? [UIColor redColor] : [UIColor whiteColor];
-    self.snip.tintColor = (sound == 4 )? [UIColor redColor] : [UIColor whiteColor];
+    NSArray *sounds = @[@"Tic Toc",@"Dong",@"Drums",@"Ding",@"Snip"];
+    self.sound.text = sounds[sound];
 
-    BOOL blank = [[NSUserDefaults standardUserDefaults] boolForKey:@"Blank"];
-    self.blank.tintColor = blank ? [UIColor redColor] : [UIColor whiteColor];
+    NSInteger form = [[NSUserDefaults standardUserDefaults] integerForKey:@"FormVal"];
+    NSArray *forms = @[@"Horizontal",@"Diagonal Up",@"Diagonal Down",@"Infinity",@"Figure 8",@"Vertical"];
+    self.form.text = forms[form];
 
     [self resetSprites];
+}
+
+
+- (IBAction)valuesUpdated:(UIStoryboardSegue *)unwindSegue {
+    [self.view setNeedsLayout];
 }
 
 @end

@@ -88,7 +88,11 @@
 
 - (IBAction)withoutClient:(UIBarButtonItem *)sender {
     NSArray *vcs = self.splitViewController.viewControllers;
-    [self.splitViewController showDetailViewController:vcs[1] sender:sender];
+    UIViewController *detailVC = vcs[1];
+    if ([detailVC respondsToSelector:@selector(setClientToRun:)]) {
+        [detailVC performSelector:@selector(setClientToRun:) withObject:nil];
+    }
+    [self.splitViewController showDetailViewController:detailVC sender:nil];
 }
 
 

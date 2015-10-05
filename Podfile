@@ -9,5 +9,6 @@ target 'iEmdr' do
 end
 
 target 'iEmdrTV' do
+platform :tvos, '9.0'
 end
 
