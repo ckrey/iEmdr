@@ -1,0 +1,7 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :tvos, '9.0'
+
+#pod 'CocoaLumberjack', :path => '~/CocoaLumberjack/'
+#pod 'Fabric'
+#pod 'Crashlytics'
+

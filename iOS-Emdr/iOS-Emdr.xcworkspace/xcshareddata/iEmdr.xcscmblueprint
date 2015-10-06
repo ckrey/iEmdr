@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E1A24C9C6F480EA0E0220D312BA3857ACCA3B6CD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E1A24C9C6F480EA0E0220D312BA3857ACCA3B6CD" : 0,
+    "35B5C9A93714EC9BEB56BAE809C5551E5C66E52D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EA4380D4-DE2C-4B67-A05F-D9D74398BBAB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E1A24C9C6F480EA0E0220D312BA3857ACCA3B6CD" : "iEmdr\/",
+    "35B5C9A93714EC9BEB56BAE809C5551E5C66E52D" : "CocoaLumberjack\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iEmdr",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iOS-Emdr\/iEmdr.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/CocoaLumberjack\/CocoaLumberjack.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "35B5C9A93714EC9BEB56BAE809C5551E5C66E52D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ckrey\/iEmdr.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E1A24C9C6F480EA0E0220D312BA3857ACCA3B6CD"
+    }
+  ]
+}

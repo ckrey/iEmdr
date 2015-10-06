@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		842B97321BBB018700BEEB9A /* SoundTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B97311BBB018700BEEB9A /* SoundTableViewController.m */; };
+		842B97351BBB06F500BEEB9A /* FormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B97341BBB06F500BEEB9A /* FormTableViewController.m */; };
+		8479A0101BC2DDD900EE144E /* bassdrum.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A0061BC2DDD900EE144E /* bassdrum.m4a */; };
+		8479A0111BC2DDD900EE144E /* dingl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A0071BC2DDD900EE144E /* dingl.m4a */; };
+		8479A0121BC2DDD900EE144E /* dingr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A0081BC2DDD900EE144E /* dingr.m4a */; };
+		8479A0131BC2DDD900EE144E /* pingl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A0091BC2DDD900EE144E /* pingl.m4a */; };
+		8479A0141BC2DDD900EE144E /* pingr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A00A1BC2DDD900EE144E /* pingr.m4a */; };
+		8479A0151BC2DDD900EE144E /* snaire.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A00B1BC2DDD900EE144E /* snaire.m4a */; };
+		8479A0161BC2DDD900EE144E /* snipl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A00C1BC2DDD900EE144E /* snipl.m4a */; };
+		8479A0171BC2DDD900EE144E /* snipr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A00D1BC2DDD900EE144E /* snipr.m4a */; };
+		8479A0181BC2DDD900EE144E /* tick.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A00E1BC2DDD900EE144E /* tick.m4a */; };
+		8479A0191BC2DDD900EE144E /* tock.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A00F1BC2DDD900EE144E /* tock.m4a */; };
+		8479A01D1BC2DEEE00EE144E /* IEMDRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A01C1BC2DEEE00EE144E /* IEMDRScene.m */; };
+		84E4BC5A1BB6F6B2005E0B54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E4BC591BB6F6B2005E0B54 /* main.m */; };
+		84E4BC5D1BB6F6B2005E0B54 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E4BC5C1BB6F6B2005E0B54 /* AppDelegate.m */; };
+		84E4BC661BB6F6B2005E0B54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4BC641BB6F6B2005E0B54 /* Main.storyboard */; };
+		84E4BC681BB6F6B2005E0B54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E4BC671BB6F6B2005E0B54 /* Assets.xcassets */; };
+		84E4BC8F1BB6F92E005E0B54 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E4BC8E1BB6F92E005E0B54 /* ViewController.m */; };
+		84E4BC921BB707D2005E0B54 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4BC911BB707D2005E0B54 /* AVFoundation.framework */; };
+		84E4BC961BB707EE005E0B54 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4BC951BB707EE005E0B54 /* SpriteKit.framework */; };
+		84E4BCAE1BB986AD005E0B54 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E4BCAD1BB986AD005E0B54 /* Settings.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		842B97301BBB018700BEEB9A /* SoundTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundTableViewController.h; sourceTree = "<group>"; };
+		842B97311BBB018700BEEB9A /* SoundTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundTableViewController.m; sourceTree = "<group>"; };
+		842B97331BBB06F500BEEB9A /* FormTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTableViewController.h; sourceTree = "<group>"; };
+		842B97341BBB06F500BEEB9A /* FormTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTableViewController.m; sourceTree = "<group>"; };
+		8479A0061BC2DDD900EE144E /* bassdrum.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bassdrum.m4a; sourceTree = "<group>"; };
+		8479A0071BC2DDD900EE144E /* dingl.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dingl.m4a; sourceTree = "<group>"; };
+		8479A0081BC2DDD900EE144E /* dingr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dingr.m4a; sourceTree = "<group>"; };
+		8479A0091BC2DDD900EE144E /* pingl.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pingl.m4a; sourceTree = "<group>"; };
+		8479A00A1BC2DDD900EE144E /* pingr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pingr.m4a; sourceTree = "<group>"; };
+		8479A00B1BC2DDD900EE144E /* snaire.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snaire.m4a; sourceTree = "<group>"; };
+		8479A00C1BC2DDD900EE144E /* snipl.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snipl.m4a; sourceTree = "<group>"; };
+		8479A00D1BC2DDD900EE144E /* snipr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snipr.m4a; sourceTree = "<group>"; };
+		8479A00E1BC2DDD900EE144E /* tick.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = tick.m4a; sourceTree = "<group>"; };
+		8479A00F1BC2DDD900EE144E /* tock.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = tock.m4a; sourceTree = "<group>"; };
+		8479A01B1BC2DEEE00EE144E /* IEMDRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEMDRScene.h; sourceTree = "<group>"; };
+		8479A01C1BC2DEEE00EE144E /* IEMDRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEMDRScene.m; sourceTree = "<group>"; };
+		84AF6DA4181AA93B0087D2B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		84AF6DA8181AA93B0087D2B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		84AF6DC6181AA93B0087D2B5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		84AF6DEE181AAE470087D2B5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		84E4BC561BB6F6B2005E0B54 /* tvOS-Emdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tvOS-Emdr.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84E4BC591BB6F6B2005E0B54 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84E4BC5B1BB6F6B2005E0B54 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		84E4BC5C1BB6F6B2005E0B54 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		84E4BC651BB6F6B2005E0B54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		84E4BC671BB6F6B2005E0B54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84E4BC691BB6F6B2005E0B54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84E4BC8D1BB6F92E005E0B54 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		84E4BC8E1BB6F92E005E0B54 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		84E4BC911BB707D2005E0B54 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		84E4BC931BB707E2005E0B54 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		84E4BC951BB707EE005E0B54 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/SpriteKit.framework; sourceTree = DEVELOPER_DIR; };
+		84E4BC971BB82F3C005E0B54 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		84E4BCAD1BB986AD005E0B54 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		8AE757DA86CF820D35A7733E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BDAF060560BB469443A4573B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB89A48EDC365DE955AF570F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84E4BC531BB6F6B2005E0B54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84E4BC961BB707EE005E0B54 /* SpriteKit.framework in Frameworks */,
+				84E4BC921BB707D2005E0B54 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8479A0051BC2DDD900EE144E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8479A0061BC2DDD900EE144E /* bassdrum.m4a */,
+				8479A0071BC2DDD900EE144E /* dingl.m4a */,
+				8479A0081BC2DDD900EE144E /* dingr.m4a */,
+				8479A0091BC2DDD900EE144E /* pingl.m4a */,
+				8479A00A1BC2DDD900EE144E /* pingr.m4a */,
+				8479A00B1BC2DDD900EE144E /* snaire.m4a */,
+				8479A00C1BC2DDD900EE144E /* snipl.m4a */,
+				8479A00D1BC2DDD900EE144E /* snipr.m4a */,
+				8479A00E1BC2DDD900EE144E /* tick.m4a */,
+				8479A00F1BC2DDD900EE144E /* tock.m4a */,
+			);
+			name = Sounds;
+			path = ../Sounds;
+			sourceTree = "<group>";
+		};
+		8479A01A1BC2DEEE00EE144E /* Emdr */ = {
+			isa = PBXGroup;
+			children = (
+				8479A01B1BC2DEEE00EE144E /* IEMDRScene.h */,
+				8479A01C1BC2DEEE00EE144E /* IEMDRScene.m */,
+			);
+			name = Emdr;
+			path = ../Emdr;
+			sourceTree = "<group>";
+		};
+		84AF6D98181AA93B0087D2B5 = {
+			isa = PBXGroup;
+			children = (
+				8479A01A1BC2DEEE00EE144E /* Emdr */,
+				8479A0051BC2DDD900EE144E /* Sounds */,
+				84E4BC571BB6F6B2005E0B54 /* tvOS-Emdr */,
+				84AF6DA3181AA93B0087D2B5 /* Frameworks */,
+				84AF6DA2181AA93B0087D2B5 /* Products */,
+				B07D63654933DA766DFE626B /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		84AF6DA2181AA93B0087D2B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84E4BC561BB6F6B2005E0B54 /* tvOS-Emdr.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84AF6DA3181AA93B0087D2B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84E4BC971BB82F3C005E0B54 /* GameController.framework */,
+				84E4BC951BB707EE005E0B54 /* SpriteKit.framework */,
+				84E4BC931BB707E2005E0B54 /* MediaPlayer.framework */,
+				84E4BC911BB707D2005E0B54 /* AVFoundation.framework */,
+				84AF6DEE181AAE470087D2B5 /* CoreData.framework */,
+				84AF6DA4181AA93B0087D2B5 /* Foundation.framework */,
+				84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */,
+				84AF6DA8181AA93B0087D2B5 /* UIKit.framework */,
+				84AF6DC6181AA93B0087D2B5 /* XCTest.framework */,
+				BDAF060560BB469443A4573B /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84E4BC571BB6F6B2005E0B54 /* tvOS-Emdr */ = {
+			isa = PBXGroup;
+			children = (
+				84E4BC5B1BB6F6B2005E0B54 /* AppDelegate.h */,
+				84E4BC5C1BB6F6B2005E0B54 /* AppDelegate.m */,
+				84E4BC8D1BB6F92E005E0B54 /* ViewController.h */,
+				84E4BC8E1BB6F92E005E0B54 /* ViewController.m */,
+				842B97331BBB06F500BEEB9A /* FormTableViewController.h */,
+				842B97341BBB06F500BEEB9A /* FormTableViewController.m */,
+				842B97301BBB018700BEEB9A /* SoundTableViewController.h */,
+				842B97311BBB018700BEEB9A /* SoundTableViewController.m */,
+				84E4BC641BB6F6B2005E0B54 /* Main.storyboard */,
+				84E4BC671BB6F6B2005E0B54 /* Assets.xcassets */,
+				84E4BCAD1BB986AD005E0B54 /* Settings.plist */,
+				84E4BC581BB6F6B2005E0B54 /* Supporting Files */,
+			);
+			name = "tvOS-Emdr";
+			path = iEmdrTV;
+			sourceTree = "<group>";
+		};
+		84E4BC581BB6F6B2005E0B54 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				84E4BC691BB6F6B2005E0B54 /* Info.plist */,
+				84E4BC591BB6F6B2005E0B54 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B07D63654933DA766DFE626B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8AE757DA86CF820D35A7733E /* Pods.debug.xcconfig */,
+				EB89A48EDC365DE955AF570F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84E4BC551BB6F6B2005E0B54 /* tvOS-Emdr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84E4BC801BB6F6B2005E0B54 /* Build configuration list for PBXNativeTarget "tvOS-Emdr" */;
+			buildPhases = (
+				84E4BC521BB6F6B2005E0B54 /* Sources */,
+				84E4BC531BB6F6B2005E0B54 /* Frameworks */,
+				84E4BC541BB6F6B2005E0B54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tvOS-Emdr";
+			productName = iEmdrTV;
+			productReference = 84E4BC561BB6F6B2005E0B54 /* tvOS-Emdr.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84AF6D99181AA93B0087D2B5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = IEMDR;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Christoph Krey";
+				TargetAttributes = {
+					84E4BC551BB6F6B2005E0B54 = {
+						CreatedOnToolsVersion = 7.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes.appletvos = {
+								enabled = 0;
+							};
+							com.apple.GameControllers.appletvos = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 84AF6D9C181AA93B0087D2B5 /* Build configuration list for PBXProject "tvOS-Emdr" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 84AF6D98181AA93B0087D2B5;
+			productRefGroup = 84AF6DA2181AA93B0087D2B5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84E4BC551BB6F6B2005E0B54 /* tvOS-Emdr */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84E4BC541BB6F6B2005E0B54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84E4BC681BB6F6B2005E0B54 /* Assets.xcassets in Resources */,
+				8479A0161BC2DDD900EE144E /* snipl.m4a in Resources */,
+				8479A0141BC2DDD900EE144E /* pingr.m4a in Resources */,
+				8479A0151BC2DDD900EE144E /* snaire.m4a in Resources */,
+				8479A0121BC2DDD900EE144E /* dingr.m4a in Resources */,
+				8479A0171BC2DDD900EE144E /* snipr.m4a in Resources */,
+				8479A0191BC2DDD900EE144E /* tock.m4a in Resources */,
+				8479A0131BC2DDD900EE144E /* pingl.m4a in Resources */,
+				8479A0181BC2DDD900EE144E /* tick.m4a in Resources */,
+				8479A0101BC2DDD900EE144E /* bassdrum.m4a in Resources */,
+				84E4BC661BB6F6B2005E0B54 /* Main.storyboard in Resources */,
+				84E4BCAE1BB986AD005E0B54 /* Settings.plist in Resources */,
+				8479A0111BC2DDD900EE144E /* dingl.m4a in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84E4BC521BB6F6B2005E0B54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8479A01D1BC2DEEE00EE144E /* IEMDRScene.m in Sources */,
+				842B97351BBB06F500BEEB9A /* FormTableViewController.m in Sources */,
+				84E4BC5D1BB6F6B2005E0B54 /* AppDelegate.m in Sources */,
+				84E4BC5A1BB6F6B2005E0B54 /* main.m in Sources */,
+				84E4BC8F1BB6F92E005E0B54 /* ViewController.m in Sources */,
+				842B97321BBB018700BEEB9A /* SoundTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		84E4BC641BB6F6B2005E0B54 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84E4BC651BB6F6B2005E0B54 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		84AF6DD4181AA93B0087D2B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84AF6DD5181AA93B0087D2B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		84E4BC811BB6F6B2005E0B54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = iEmdrTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		84E4BC821BB6F6B2005E0B54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = iEmdrTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84AF6D9C181AA93B0087D2B5 /* Build configuration list for PBXProject "tvOS-Emdr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84AF6DD4181AA93B0087D2B5 /* Debug */,
+				84AF6DD5181AA93B0087D2B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84E4BC801BB6F6B2005E0B54 /* Build configuration list for PBXNativeTarget "tvOS-Emdr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84E4BC811BB6F6B2005E0B54 /* Debug */,
+				84E4BC821BB6F6B2005E0B54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84AF6D99181AA93B0087D2B5 /* Project object */;
+}
