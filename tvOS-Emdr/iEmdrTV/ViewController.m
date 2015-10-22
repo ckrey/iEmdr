@@ -11,6 +11,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "IemdrScene.h"
 #import <AVFoundation/AVFoundation.h>
+//#import <CocoaLumberjack/CocoaLumberJack.h>
 
 @interface ViewController ()
 
@@ -50,6 +51,7 @@
 @end
 
 @implementation ViewController
+//static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -76,6 +78,8 @@
 }
 
 - (void)stopEmdr {
+    //DDLogVerbose(@"stopEmdr");
+
     [self resetSprites];
     self.started = nil;
 
@@ -110,6 +114,8 @@
 }
 
 - (void)startEmdr {
+    //DDLogVerbose(@"startEmdr");
+
     [self resetSprites];
     self.started = [NSDate date];
     [self.progress setProgress:0.0 animated:YES];
@@ -162,7 +168,7 @@
 - (void)timePassed:(NSTimer *)timer
 {
     float value = [[NSDate date] timeIntervalSinceDate:self.started] / [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationVal"];
-    NSLog(@"ticker %f", value);
+    //DDLogVerbose(@"ticker %f", value);
     [self.progress setProgress:value animated:YES];
 
     if (value >= 1.0) {
@@ -172,7 +178,7 @@
 
 - (void)resetSprites
 {
-    NSLog(@"resetSprites");
+    //DDLogVerbose(@"resetSprites");
     if (self.passingTimer) {
         [self.passingTimer invalidate];
     }
@@ -402,7 +408,7 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    NSLog(@"viewDidLayoutSubviews");
+    //DDLogVerbose(@"viewDidLayoutSubviews");
 
     [super viewDidLayoutSubviews];
 
