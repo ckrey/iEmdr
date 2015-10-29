@@ -15,10 +15,8 @@
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet UIProgressView *progress;
-@property (weak, nonatomic) IBOutlet UIButton *start;
-@property (weak, nonatomic) IBOutlet UIButton *stop;
-@property (weak, nonatomic) IBOutlet UIButton *sample;
+@property (weak, nonatomic) IBOutlet UILabel *help;
+@property (weak, nonatomic) IBOutlet UILabel *headline;
 
 @property (weak, nonatomic) IBOutlet UIButton *canvasPlus;
 @property (weak, nonatomic) IBOutlet UIButton *canvasMinus;
@@ -42,11 +40,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *formSelect;
 @property (weak, nonatomic) IBOutlet UIButton *soundSelect;
 
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *UIGesture;
+
 @property (nonatomic) NSTimeInterval timePassed;
-@property (nonatomic) BOOL blank;
 @property (strong, nonatomic) NSTimer *passingTimer;
 @property (strong, nonatomic) NSDate *started;
 @property (nonatomic) AVAudioPlayer * backgroundMusicPlayer;
+@property (nonatomic) BOOL menuStop;
 
 @end
 
@@ -55,38 +55,78 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.blank = FALSE;
     [self resetSprites];
 }
 
-- (IBAction)startPressed:(UIButton *)sender {
-    self.blank = TRUE;
-    [self startEmdr];
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    NSLog(@"pressesBegan");
+
+    for (UIPress *press in [presses allObjects]) {
+        NSLog(@"press %ld", (long)press.type);
+
+        if (press.type == UIPressTypePlayPause) {
+            if (self.started == nil) {
+                [self startEmdr];
+            } else {
+                [self stopEmdr];
+            }
+            return;
+        }
+        if (press.type == UIPressTypeMenu) {
+            if (self.started != nil) {
+                [self stopEmdr];
+                self.menuStop = true;
+                return;
+            }
+        }
+    }
+    [super pressesBegan:presses withEvent:event];
 }
 
-- (IBAction)samplePressed:(id)sender {
-    self.blank = FALSE;
-    [self startEmdr];
+- (void)pressesCancelled:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    NSLog(@"pressesCancelled");
+
+    for (UIPress *press in [presses allObjects]) {
+        NSLog(@"press %ld", (long)press.type);
+        if (press.type == UIPressTypePlayPause) {
+            return;
+        }
+        if (press.type == UIPressTypeMenu) {
+            if (self.menuStop) {
+                self.menuStop = false;
+                return;
+            }
+        }
+    }
+    [super pressesCancelled:presses withEvent:event];
 }
 
-- (IBAction)tapped:(UITapGestureRecognizer *)sender {
-    [self stopEmdr];
-}
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    NSLog(@"pressesEnded");
 
-- (IBAction)stopPressed:(id)sender {
-    [self stopEmdr];
+    for (UIPress *press in [presses allObjects]) {
+        NSLog(@"press %ld", (long)press.type);
+        if (press.type == UIPressTypePlayPause) {
+            return;
+        }
+        if (press.type == UIPressTypeMenu) {
+            if (self.menuStop) {
+                self.menuStop = false;
+                return;
+            }
+        }
+    }
+    [super pressesEnded:presses withEvent:event];
 }
 
 - (void)stopEmdr {
-    //DDLogVerbose(@"stopEmdr");
+    NSLog(@"stopEmdr");
 
     [self resetSprites];
     self.started = nil;
 
-    self.progress.hidden = true;
-    self.stop.hidden = true;
-    self.start.hidden = false;
-    self.sample.hidden = false;
+    self.help.hidden = false;
+    self.headline.hidden = false;
 
     self.huePlus.hidden = false;
     self.hueMinus.hidden = false;
@@ -114,22 +154,14 @@
 }
 
 - (void)startEmdr {
-    //DDLogVerbose(@"startEmdr");
+    NSLog(@"startEmdr");
 
     [self resetSprites];
     self.started = [NSDate date];
-    [self.progress setProgress:0.0 animated:YES];
 
-    if (self.blank) {
-        self.progress.hidden = true;
-        self.stop.hidden = true;
-    } else {
-        self.progress.hidden = false;
-        self.stop.hidden = false;
-    }
-    self.start.hidden = true;
-    self.sample.hidden = true;
-
+    self.help.hidden = true;
+    self.headline.hidden = true;
+    
     self.huePlus.hidden = true;
     self.hueMinus.hidden = true;
 
@@ -161,18 +193,13 @@
     [self.view setNeedsFocusUpdate];
 }
 
-- (UIView *)preferredFocusedView {
-    return self.start;
-}
-
 - (void)timePassed:(NSTimer *)timer
 {
     float value = [[NSDate date] timeIntervalSinceDate:self.started] / [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationVal"];
     //DDLogVerbose(@"ticker %f", value);
-    [self.progress setProgress:value animated:YES];
 
     if (value >= 1.0) {
-        [self stopPressed:nil];
+        [self stopEmdr];
     }
 }
 
@@ -412,8 +439,8 @@
 
     [super viewDidLayoutSubviews];
 
-    SKView *spriteView = (SKView *) self.view;
-    IemdrScene *scene = [[IemdrScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
+    SKView *spriteView = (SKView *)self.view;
+    IemdrScene *scene = [[IemdrScene alloc] initWithSize:CGSizeMake(spriteView.frame.size.width, spriteView.frame.size.height)];
     [spriteView presentScene:scene];
 
     self.bpmLabel.text = [NSString stringWithFormat:@"%.0f",

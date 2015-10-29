@@ -53,7 +53,7 @@
 		84AF6DA8181AA93B0087D2B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		84AF6DC6181AA93B0087D2B5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		84AF6DEE181AAE470087D2B5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		84E4BC561BB6F6B2005E0B54 /* tvOS-Emdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tvOS-Emdr.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84E4BC561BB6F6B2005E0B54 /* iEmdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEmdr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E4BC591BB6F6B2005E0B54 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84E4BC5B1BB6F6B2005E0B54 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84E4BC5C1BB6F6B2005E0B54 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		84AF6DA2181AA93B0087D2B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84E4BC561BB6F6B2005E0B54 /* tvOS-Emdr.app */,
+				84E4BC561BB6F6B2005E0B54 /* iEmdr.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,9 +192,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84E4BC551BB6F6B2005E0B54 /* tvOS-Emdr */ = {
+		84E4BC551BB6F6B2005E0B54 /* iEmdr */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E4BC801BB6F6B2005E0B54 /* Build configuration list for PBXNativeTarget "tvOS-Emdr" */;
+			buildConfigurationList = 84E4BC801BB6F6B2005E0B54 /* Build configuration list for PBXNativeTarget "iEmdr" */;
 			buildPhases = (
 				B9AB281EE2D02AB0F5B9ED06 /* Check Pods Manifest.lock */,
 				84E4BC521BB6F6B2005E0B54 /* Sources */,
@@ -207,9 +207,9 @@
 			);
 			dependencies = (
 			);
-			name = "tvOS-Emdr";
+			name = iEmdr;
 			productName = iEmdrTV;
-			productReference = 84E4BC561BB6F6B2005E0B54 /* tvOS-Emdr.app */;
+			productReference = 84E4BC561BB6F6B2005E0B54 /* iEmdr.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -248,7 +248,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84E4BC551BB6F6B2005E0B54 /* tvOS-Emdr */,
+				84E4BC551BB6F6B2005E0B54 /* iEmdr */,
 			);
 		};
 /* End PBXProject section */
@@ -485,7 +485,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E4BC801BB6F6B2005E0B54 /* Build configuration list for PBXNativeTarget "tvOS-Emdr" */ = {
+		84E4BC801BB6F6B2005E0B54 /* Build configuration list for PBXNativeTarget "iEmdr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84E4BC811BB6F6B2005E0B54 /* Debug */,
