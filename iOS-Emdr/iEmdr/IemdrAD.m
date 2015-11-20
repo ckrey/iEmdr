@@ -16,6 +16,7 @@
 @end
 
 @implementation IemdrAD
+static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
@@ -28,10 +29,8 @@
     do {
         state = self.data.documentState;
         if (state) {
-#ifdef DEBUG
-            NSLog(@"Waiting for document to open documentState = 0x%02x",
+            DDLogVerbose(@"Waiting for document to open documentState = 0x%02x",
                   (unsigned short)self.data.documentState);
-#endif
             if (state & UIDocumentStateInConflict || state & UIDocumentStateSavingError) {
                 break;
             }
@@ -39,21 +38,6 @@
         }
     } while (state);
     return YES;
-}
-							
-- (void)applicationWillResignActive:(UIApplication *)application {
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
 }
 
 @end

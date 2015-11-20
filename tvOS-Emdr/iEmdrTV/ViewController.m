@@ -11,7 +11,8 @@
 #import <SpriteKit/SpriteKit.h>
 #import "IemdrScene.h"
 #import <AVFoundation/AVFoundation.h>
-//#import <CocoaLumberjack/CocoaLumberJack.h>
+#import <CocoaLumberjack/CocoaLumberJack.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface ViewController ()
 
@@ -51,7 +52,7 @@
 @end
 
 @implementation ViewController
-//static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -59,10 +60,10 @@
 }
 
 - (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
-    NSLog(@"pressesBegan");
+    DDLogVerbose(@"pressesBegan");
 
     for (UIPress *press in [presses allObjects]) {
-        NSLog(@"press %ld", (long)press.type);
+        DDLogVerbose(@"press %ld", (long)press.type);
 
         if (press.type == UIPressTypePlayPause) {
             if (self.started == nil) {
@@ -84,10 +85,10 @@
 }
 
 - (void)pressesCancelled:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
-    NSLog(@"pressesCancelled");
+    DDLogVerbose(@"pressesCancelled");
 
     for (UIPress *press in [presses allObjects]) {
-        NSLog(@"press %ld", (long)press.type);
+        DDLogVerbose(@"press %ld", (long)press.type);
         if (press.type == UIPressTypePlayPause) {
             return;
         }
@@ -102,10 +103,10 @@
 }
 
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
-    NSLog(@"pressesEnded");
+    DDLogVerbose(@"pressesEnded");
 
     for (UIPress *press in [presses allObjects]) {
-        NSLog(@"press %ld", (long)press.type);
+        DDLogVerbose(@"press %ld", (long)press.type);
         if (press.type == UIPressTypePlayPause) {
             return;
         }
@@ -120,7 +121,7 @@
 }
 
 - (void)stopEmdr {
-    NSLog(@"stopEmdr");
+    DDLogVerbose(@"stopEmdr");
 
     [self resetSprites];
     self.started = nil;
@@ -154,7 +155,7 @@
 }
 
 - (void)startEmdr {
-    NSLog(@"startEmdr");
+    DDLogVerbose(@"startEmdr");
 
     [self resetSprites];
     self.started = [NSDate date];
@@ -193,19 +194,17 @@
     [self.view setNeedsFocusUpdate];
 }
 
-- (void)timePassed:(NSTimer *)timer
-{
+- (void)timePassed:(NSTimer *)timer {
     float value = [[NSDate date] timeIntervalSinceDate:self.started] / [[NSUserDefaults standardUserDefaults] doubleForKey:@"DurationVal"];
-    //DDLogVerbose(@"ticker %f", value);
+    DDLogVerbose(@"ticker %f", value);
 
     if (value >= 1.0) {
         [self stopEmdr];
     }
 }
 
-- (void)resetSprites
-{
-    //DDLogVerbose(@"resetSprites");
+- (void)resetSprites {
+    DDLogVerbose(@"resetSprites");
     if (self.passingTimer) {
         [self.passingTimer invalidate];
     }
@@ -234,6 +233,7 @@
     node.speed = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"] / 6;
 
 }
+
 - (IBAction)canvasPlus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasVal"];
     double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasMax"];
@@ -243,6 +243,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"CanvasVal"];
     [self.view setNeedsLayout];
 }
+
 - (IBAction)canvasMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasMin"];
@@ -262,6 +263,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"HueVal"];
     [self.view setNeedsLayout];
 }
+
 - (IBAction)hueMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"HueMin"];
@@ -291,6 +293,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"RadiusVal"];
     [self.view setNeedsLayout];
 }
+
 - (IBAction)bpmPlus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"];
     double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMMax"];
@@ -300,6 +303,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"BPMVal"];
     [self.view setNeedsLayout];
 }
+
 - (IBAction)bpmMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMMin"];
@@ -435,7 +439,7 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    //DDLogVerbose(@"viewDidLayoutSubviews");
+    DDLogVerbose(@"viewDidLayoutSubviews");
 
     [super viewDidLayoutSubviews];
 

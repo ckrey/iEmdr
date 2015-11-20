@@ -68,6 +68,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:session];
+        [self.fetchedResultsController.managedObjectContext save:nil];
     }
 }
 

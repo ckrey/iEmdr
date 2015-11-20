@@ -11,7 +11,6 @@
 
 @interface IemdrPersonTVC ()
 @property (strong, nonatomic) NSMutableDictionary *sections;
-@property (strong, nonatomic) UIAlertView *alertview;
 @end
 
 @implementation IemdrPersonTVC
@@ -52,13 +51,10 @@
             [self.sections setValue:persons forKey:key];
         }
     } else {
-        self.alertview = [[UIAlertView alloc] initWithTitle:@"Addressbook Access blocked"
-                                                    message:@"please adjust Settings/Privacy/Contacts"
-                                                   delegate:nil
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles:@"OK", nil];
-        
-        [self.alertview show];
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Addressbook Access blocked"
+                                                                    message:@"please adjust Settings/Privacy/Contacts"
+                                                             preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:ac animated:TRUE completion:nil];
     }
     
     self.tableView.sectionIndexMinimumDisplayRowCount = 8;

@@ -47,7 +47,4 @@
 //  (but definitely for row moves).
 @property (nonatomic) BOOL suspendAutomaticTrackingOfChangesInManagedObjectContext;
 
-// Set to YES to get some debugging output in the console.
-@property BOOL debug;
-
 @end

@@ -17,8 +17,9 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-@interface IemdrVC ()
+#import <CocoaLumberjack/CocoaLumberJack.h>
 
+@interface IemdrVC ()
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toolbarTitle;
 @property (weak, nonatomic) IBOutlet UIProgressView *progress;
@@ -57,7 +58,6 @@
 @property (weak, nonatomic) SKView *big;
 @property (strong, nonatomic) UIWindow *secondWindow;
 
-
 @end
 
 #define BPM_MAX 180.0
@@ -70,51 +70,25 @@
 
 #define BACKGROUND_MAX 1.0
 #define BACKGROUND_MIN 0.0
-#define BACKGROUND_DEFAULT 0.2
+#define BACKGROUND_DEFAULT 1.0
 
 #define DURATION_MAX 600.0
 #define DURATION_MIN 10.0
 #define DURATION_DEFAULT 60.0
 
-#define HUE_DEFAULT 0.9
+#define HUE_DEFAULT 1.0
 
 #define FORM_DEFAULT 0
 #define SOUND_DEFAULT 0
 
 @implementation IemdrVC
+static const DDLogLevel ddLogLevel = DDLogLevelError;
 
-- (void)setClientName
-{
+- (void)setClientName {
     NSString *name = self.clientToRun ? self.clientToRun.name : @">>";
     
     self.title = name;
     self.toolbarTitle.title = name;
-}
-
-- (void)setClientToRun:(Client *)clientToRun
-{
-    _clientToRun = clientToRun;
-    [self setClientName];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-    
-    [center addObserver:self selector:@selector(handleScreenConnectNotification:)
-                   name:UIScreenDidConnectNotification object:nil];
-    [center addObserver:self selector:@selector(handleScreenDisconnectNotification:)
-                   name:UIScreenDidDisconnectNotification object:nil];
-    
-    [self setClientName];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     self.durationSlider.minimumValue = DURATION_MIN;
     self.durationSlider.maximumValue = DURATION_MAX;
     self.durationSlider.value = DURATION_DEFAULT;
@@ -156,33 +130,46 @@
         self.hueSlider.value = [newestSession.hue floatValue];
         self.speedSlider.value = [newestSession.frequency intValue];
     }
+    [self backgroundChanged:self.backgroundSlider];
+    [self.view setNeedsDisplay];
+    
     [self checkForExistingScreenAndInitializeIfPresent];
+}
+
+- (void)setClientToRun:(Client *)clientToRun {
+    _clientToRun = clientToRun;
+    [self setClientName];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
-    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
     
-    if (self.splitViewController) {
-        if (![self.toolbar.items containsObject:self.splitViewController.displayModeButtonItem]) {
-            NSMutableArray *barItems = [self.toolbar.items mutableCopy];
-            for (int i = 0; i < barItems.count; i++) {
-                UIBarItem *barItem = barItems[i];
-                if (barItem.tag == 1) {
-                    [barItems replaceObjectAtIndex:i withObject:self.splitViewController.displayModeButtonItem];
-                    break;
-                }
-            }
-            self.toolbar.items = barItems;
-        }
+    [center addObserver:self selector:@selector(handleScreenConnectNotification:)
+                   name:UIScreenDidConnectNotification object:nil];
+    [center addObserver:self selector:@selector(handleScreenDisconnectNotification:)
+                   name:UIScreenDidDisconnectNotification object:nil];
+    
+    [self setClientName];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setClientName];
+    if (self.splitViewController.isCollapsed) {
+        self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryOverlay;
+    } else {
+        self.splitViewController.preferredDisplayMode =  UISplitViewControllerDisplayModeAllVisible;
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
+- (void)viewWillDisappear:(BOOL)animated {
     [self resetSprites];
+    [super viewWillDisappear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setup];
 }
@@ -195,7 +182,7 @@
     [self sizeChanged:self.sizeSlider];
     [self hueChanged:self.hueSlider];
     [self speedChanged:self.speedSlider];
-
+    
     [self resetSprites];
     [self.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
 }
@@ -208,7 +195,7 @@
 - (void)timePassed:(NSTimer *)timer
 {
     float value = [[NSDate date] timeIntervalSinceDate:self.started] / self.durationSlider.value;
-    NSLog(@"ticker %f", value);
+    DDLogVerbose(@"ticker %f", value);
     [self.progress setProgress:value animated:YES];
     
     if (value >= 1.0) {
@@ -236,11 +223,10 @@
     SKView *spriteView = (SKView *)self.view;
     spriteView.scene.backgroundColor = [UIColor colorWithHue:1.0 saturation:0.0 brightness:sender.value alpha:1.0];
     self.big.scene.backgroundColor = [UIColor colorWithHue:1.0 saturation:0.0 brightness:sender.value alpha:1.0];
-
+    
 }
 - (IBAction)paused:(UIBarButtonItem *)sender {
-    BOOL hidden = self.sizeLabel.isHidden ?
-    FALSE : TRUE;
+    BOOL hidden = self.sizeLabel.isHidden ? FALSE : TRUE;
     
     self.sizeLabel.hidden = hidden;
     self.sizeText.hidden = hidden;
@@ -265,6 +251,16 @@
     self.formSegment.hidden = hidden;
     self.soundSegment.hidden = hidden;
     
+    if (self.splitViewController.isCollapsed) {
+        self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryOverlay;
+    } else {
+        if (hidden) {
+            self.splitViewController.preferredDisplayMode =  UISplitViewControllerDisplayModePrimaryHidden;
+        } else {
+            self.splitViewController.preferredDisplayMode =  UISplitViewControllerDisplayModeAllVisible;
+        }
+    }
+
     [self.navigationController setNavigationBarHidden:hidden animated:YES];
 }
 
@@ -286,23 +282,23 @@
     SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
     node.fillColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
     //node.strokeColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
-
+    
     SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
     nodeBig.fillColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
     //nodeBig.strokeColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
-
+    
 }
 
 - (IBAction)speedChanged:(UISlider *)sender {
     self.speedText.text = [NSString stringWithFormat:@"%3.0f", sender.value];
-
+    
     SKView *spriteView = (SKView *) self.view;
     SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
     node.speed = sender.value / 6;
     
     SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
     nodeBig.speed = sender.value / 6;
-
+    
 }
 
 - (IBAction)played:(UIBarButtonItem *)sender {
@@ -315,7 +311,7 @@
     self.playButton.enabled = FALSE;
     self.stopButton.enabled = TRUE;
     self.started = [NSDate date];
-
+    
     [self setNode:(SKView *)self.view];
     [self setNode:self.big];
 }
@@ -330,22 +326,22 @@
     if (self.passingTimer) {
         [self.passingTimer invalidate];
     }
-
+    
     self.playButton.enabled = TRUE;
     self.stopButton.enabled = FALSE;
     
     SKView *spriteView = (SKView *)self.view;
     SKNode *node = [spriteView.scene childNodeWithName:@"node"];
     [node removeAllActions];
-
+    
     float w = spriteView.scene.frame.size.width;
     float h = spriteView.scene.frame.size.height;
     SKAction *reset = [SKAction moveTo:CGPointMake(w/2, h/2) duration:0.25];
     [node runAction:reset];
-
+    
     SKNode *nodeBig = [self.big.scene childNodeWithName:@"node"];
     [nodeBig removeAllActions];
-
+    
     float wBig = self.big.scene.frame.size.width;
     float hBig = self.big.scene.frame.size.height;
     SKAction *resetBig = [SKAction moveTo:CGPointMake(wBig/2, hBig/2) duration:0.25];
@@ -370,7 +366,7 @@
     
     struct CGPath *pathl = CGPathCreateMutable();
     CGPathMoveToPoint(pathl, NULL, 0, 0);
-
+    
     struct CGPath *pathr = CGPathCreateMutable();
     CGPathMoveToPoint(pathr, NULL, 0, 0);
     
@@ -384,7 +380,7 @@
             
             CGPathAddLineToPoint(pathr, NULL, 0, -h);
             break;
-
+            
         case 4:
             reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
             
@@ -405,7 +401,7 @@
             CGPathAddArc(pathr, NULL, -w*FLAT/4, 0, w*FLAT/4, 0, M_PI*3/2, YES);
             CGPathAddLineToPoint(pathr, NULL, -(w-w*FLAT/4), w*FLAT/4);
             CGPathAddArc(pathr, NULL, -(w-w*FLAT/4), 0, w*FLAT/4, M_PI/2, M_PI, NO);
-
+            
             break;
         case 2:
             reset = [SKAction moveTo:CGPointMake(0, h-h/2*(1-FLAT)) duration:0];
@@ -418,7 +414,7 @@
             reset = [SKAction moveTo:CGPointMake(0, h/2*(1-FLAT)) duration:0];
             
             CGPathAddLineToPoint(pathl, NULL, w, h*FLAT);
-
+            
             CGPathAddLineToPoint(pathr, NULL, -w, -h*FLAT);
             break;
         case 0:
@@ -426,7 +422,7 @@
             reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
             
             CGPathAddLineToPoint(pathl, NULL, w, 0);
-
+            
             CGPathAddLineToPoint(pathr, NULL, -w, 0);
             break;
     }
@@ -460,7 +456,7 @@
     
     SKAction *actionl = [SKAction followPath:pathl duration:5.0];
     SKAction *actionr = [SKAction followPath:pathr duration:5.0];
-
+    
     SKAction *sequence = [SKAction sequence:@[reset, soundl, actionl, soundr, actionr]];
     
     [node runAction:[SKAction repeatActionForever:sequence]];
@@ -477,14 +473,14 @@
                                        size:@(self.sizeSlider.value)
                                   frequency:@(self.speedSlider.value)
                                        form:@(self.formSegment.selectedSegmentIndex)
-                                       sound:@(self.soundSegment.selectedSegmentIndex)
+                                      sound:@(self.soundSegment.selectedSegmentIndex)
                                      client:self.clientToRun
                      inManagedObjectContext:self.clientToRun.managedObjectContext];
+        [self.clientToRun.managedObjectContext save:nil];
     }
 }
 
-- (void)viewDidLayoutSubviews
-{
+- (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
     SKView *spriteView = (SKView *) self.view;
@@ -504,25 +500,20 @@
 
 - (void)handleScreenConnectNotification:(NSNotification *)notification {
     UIScreen *screen = (UIScreen *)notification.object;
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Second Screen"
-                                                        message:[NSString stringWithFormat:@"connected %.0f x %.0f pixels",
-                                                                 screen.bounds.size.width,
-                                                                 screen.bounds.size.height]
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"OK", nil];
-    [alertView show];
-    
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Second Screen"
+                                                                message:[NSString stringWithFormat:@"connected %.0f x %.0f pixels",
+                                                                         screen.bounds.size.width,
+                                                                         screen.bounds.size.height]
+                                                         preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:TRUE completion:nil];
     [self checkForExistingScreenAndInitializeIfPresent];
 }
 
 - (void)handleScreenDisconnectNotification:(NSNotification *)notification {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Second Screen"
-                                                        message:@"disconnected"
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"OK", nil];
-    [alertView show];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Second Screen"
+                                                                message:@"disconnected"
+                                                         preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:TRUE completion:nil];
     if (self.secondWindow) {
         self.secondWindow.hidden = YES;
         self.secondWindow = nil;
@@ -544,16 +535,6 @@
         self.big = skView;
         self.secondWindow.hidden = NO;
         [self setup];
-    }
-}
-
-
-#pragma SplitViewDelegate
-
-- (void)awakeFromNib
-{
-    if (self.splitViewController) {
-        self.splitViewController.delegate = self;
     }
 }
 

@@ -50,7 +50,6 @@
 		029E81A6EC8EE63AF432E16C802E014D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BA3B1E77228E07303F9A1DF8EDDF5E5 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
 		10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		13A9C642BB7FAF29108E26CCE9A5438C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		16260D5F2488A714F9AD97E666FD61B4 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
 		18586657AFAC192F19747CFCB4466667 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 		272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
@@ -59,10 +58,10 @@
 		37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		39CD6669585D4B7B67D6A2A126A52715 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3F424F1BFA06797D9C952818598922CF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		47073FFBF249AC59CF81B12419EDCDE5 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
 		4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
 		517D6D5071227BEC92E53909B3F746AA /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		52B1D52DD9B8845C8D803CE92466AD7C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		5D595B86B34FF5E69E7436ECF8656359 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62FD21DD639DCDF7CD601095E9B4AFE1 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
 		6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		CC709CCFDBA538A629885ACCF67D8DD0 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
 		D48AED771CA2E3EC62EBFD000AAA7539 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		D614BBA04CFED0A980654667EBD6F25A /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		D798620FC46D10E7F26A82C0C6C3B586 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		D8653E52AA12D3C9B91D51D91CC80A6F /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		E5BDC65EDD91241E35E1299B4C6A8A54 /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
 		F0FF7D31800688561ED1871EDFC27ABE /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
@@ -124,28 +124,20 @@
 			name = Default;
 			sourceTree = "<group>";
 		};
-		091C65C143AA16E0A38C2E68FEC9F86B /* Fabric */ = {
+		172DBA0F5EA95DDBFC2955FB1D917BAE /* Fabric */ = {
 			isa = PBXGroup;
 			children = (
-				2AA626FA1FAF53794E3FEA1EC865E0F0 /* Base */,
+				8C936057289F3299504795841657D31E /* Frameworks */,
 			);
 			path = Fabric;
 			sourceTree = "<group>";
 		};
-		11B074778B56E565B6AEA7B2AE2DB46C /* Frameworks */ = {
+		20C2B13DC2DAB2A13D32FDEA6ABA287B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F424F1BFA06797D9C952818598922CF /* Crashlytics.framework */,
+				D798620FC46D10E7F26A82C0C6C3B586 /* Crashlytics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2AA626FA1FAF53794E3FEA1EC865E0F0 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				623746ABCC32B88AA0EA170524E45FB2 /* Frameworks */,
-			);
-			name = Base;
 			sourceTree = "<group>";
 		};
 		5929AF996E94DECB6A3E059E72243262 /* Products */ = {
@@ -166,14 +158,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/CocoaLumberjack";
-			sourceTree = "<group>";
-		};
-		623746ABCC32B88AA0EA170524E45FB2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				13A9C642BB7FAF29108E26CCE9A5438C /* Fabric.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		7130D29ECD8FFA273E73BB3A60E88C27 /* Extensions */ = {
@@ -205,7 +189,7 @@
 			children = (
 				8D7D17C639D4E82727BBDB7D3E9C3002 /* CocoaLumberjack */,
 				8A0BBCF14C375BDC95776F3607AC4445 /* Crashlytics */,
-				091C65C143AA16E0A38C2E68FEC9F86B /* Fabric */,
+				172DBA0F5EA95DDBFC2955FB1D917BAE /* Fabric */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -213,9 +197,17 @@
 		8A0BBCF14C375BDC95776F3607AC4445 /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
-				11B074778B56E565B6AEA7B2AE2DB46C /* Frameworks */,
+				20C2B13DC2DAB2A13D32FDEA6ABA287B /* Frameworks */,
 			);
 			path = Crashlytics;
+			sourceTree = "<group>";
+		};
+		8C936057289F3299504795841657D31E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52B1D52DD9B8845C8D803CE92466AD7C /* Fabric.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8D7D17C639D4E82727BBDB7D3E9C3002 /* CocoaLumberjack */ = {

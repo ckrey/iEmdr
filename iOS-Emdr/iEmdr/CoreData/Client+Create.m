@@ -7,11 +7,12 @@
 //
 
 #import "Client+Create.h"
+#import <CocoaLumberjack/CocoaLumberJack.h>
 
 @implementation Client (Create)
+static const DDLogLevel ddLogLevel = DDLogLevelError;
 
-+ (Client *)clientWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context
-{
++ (Client *)clientWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context {
     Client *client = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Client"];
@@ -39,44 +40,35 @@
     return client;
 }
 
-+ (ABAddressBookRef)theABRef
-{
++ (ABAddressBookRef)theABRef {
     static ABAddressBookRef ab = nil;
     static BOOL isGranted = YES;
     
     if (!ab) {
         if (isGranted) {
-#ifdef DEBUG
-            NSLog(@"ABAddressBookCreateWithOptions");
-#endif
+            DDLogVerbose(@"ABAddressBookCreateWithOptions");
             CFErrorRef cfError;
             ab = ABAddressBookCreateWithOptions(NULL, &cfError);
             if (ab) {
-#ifdef DEBUG
-                NSLog(@"ABAddressBookCreateWithOptions successful");
-#endif
+                DDLogVerbose(@"ABAddressBookCreateWithOptions successful");
             } else {
                 CFStringRef errorDescription = CFErrorCopyDescription(cfError);
-                NSLog(@"ABAddressBookCreateWithOptions not successfull %@", errorDescription);
+                DDLogError(@"ABAddressBookCreateWithOptions not successfull %@", errorDescription);
                 isGranted = NO;
             }
             
-#ifdef DEBUG
-            NSLog(@"ABAddressBookRequestAccessWithCompletion");
-#endif
+            DDLogVerbose(@"ABAddressBookRequestAccessWithCompletion");
             
             ABAddressBookRequestAccessWithCompletion(ab, ^(bool granted, CFErrorRef error) {
                 if (granted) {
-#ifdef DEBUG
-                    NSLog(@"ABAddressBookRequestAccessCompletionHandler successful");
-#endif
+                    DDLogVerbose(@"ABAddressBookRequestAccessCompletionHandler successful");
                 } else {
                     isGranted = NO;
                     ab = nil;
                 }
             });
         } else {
-           NSLog(@"ABAddressBookRequestAccessWithCompletion not successfull");
+           DDLogError(@"ABAddressBookRequestAccessWithCompletion not successfull");
         }
         
     }

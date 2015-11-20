@@ -13,12 +13,10 @@
 #import "Session+Create.h"
 #import "IemdrPersonTVC.h"
 #import "IemdrVC.h"
-
-@interface iEmdrClientTVC()
-@property (strong, nonatomic) UIAlertView *alertview;
-@end
+#import <CocoaLumberjack/CocoaLumberJack.h>
 
 @implementation iEmdrClientTVC
+static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -46,7 +44,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"prepareForSegue %@ %@ %@ %@", segue, segue.identifier, segue.sourceViewController, segue.destinationViewController);
+    DDLogVerbose(@"prepareForSegue %@", segue.identifier);
     NSIndexPath *indexPath = nil;
     
     if ([sender isKindOfClass:[UITableViewCell class]]) {
@@ -73,26 +71,43 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Client *client = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:client];
+        [self.fetchedResultsController.managedObjectContext save:nil];
     }
 }
 
-- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath {
-    NSArray *vcs = self.splitViewController.viewControllers;
-    UIViewController *detailVC = vcs[1];
-    if ([detailVC respondsToSelector:@selector(setClientToRun:)]) {
-        Client *client = [self.fetchedResultsController objectAtIndexPath:newIndexPath];
-        [detailVC performSelector:@selector(setClientToRun:) withObject:client];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Client *client = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    if (self.splitViewController.isCollapsed) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        IemdrVC *vc = [sb instantiateViewControllerWithIdentifier:@"detailView"];
+        if ([vc respondsToSelector:@selector(setClientToRun:)]) {
+            [vc performSelector:@selector(setClientToRun:) withObject:client];
+        }
+        [self.navigationController pushViewController:vc animated:TRUE];
+    } else {
+        IemdrVC *vc = self.splitViewController.viewControllers[1];
+        if ([vc respondsToSelector:@selector(setClientToRun:)]) {
+            [vc performSelector:@selector(setClientToRun:) withObject:client];
+        }
     }
-    [self.splitViewController showDetailViewController:detailVC sender:nil];
+
 }
 
-- (IBAction)withoutClient:(UIBarButtonItem *)sender {
-    NSArray *vcs = self.splitViewController.viewControllers;
-    UIViewController *detailVC = vcs[1];
-    if ([detailVC respondsToSelector:@selector(setClientToRun:)]) {
-        [detailVC performSelector:@selector(setClientToRun:) withObject:nil];
+- (IBAction)fastForwardPressed:(UIBarButtonItem *)sender {
+    if (self.splitViewController.isCollapsed) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        IemdrVC *vc = [sb instantiateViewControllerWithIdentifier:@"detailView"];
+        if ([vc respondsToSelector:@selector(setClientToRun:)]) {
+            [vc performSelector:@selector(setClientToRun:) withObject:nil];
+        }
+        [self.navigationController pushViewController:vc animated:TRUE];
+    } else {
+        IemdrVC *vc = self.splitViewController.viewControllers[1];
+        if ([vc respondsToSelector:@selector(setClientToRun:)]) {
+            [vc performSelector:@selector(setClientToRun:) withObject:nil];
+        }
     }
-    [self.splitViewController showDetailViewController:detailVC sender:nil];
 }
 
 
@@ -101,6 +116,7 @@
         NSString *name = [unwindSegue.sourceViewController performSelector:@selector(selectedPersonName)];
         IemdrAD *delegate = [UIApplication sharedApplication].delegate;
         [Client clientWithName:name inManagedObjectContext:delegate.data.managedObjectContext];
+        [delegate.data.managedObjectContext save:nil];
     }
 }
 @end

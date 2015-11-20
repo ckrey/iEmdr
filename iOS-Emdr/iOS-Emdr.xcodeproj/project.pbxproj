@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		720AB8950C82F6E4848D3942 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDAF060560BB469443A4573B /* libPods.a */; };
+		843E113F1BFF6EBA0049298E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843E113E1BFF6EBA0049298E /* Main.storyboard */; };
 		84469C431BB99C9B00C8C1DA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84469C421BB99C9B00C8C1DA /* Launch Screen.storyboard */; };
 		8479A0291BC2E05C00EE144E /* bassdrum.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A01F1BC2E05C00EE144E /* bassdrum.m4a */; };
 		8479A02A1BC2E05C00EE144E /* dingl.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8479A0201BC2E05C00EE144E /* dingl.m4a */; };
@@ -36,7 +37,6 @@
 		84AF6DAF181AA93B0087D2B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6DAD181AA93B0087D2B5 /* InfoPlist.strings */; };
 		84AF6DB1181AA93B0087D2B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DB0181AA93B0087D2B5 /* main.m */; };
 		84AF6DB5181AA93B0087D2B5 /* IemdrAD.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DB4181AA93B0087D2B5 /* IemdrAD.m */; };
-		84AF6DBB181AA93B0087D2B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6DB9181AA93B0087D2B5 /* Main.storyboard */; };
 		84AF6DBE181AA93B0087D2B5 /* IemdrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DBD181AA93B0087D2B5 /* IemdrVC.m */; };
 		84AF6DC0181AA93B0087D2B5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6DBF181AA93B0087D2B5 /* Images.xcassets */; };
 		84AF6DDE181AACF10087D2B5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DDC181AACF10087D2B5 /* Model.xcdatamodeld */; };
@@ -46,13 +46,13 @@
 		84AF6DF5181AAE8B0087D2B5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DF4181AAE8B0087D2B5 /* MessageUI.framework */; };
 		84D7558B18402CB5002613E2 /* IemdrBigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D7558A18402CB5002613E2 /* IemdrBigVC.m */; };
 		84E4BC8A1BB6F833005E0B54 /* big.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4BC891BB6F833005E0B54 /* big.storyboard */; };
-		84E4BC8C1BB6F839005E0B54 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4BC8B1BB6F839005E0B54 /* Main_iPhone.storyboard */; };
 		84E81CA41A10920700E82A68 /* IemdrPersonTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E81CA31A10920700E82A68 /* IemdrPersonTVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		841227E7182416C800DF7658 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		84235953183FBC8900782AD1 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
+		843E113E1BFF6EBA0049298E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		84469C421BB99C9B00C8C1DA /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		847946E6183C21CB00402ABC /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
 		8479A01F1BC2E05C00EE144E /* bassdrum.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bassdrum.m4a; sourceTree = "<group>"; };
@@ -97,7 +97,6 @@
 		84AF6DB2181AA93B0087D2B5 /* iEmdr-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iEmdr-Prefix.pch"; sourceTree = "<group>"; };
 		84AF6DB3181AA93B0087D2B5 /* IemdrAD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IemdrAD.h; sourceTree = "<group>"; };
 		84AF6DB4181AA93B0087D2B5 /* IemdrAD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IemdrAD.m; sourceTree = "<group>"; };
-		84AF6DBA181AA93B0087D2B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84AF6DBC181AA93B0087D2B5 /* IemdrVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IemdrVC.h; sourceTree = "<group>"; };
 		84AF6DBD181AA93B0087D2B5 /* IemdrVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IemdrVC.m; sourceTree = "<group>"; };
 		84AF6DBF181AA93B0087D2B5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -110,7 +109,6 @@
 		84D7558918402CB5002613E2 /* IemdrBigVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IemdrBigVC.h; sourceTree = "<group>"; };
 		84D7558A18402CB5002613E2 /* IemdrBigVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IemdrBigVC.m; sourceTree = "<group>"; };
 		84E4BC891BB6F833005E0B54 /* big.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = big.storyboard; sourceTree = "<group>"; };
-		84E4BC8B1BB6F839005E0B54 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		84E4BC911BB707D2005E0B54 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		84E4BC931BB707E2005E0B54 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		84E4BC951BB707EE005E0B54 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/SpriteKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -245,9 +243,8 @@
 				84AF6DB3181AA93B0087D2B5 /* IemdrAD.h */,
 				84AF6DB4181AA93B0087D2B5 /* IemdrAD.m */,
 				84E4BC891BB6F833005E0B54 /* big.storyboard */,
-				84AF6DB9181AA93B0087D2B5 /* Main.storyboard */,
-				84E4BC8B1BB6F839005E0B54 /* Main_iPhone.storyboard */,
 				84469C421BB99C9B00C8C1DA /* Launch Screen.storyboard */,
+				843E113E1BFF6EBA0049298E /* Main.storyboard */,
 				84AF6DBC181AA93B0087D2B5 /* IemdrVC.h */,
 				84AF6DBD181AA93B0087D2B5 /* IemdrVC.m */,
 				84D7558918402CB5002613E2 /* IemdrBigVC.h */,
@@ -337,15 +334,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E4BC8C1BB6F839005E0B54 /* Main_iPhone.storyboard in Resources */,
 				8479A02C1BC2E05C00EE144E /* pingl.m4a in Resources */,
 				8479A02D1BC2E05C00EE144E /* pingr.m4a in Resources */,
 				84E4BC8A1BB6F833005E0B54 /* big.storyboard in Resources */,
 				8479A02F1BC2E05C00EE144E /* snipl.m4a in Resources */,
 				8479A0301BC2E05C00EE144E /* snipr.m4a in Resources */,
 				84469C431BB99C9B00C8C1DA /* Launch Screen.storyboard in Resources */,
+				843E113F1BFF6EBA0049298E /* Main.storyboard in Resources */,
 				8479A0291BC2E05C00EE144E /* bassdrum.m4a in Resources */,
-				84AF6DBB181AA93B0087D2B5 /* Main.storyboard in Resources */,
 				8479A0321BC2E05C00EE144E /* tock.m4a in Resources */,
 				84AF6DC0181AA93B0087D2B5 /* Images.xcassets in Resources */,
 				8479A02E1BC2E05C00EE144E /* snaire.m4a in Resources */,
@@ -385,7 +381,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" e44c44a1a79cb757131e807fc29016438bc0d420 2666d328f87eea1bd136c0039a3f1814af440f1558379cb3a6d1d7081614b01e";
+			shellScript = "./Pods/Fabric.framework/run e44c44a1a79cb757131e807fc29016438bc0d420 2666d328f87eea1bd136c0039a3f1814af440f1558379cb3a6d1d7081614b01e";
 		};
 		AC4BFE4FBF7E287D03AA2552 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -453,14 +449,6 @@
 				84AF6DAE181AA93B0087D2B5 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		84AF6DB9181AA93B0087D2B5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84AF6DBA181AA93B0087D2B5 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -545,12 +533,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iEmdr/iEmdr-Prefix.pch";
 				INFOPLIST_FILE = "iEmdr/iEmdr-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iEmdr/iOS-Emdr-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -561,12 +554,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iEmdr/iEmdr-Prefix.pch";
 				INFOPLIST_FILE = "iEmdr/iEmdr-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iEmdr/iOS-Emdr-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

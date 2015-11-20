@@ -7,26 +7,26 @@
 //
 
 #import "AppDelegate.h"
-//#import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
-//#import <CocoaLumberjack/CocoaLumberJack.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <CocoaLumberjack/CocoaLumberJack.h>
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-//static const DDLogLevel ddLogLevel = DDLogLevelError;
+static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //[Fabric with:@[CrashlyticsKit]];
-//#ifdef DEBUG
-//    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelAll];
-//#else
-//    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelError];
-//#endif
-//
+    [Fabric with:@[CrashlyticsKit]];
+#ifdef DEBUG
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelAll];
+#else
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelError];
+#endif
+
     NSURL *bundleURL = [[NSBundle mainBundle] bundleURL];
     NSURL *defaultURL = [bundleURL URLByAppendingPathComponent:@"Settings.plist"];
     NSDictionary *fileDefaults = [NSDictionary dictionaryWithContentsOfURL:defaultURL];
@@ -103,7 +103,7 @@
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         // Replace this with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     
@@ -135,7 +135,7 @@
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+            DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }

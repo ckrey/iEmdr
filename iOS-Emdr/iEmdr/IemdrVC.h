@@ -12,7 +12,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 
-@interface IemdrVC : UIViewController <UISplitViewControllerDelegate>
+@interface IemdrVC : UIViewController
 
 @property (strong, nonatomic) Client *clientToRun;
 - (void)sessionFinished;

@@ -202,6 +202,7 @@
 				84E4BC541BB6F6B2005E0B54 /* Resources */,
 				13A0F98C464FF54D4C253261 /* Embed Pods Frameworks */,
 				64EF85D9FF8C64B03B2AB5C1 /* Copy Pods Resources */,
+				84BFBF551BFE22B400AA8037 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -306,6 +307,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		84BFBF551BFE22B400AA8037 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Pods/Fabric.framework/run e44c44a1a79cb757131e807fc29016438bc0d420 2666d328f87eea1bd136c0039a3f1814af440f1558379cb3a6d1d7081614b01e";
 		};
 		B9AB281EE2D02AB0F5B9ED06 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -436,6 +450,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = iEmdrTV/Info.plist;
@@ -460,6 +478,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = iEmdrTV/Info.plist;
