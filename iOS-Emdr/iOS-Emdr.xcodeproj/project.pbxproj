@@ -87,7 +87,7 @@
 		8479A0521BC2E25E00EE144E /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = CoreData/Session.m; sourceTree = "<group>"; };
 		8479A0531BC2E25E00EE144E /* Session+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Session+Create.h"; path = "CoreData/Session+Create.h"; sourceTree = "<group>"; };
 		8479A0541BC2E25E00EE144E /* Session+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Session+Create.m"; path = "CoreData/Session+Create.m"; sourceTree = "<group>"; };
-		84AF6DA1181AA93B0087D2B5 /* iOS-Emdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Emdr.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84AF6DA1181AA93B0087D2B5 /* iEmdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEmdr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AF6DA4181AA93B0087D2B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		84AF6DA8181AA93B0087D2B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -202,7 +202,7 @@
 		84AF6DA2181AA93B0087D2B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84AF6DA1181AA93B0087D2B5 /* iOS-Emdr.app */,
+				84AF6DA1181AA93B0087D2B5 /* iEmdr.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -280,9 +280,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84AF6DA0181AA93B0087D2B5 /* iOS-Emdr */ = {
+		84AF6DA0181AA93B0087D2B5 /* iEmdr */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84AF6DD6181AA93B0087D2B5 /* Build configuration list for PBXNativeTarget "iOS-Emdr" */;
+			buildConfigurationList = 84AF6DD6181AA93B0087D2B5 /* Build configuration list for PBXNativeTarget "iEmdr" */;
 			buildPhases = (
 				83484DD70D26C932C974BE4F /* Check Pods Manifest.lock */,
 				84AF6D9D181AA93B0087D2B5 /* Sources */,
@@ -296,9 +296,9 @@
 			);
 			dependencies = (
 			);
-			name = "iOS-Emdr";
+			name = iEmdr;
 			productName = iEmdr;
-			productReference = 84AF6DA1181AA93B0087D2B5 /* iOS-Emdr.app */;
+			productReference = 84AF6DA1181AA93B0087D2B5 /* iEmdr.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -324,7 +324,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84AF6DA0181AA93B0087D2B5 /* iOS-Emdr */,
+				84AF6DA0181AA93B0087D2B5 /* iEmdr */,
 			);
 		};
 /* End PBXProject section */
@@ -580,7 +580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84AF6DD6181AA93B0087D2B5 /* Build configuration list for PBXNativeTarget "iOS-Emdr" */ = {
+		84AF6DD6181AA93B0087D2B5 /* Build configuration list for PBXNativeTarget "iEmdr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84AF6DD7181AA93B0087D2B5 /* Debug */,

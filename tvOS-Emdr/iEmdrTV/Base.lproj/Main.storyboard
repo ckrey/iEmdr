@@ -162,14 +162,15 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="iEmdr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwx-Do-A1R">
-                                <rect key="frame" x="20" y="20" width="192" height="81"/>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lHm-Xm-tbT">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <items>
+                                    <navigationItem title="Title" id="ema-eg-nc3">
+                                        <barButtonItem key="rightBarButtonItem" title="Size" id="HuH-67-GRT"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -193,7 +194,6 @@
                         <outlet property="durationPlus" destination="gZY-g7-Eeh" id="kqF-ct-dXH"/>
                         <outlet property="form" destination="Ds9-aS-Equ" id="00F-ix-4Qk"/>
                         <outlet property="formSelect" destination="Mzn-kV-4lr" id="tbY-YQ-sdN"/>
-                        <outlet property="headline" destination="uwx-Do-A1R" id="5jo-ve-mwl"/>
                         <outlet property="help" destination="dGK-JT-Cye" id="TZy-wH-obd"/>
                         <outlet property="hueMinus" destination="nxH-wZ-uv7" id="m7W-Zr-tjs"/>
                         <outlet property="huePlus" destination="58n-M2-ZWX" id="hNM-6x-5VD"/>
@@ -208,7 +208,7 @@
                     <pressTypeMask key="allowedPressTypes" playPause="YES"/>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-738" y="5"/>
+            <point key="canvasLocation" x="-802" y="257"/>
         </scene>
         <!--Form Table View Controller-->
         <scene sceneID="oCW-KQ-ufs">
