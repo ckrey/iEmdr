@@ -13,7 +13,7 @@
    height="2048"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="iEmdr.svg">
   <defs
      id="defs4">
@@ -28,9 +28,138 @@
        height="10"
        y="-5">
       <feGaussianBlur
-         in="SourceGraphic"
-         stdDeviation="100 31.379411764705882"
+         stdDeviation="56.5 31.399999999999999"
          id="feGaussianBlur3918" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Feather"
+       id="filter4410">
+      <feGaussianBlur
+         stdDeviation="80.32"
+         result="blur"
+         id="feGaussianBlur4412" />
+      <feComposite
+         in="SourceGraphic"
+         in2="blur"
+         operator="atop"
+         result="composite1"
+         id="feComposite4414" />
+      <feComposite
+         in2="composite1"
+         operator="in"
+         result="composite2"
+         id="feComposite4416" />
+      <feComposite
+         in2="composite2"
+         operator="in"
+         result="composite3"
+         id="feComposite4418" />
+    </filter>
+    <filter
+       inkscape:label="Smear Transparency"
+       inkscape:menu="Overlays"
+       inkscape:menu-tooltip="Paint objects with a transparent turbulence which turns around color edges"
+       height="1.4"
+       y="-0.2"
+       width="1.4"
+       x="-0.2"
+       style="color-interpolation-filters:sRGB;"
+       id="filter4422">
+      <feColorMatrix
+         in="SourceGraphic"
+         result="result1"
+         type="luminanceToAlpha"
+         id="feColorMatrix4424" />
+      <feComposite
+         in2="result1"
+         k3="1"
+         in="SourceGraphic"
+         result="result2"
+         operator="out"
+         id="feComposite4426" />
+      <feGaussianBlur
+         stdDeviation="0.7"
+         result="result10"
+         id="feGaussianBlur4428" />
+      <feBlend
+         in2="result10"
+         mode="screen"
+         in="result10"
+         result="fbSourceGraphic"
+         id="feBlend4430" />
+      <feGaussianBlur
+         stdDeviation="3"
+         result="result8"
+         in="fbSourceGraphic"
+         id="feGaussianBlur4432" />
+      <feTurbulence
+         seed="0"
+         result="result7"
+         type="fractalNoise"
+         numOctaves="1"
+         baseFrequency="0.3"
+         id="feTurbulence4434" />
+      <feColorMatrix
+         result="result9"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1.2 -0.2 "
+         id="feColorMatrix4436" />
+      <feComposite
+         in2="result8"
+         result="result6"
+         operator="atop"
+         in="result8"
+         id="feComposite4438" />
+      <feDisplacementMap
+         in="result9"
+         in2="result6"
+         xChannelSelector="R"
+         yChannelSelector="A"
+         scale="100"
+         result="result4"
+         id="feDisplacementMap4440" />
+      <feComposite
+         in2="result4"
+         result="result2"
+         operator="arithmetic"
+         in="result8"
+         k1="2"
+         id="feComposite4442" />
+      <feComposite
+         result="fbSourceGraphic"
+         in="fbSourceGraphic"
+         operator="in"
+         in2="result2"
+         id="feComposite4444" />
+    </filter>
+    <filter
+       inkscape:label="Blur Double"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
+       style="color-interpolation-filters:sRGB;"
+       id="filter4842">
+      <feGaussianBlur
+         stdDeviation="5"
+         result="fbSourceGraphic"
+         id="feGaussianBlur4844" />
+      <feGaussianBlur
+         stdDeviation="0.01"
+         in="SourceGraphic"
+         result="result1"
+         id="feGaussianBlur4846" />
+      <feComposite
+         in2="result1"
+         operator="arithmetic"
+         in="fbSourceGraphic"
+         k2="0.5"
+         k3="0.5"
+         result="result2"
+         id="feComposite4848" />
+      <feBlend
+         in2="fbSourceGraphic"
+         mode="normal"
+         result="result3"
+         id="feBlend4850" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -40,16 +169,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="835.71429"
-     inkscape:cy="1205.7143"
+     inkscape:zoom="0.12374369"
+     inkscape:cx="1167.1429"
+     inkscape:cy="1102.8572"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1690"
-     inkscape:window-height="1164"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="1440"
+     inkscape:window-height="856"
+     inkscape:window-x="28"
+     inkscape:window-y="23"
      inkscape:window-maximized="0"
      showguides="false"
      inkscape:snap-global="false">
@@ -69,7 +198,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -87,18 +216,13 @@
        y="-995.13898"
        rx="12.25639"
        ry="12.290578" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3916)"
-       id="path3776"
-       sodipodi:cx="1170"
-       sodipodi:cy="713.71429"
-       sodipodi:rx="295.71429"
-       sodipodi:ry="294.28571"
-       d="m 1317.8572,458.8554 a 295.71429,294.28571 0 1 1 -10e-5,-10e-6"
-       transform="translate(0,-995.63782)"
-       sodipodi:start="5.2359878"
-       sodipodi:end="11.519173"
-       sodipodi:open="true" />
+    <ellipse
+       ry="294.28571"
+       rx="295.71429"
+       cy="261.92352"
+       cx="1264.2858"
+       transform="scale(1,-1)"
+       id="ellipse4358"
+       style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

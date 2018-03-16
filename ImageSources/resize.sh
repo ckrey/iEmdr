@@ -30,6 +30,10 @@ $IMAGEW -bkgd 000 "$MYPWD/$BASE-1024.png" "$MYPWD/iTunesArtwork.png"
 
 # App Icons
 
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-20.png" -w 20 -h 20
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-20@2x.png" -w 40 -h 40
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-20@3x.png" -w 60 -h 60
+
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-29.png" -w 29 -h 29
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-29@2x.png" -w 58 -h 58
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-29@3x.png" -w 87 -h 87
@@ -43,6 +47,11 @@ $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-60@3x.png" -w 180 -h 180
 
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-76.png" -w 76 -h 76
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-76@2x.png" -w 152 -h 152
+
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-83-5@2x.png" -w 167 -h 167
+
+# App Store Image
+$IMAGEW -bkgd 000 -crop 0,0,1024,1024 "$MYPWD/$BASE-1024.png" "$MYPWD/$BASE-1024x1024.png" -w 1024 -h 1024
 
 # Launch Images
 $IMAGEW -bkgd 000 -crop 0,483,2208,1242 "$MYPWD/$BASE-2208.png" "$MYPWD/$BASE-2208x1242.png" -w 2208 -h 1242
