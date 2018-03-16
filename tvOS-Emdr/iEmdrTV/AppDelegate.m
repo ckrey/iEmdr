@@ -3,13 +3,11 @@
 //  iEmdrTV
 //
 //  Created by Christoph Krey on 26.09.15.
-//  Copyright © 2015 Christoph Krey. All rights reserved.
+//  Copyright © 2015-2018 Christoph Krey. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-#import <CocoaLumberjack/CocoaLumberJack.h>
+#import "CocoaLumberjack.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +18,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Fabric with:@[CrashlyticsKit]];
 #ifdef DEBUG
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelAll];
 #else

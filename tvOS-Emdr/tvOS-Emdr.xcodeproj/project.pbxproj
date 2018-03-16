@@ -28,7 +28,7 @@
 		84E4BC921BB707D2005E0B54 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4BC911BB707D2005E0B54 /* AVFoundation.framework */; };
 		84E4BC961BB707EE005E0B54 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4BC951BB707EE005E0B54 /* SpriteKit.framework */; };
 		84E4BCAE1BB986AD005E0B54 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E4BCAD1BB986AD005E0B54 /* Settings.plist */; };
-		C598736FC295184E391276C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDAF060560BB469443A4573B /* libPods.a */; };
+		A55DECA2BB306A814EB3DA96 /* Pods_iEmdr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F547C5BCC92B719A0C02B2 /* Pods_iEmdr.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,9 +67,9 @@
 		84E4BC951BB707EE005E0B54 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/SpriteKit.framework; sourceTree = DEVELOPER_DIR; };
 		84E4BC971BB82F3C005E0B54 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		84E4BCAD1BB986AD005E0B54 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
-		8AE757DA86CF820D35A7733E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		BDAF060560BB469443A4573B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB89A48EDC365DE955AF570F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8B4A975D882D70C6F740E420 /* Pods-iEmdr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iEmdr.release.xcconfig"; path = "Pods/Target Support Files/Pods-iEmdr/Pods-iEmdr.release.xcconfig"; sourceTree = "<group>"; };
+		93F547C5BCC92B719A0C02B2 /* Pods_iEmdr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iEmdr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD3844691887C5F93BB49033 /* Pods-iEmdr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iEmdr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iEmdr/Pods-iEmdr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +79,22 @@
 			files = (
 				84E4BC961BB707EE005E0B54 /* SpriteKit.framework in Frameworks */,
 				84E4BC921BB707D2005E0B54 /* AVFoundation.framework in Frameworks */,
-				C598736FC295184E391276C7 /* libPods.a in Frameworks */,
+				A55DECA2BB306A814EB3DA96 /* Pods_iEmdr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62BDA4F7C5B17E64B83DC41F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD3844691887C5F93BB49033 /* Pods-iEmdr.debug.xcconfig */,
+				8B4A975D882D70C6F740E420 /* Pods-iEmdr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8479A0051BC2DDD900EE144E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +131,7 @@
 				84E4BC571BB6F6B2005E0B54 /* tvOS-Emdr */,
 				84AF6DA3181AA93B0087D2B5 /* Frameworks */,
 				84AF6DA2181AA93B0087D2B5 /* Products */,
-				B07D63654933DA766DFE626B /* Pods */,
+				62BDA4F7C5B17E64B83DC41F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,7 +155,7 @@
 				84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */,
 				84AF6DA8181AA93B0087D2B5 /* UIKit.framework */,
 				84AF6DC6181AA93B0087D2B5 /* XCTest.framework */,
-				BDAF060560BB469443A4573B /* libPods.a */,
+				93F547C5BCC92B719A0C02B2 /* Pods_iEmdr.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -180,15 +189,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B07D63654933DA766DFE626B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8AE757DA86CF820D35A7733E /* Pods.debug.xcconfig */,
-				EB89A48EDC365DE955AF570F /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -196,13 +196,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84E4BC801BB6F6B2005E0B54 /* Build configuration list for PBXNativeTarget "iEmdr" */;
 			buildPhases = (
-				B9AB281EE2D02AB0F5B9ED06 /* Check Pods Manifest.lock */,
+				2DA07472499580A726EEFA88 /* [CP] Check Pods Manifest.lock */,
 				84E4BC521BB6F6B2005E0B54 /* Sources */,
 				84E4BC531BB6F6B2005E0B54 /* Frameworks */,
 				84E4BC541BB6F6B2005E0B54 /* Resources */,
-				13A0F98C464FF54D4C253261 /* Embed Pods Frameworks */,
-				64EF85D9FF8C64B03B2AB5C1 /* Copy Pods Resources */,
-				84BFBF551BFE22B400AA8037 /* ShellScript */,
+				1EEAE83D84470B068F824415 /* [CP] Embed Pods Frameworks */,
+				ADF3F3A440474886F0554F52 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,11 +219,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IEMDR;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Christoph Krey";
 				TargetAttributes = {
 					84E4BC551BB6F6B2005E0B54 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = C652JFWU23;
 						SystemCapabilities = {
 							com.apple.BackgroundModes.appletvos = {
 								enabled = 0;
@@ -278,62 +278,55 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		13A0F98C464FF54D4C253261 /* Embed Pods Frameworks */ = {
+		1EEAE83D84470B068F824415 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-iEmdr/Pods-iEmdr-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iEmdr/Pods-iEmdr-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		64EF85D9FF8C64B03B2AB5C1 /* Copy Pods Resources */ = {
+		2DA07472499580A726EEFA88 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iEmdr-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		84BFBF551BFE22B400AA8037 /* ShellScript */ = {
+		ADF3F3A440474886F0554F52 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Pods/Fabric.framework/run e44c44a1a79cb757131e807fc29016438bc0d420 2666d328f87eea1bd136c0039a3f1814af440f1558379cb3a6d1d7081614b01e";
-		};
-		B9AB281EE2D02AB0F5B9ED06 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iEmdr/Pods-iEmdr-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -374,19 +367,30 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -414,18 +418,29 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -441,13 +456,14 @@
 		};
 		84E4BC811BB6F6B2005E0B54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AE757DA86CF820D35A7733E /* Pods.debug.xcconfig */;
+			baseConfigurationReference = CD3844691887C5F93BB49033 /* Pods-iEmdr.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Brand Assets";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = C652JFWU23;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -469,14 +485,15 @@
 		};
 		84E4BC821BB6F6B2005E0B54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB89A48EDC365DE955AF570F /* Pods.release.xcconfig */;
+			baseConfigurationReference = 8B4A975D882D70C6F740E420 /* Pods-iEmdr.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Brand Assets";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = C652JFWU23;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

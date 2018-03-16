@@ -3,7 +3,7 @@
 //  iEmdr
 //
 //  Created by Christoph Krey on 10.11.14.
-//  Copyright (c) 2014 Christoph Krey. All rights reserved.
+//  Copyright © 2014-2018 Christoph Krey. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

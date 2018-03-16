@@ -3,7 +3,7 @@
 //  OwnTracksCTRLTV
 //
 //  Created by Christoph Krey on 26.09.15.
-//  Copyright © 2015 OwnTracks. All rights reserved.
+//  Copyright © 2015-2018 OwnTracks. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -11,8 +11,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "IemdrScene.h"
 #import <AVFoundation/AVFoundation.h>
-#import <CocoaLumberjack/CocoaLumberJack.h>
-#import <Crashlytics/Crashlytics.h>
+#import "CocoaLumberjack.h"
 
 @interface ViewController ()
 

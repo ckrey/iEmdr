@@ -3,7 +3,7 @@
 //  iEmdr
 //
 //  Created by Christoph Krey on 23.11.13.
-//  Copyright (c) 2013 Christoph Krey. All rights reserved.
+//  Copyright © 2013-2018 Christoph Krey. All rights reserved.
 //
 
 #import "IemdrBigVC.h"

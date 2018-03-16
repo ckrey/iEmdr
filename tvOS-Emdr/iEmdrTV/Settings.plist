@@ -29,9 +29,9 @@
 	<key>BPMMin</key>
 	<integer>15</integer>
 	<key>BPMInc</key>
-	<integer>0</integer>
+	<integer>5</integer>
 	<key>BPMFac</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>RadiusVal</key>
 	<integer>50</integer>
 	<key>RadiusMax</key>

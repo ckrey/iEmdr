@@ -18,11 +18,16 @@ $INK -z -D -e "$MYPWD/$BASE-1024.png" -f 	$MYPWD/$SVG -w 1024 -h 1024
 $INK -z -D -e "$MYPWD/$BASE-1334.png" -f 	$MYPWD/$SVG -w 1334 -h 1334
 $INK -z -D -e "$MYPWD/$BASE-2048.png" -f 	$MYPWD/$SVG -w 2048 -h 2048
 $INK -z -D -e "$MYPWD/$BASE-2208.png" -f 	$MYPWD/$SVG -w 2208 -h 2208
+$INK -z -D -e "$MYPWD/$BASE-3840.png" -f 	$MYPWD/$SVG -w 3840 -h 3840
+$INK -z -D -e "$MYPWD/$BASE-4640.png" -f 	$MYPWD/$SVG -w 4640 -h 4640
 
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-3840.png" "$MYPWD/$BASE-2320.png" -w 2320 -h 2320
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-3840.png" "$MYPWD/$BASE-2560.png" -w 2560 -h 2560
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-1920.png" -w 1920 -h 1920
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-1280.png" -w 1280 -h 1280
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-1136.png" -w 1136 -h 1136
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-960.png" -w 960 -h 960
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-800.png" -w 800 -h 800
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-400.png" -w 400 -h 400
 
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/iTunesArtwork@2x.png" 
@@ -71,12 +76,23 @@ $IMAGEW -bkgd 000 -crop 160,0,640,960 "$MYPWD/$BASE-960.png" "$MYPWD/$BASE-640x9
 
 # AppleTV
 $IMAGEW -bkgd 000 -crop 0,0,1920,1080 "$MYPWD/$BASE-1920.png" "$MYPWD/LaunchImage-1920x1080.png" -w 1920 -h 1080
-$IMAGEW -bkgd 000 -crop 0,0,1920,720 "$MYPWD/$BASE-1920.png" "$MYPWD/TopShelfImage-1920x720.png" -w 1920 -h 720
+$IMAGEW -bkgd 000 -crop 0,0,3840,2160 "$MYPWD/$BASE-3840.png" "$MYPWD/LaunchImage-1920x1080@2x.png" -w 3840 -h 2160
+
+$IMAGEW -bkgd 000 -crop 0,360,1920,720 "$MYPWD/$BASE-1920.png" "$MYPWD/TopShelfImage-1920x720.png" -w 1920 -h 720
+$IMAGEW -bkgd 000 -crop 0,720,3840,1440 "$MYPWD/$BASE-3840.png" "$MYPWD/TopShelfImage-1920x720@2x.png" -w 3840 -h 1440
+$IMAGEW -bkgd 000 -crop 0,360,2320,720 "$MYPWD/$BASE-2320.png" "$MYPWD/TopShelfImage-2320x720.png" -w 2320 -h 720
+$IMAGEW -bkgd 000 -crop 0,720,4640,1440 "$MYPWD/$BASE-4640.png" "$MYPWD/TopShelfImage-2320x720@2x.png" -w 4640 -h 1440
 
 $IMAGEW -bkgd 000 -crop 0,0,1280,768 "$MYPWD/$BASE-1280.png" "$MYPWD/$BASE-1280x768-Front.png" -w 1280 -h 768
 $IMAGEW -bkgd 000 -crop 0,0,1280,768 "$MYPWD/$BASE-1280.png" "$MYPWD/$BASE-1280x768-Middle.png" -w 1280 -h 768
 $IMAGEW -bkgd 000 -crop 0,0,1280,768 "$MYPWD/$BASE-1280.png" "$MYPWD/$BASE-1280x768-Back.png" -w 1280 -h 768
+$IMAGEW -bkgd 000 -crop 0,0,2560,1536 "$MYPWD/$BASE-2560.png" "$MYPWD/$BASE-1280x768-Front@2x.png" -w 2560 -h 1536
+$IMAGEW -bkgd 000 -crop 0,0,2560,1536 "$MYPWD/$BASE-2560.png" "$MYPWD/$BASE-1280x768-Middle@2x.png" -w 2560 -h 1536
+$IMAGEW -bkgd 000 -crop 0,0,2560,1536 "$MYPWD/$BASE-2560.png" "$MYPWD/$BASE-1280x768-Back@2x.png" -w 2560 -h 1536
 
 $IMAGEW -bkgd 000 -crop 0,0,400,240 "$MYPWD/$BASE-400.png" "$MYPWD/$BASE-400x240-Front.png" -w 400 -h 240
 $IMAGEW -bkgd 000 -crop 0,0,400,240 "$MYPWD/$BASE-400.png" "$MYPWD/$BASE-400x240-Middle.png" -w 400 -h 240
 $IMAGEW -bkgd 000 -crop 0,0,400,240 "$MYPWD/$BASE-400.png" "$MYPWD/$BASE-400x240-Back.png" -w 400 -h 240
+$IMAGEW -bkgd 000 -crop 0,0,800,480 "$MYPWD/$BASE-800.png" "$MYPWD/$BASE-400x240-Front@2x.png" -w 800 -h 480
+$IMAGEW -bkgd 000 -crop 0,0,800,480 "$MYPWD/$BASE-800.png" "$MYPWD/$BASE-400x240-Middle@2x.png" -w 800 -h 480
+$IMAGEW -bkgd 000 -crop 0,0,800,480 "$MYPWD/$BASE-800.png" "$MYPWD/$BASE-400x240-Back@2x.png" -w 800 -h 480

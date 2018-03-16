@@ -1,7 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :tvos, '9.0'
+use_frameworks!
 
 pod 'CocoaLumberjack'
-pod 'Fabric'
-pod 'Crashlytics'
+
+target 'iEmdr' do
+end
 

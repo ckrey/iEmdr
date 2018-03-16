@@ -161,6 +161,28 @@
          result="result3"
          id="feBlend4850" />
     </filter>
+    <filter
+       height="1"
+       width="1"
+       y="0"
+       x="0"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter4180">
+      <feGaussianBlur
+         stdDeviation="23.68 2"
+         result="blur"
+         id="feGaussianBlur4182" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 50 0 "
+         result="colormatrix"
+         id="feColorMatrix4184" />
+      <feComposite
+         in="colormatrix"
+         in2="SourceGraphic"
+         operator="in"
+         id="feComposite4186" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -169,8 +191,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.12374369"
-     inkscape:cx="1167.1429"
+     inkscape:zoom="0.32579393"
+     inkscape:cx="430.48093"
      inkscape:cy="1102.8572"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -223,6 +245,6 @@
        cx="1264.2858"
        transform="scale(1,-1)"
        id="ellipse4358"
-       style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4180)" />
   </g>
 </svg>
