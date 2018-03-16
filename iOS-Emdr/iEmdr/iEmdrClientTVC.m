@@ -8,12 +8,12 @@
 
 #import "iEmdrClientTVC.h"
 #import "iEmdrSessionTVC.h"
-#import "iEmdrAD.h"
+#import "IemdrAD.h"
 #import "Client+Create.h"
 #import "Session+Create.h"
-#import "IemdrPersonTVC.h"
+#import "IEMDRPersonTVC.h"
 #import "IemdrVC.h"
-#import <CocoaLumberjack/CocoaLumberJack.h>
+#import "CocoaLumberjack.h"
 
 @implementation iEmdrClientTVC
 static const DDLogLevel ddLogLevel = DDLogLevelError;
@@ -21,7 +21,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    IemdrAD *delegate = [UIApplication sharedApplication].delegate;
+    IemdrAD *delegate = (IemdrAD *)[UIApplication sharedApplication].delegate;
         
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Client"];
     
@@ -114,7 +114,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 - (IBAction)clientSelected:(UIStoryboardSegue *)unwindSegue {
     if ([unwindSegue.sourceViewController respondsToSelector:@selector(selectedPersonName)]) {
         NSString *name = [unwindSegue.sourceViewController performSelector:@selector(selectedPersonName)];
-        IemdrAD *delegate = [UIApplication sharedApplication].delegate;
+        IemdrAD *delegate = (IemdrAD *)[UIApplication sharedApplication].delegate;
         [Client clientWithName:name inManagedObjectContext:delegate.data.managedObjectContext];
         [delegate.data.managedObjectContext save:nil];
     }

@@ -7,7 +7,7 @@
 //
 
 #import "IemdrVC.h"
-#import "iEmdrAD.h"
+#import "IemdrAD.h"
 #import "Client+Create.h"
 #import "Session+Create.h"
 #include <math.h>
@@ -17,7 +17,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import <CocoaLumberjack/CocoaLumberJack.h>
+#import "CocoaLumberjack.h"
 
 @interface IemdrVC ()
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -505,6 +505,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                                                                          screen.bounds.size.width,
                                                                          screen.bounds.size.height]
                                                          preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:nil];
+    [ac addAction:ok];
     [self presentViewController:ac animated:TRUE completion:nil];
     [self checkForExistingScreenAndInitializeIfPresent];
 }
@@ -513,6 +518,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Second Screen"
                                                                 message:@"disconnected"
                                                          preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:nil];
+    [ac addAction:ok];
     [self presentViewController:ac animated:TRUE completion:nil];
     if (self.secondWindow) {
         self.secondWindow.hidden = YES;

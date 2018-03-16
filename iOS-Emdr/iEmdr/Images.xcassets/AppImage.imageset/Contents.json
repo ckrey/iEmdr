@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iTunesArtwork.png",
+      "filename" : "iEmdr-1024.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "iTunesArtwork@2x.png",
+      "filename" : "iEmdr-2048.png",
       "scale" : "2x"
     },
     {

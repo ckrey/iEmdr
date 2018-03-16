@@ -1,24 +1,17 @@
 PODS:
-  - CocoaLumberjack (2.2.0):
-    - CocoaLumberjack/Default (= 2.2.0)
-    - CocoaLumberjack/Extensions (= 2.2.0)
-  - CocoaLumberjack/Core (2.2.0)
-  - CocoaLumberjack/Default (2.2.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.2.0):
+  - CocoaLumberjack (3.4.1):
+    - CocoaLumberjack/Default (= 3.4.1)
+    - CocoaLumberjack/Extensions (= 3.4.1)
+  - CocoaLumberjack/Default (3.4.1)
+  - CocoaLumberjack/Extensions (3.4.1):
     - CocoaLumberjack/Default
-  - Crashlytics (3.4.1):
-    - Fabric (~> 1.6.0)
-  - Fabric (1.6.1)
 
 DEPENDENCIES:
   - CocoaLumberjack
-  - Crashlytics
-  - Fabric
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
-  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: a0293f63dbba094cad5f07c0e54912a20d0dfecd
+
+COCOAPODS: 1.4.0

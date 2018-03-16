@@ -7,9 +7,7 @@
 //
 
 #import "IemdrAD.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-#import <CocoaLumberjack/CocoaLumberJack.h>
+#import "CocoaLumberjack.h"
 
 @interface IemdrAD()
 
@@ -20,7 +18,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [Fabric with:@[CrashlyticsKit]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
     self.data = [[iEmdrCoreData alloc] init];

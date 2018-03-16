@@ -6,7 +6,7 @@
 //
 
 #import "CoreDataTVC.h"
-#import <CocoaLumberjack/CocoaLumberJack.h>
+#import "CocoaLumberjack.h"
 
 @interface CoreDataTVC()
 @property (nonatomic) BOOL beganUpdates;

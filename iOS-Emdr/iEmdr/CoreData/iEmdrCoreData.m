@@ -7,7 +7,7 @@
 //
 
 #import "iEmdrCoreData.h"
-#import <CocoaLumberjack/CocoaLumberJack.h>
+#import "CocoaLumberjack.h"
 
 @interface iEmdrCoreData()
 

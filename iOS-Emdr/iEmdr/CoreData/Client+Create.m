@@ -7,7 +7,7 @@
 //
 
 #import "Client+Create.h"
-#import <CocoaLumberjack/CocoaLumberJack.h>
+#import "CocoaLumberjack.h"
 
 @implementation Client (Create)
 static const DDLogLevel ddLogLevel = DDLogLevelError;

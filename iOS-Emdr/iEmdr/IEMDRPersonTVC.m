@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Christoph Krey. All rights reserved.
 //
 
-#import "IemdrPersonTVC.h"
+#import "IEMDRPersonTVC.h"
 #import <AddressBook/AddressBook.h>
 
 @interface IemdrPersonTVC ()

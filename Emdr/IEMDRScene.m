@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Christoph Krey. All rights reserved.
 //
 
-#import "IemdrScene.h"
+#import "IEMDRScene.h"
 
 @interface IemdrScene ()
 @property BOOL contentCreated;
