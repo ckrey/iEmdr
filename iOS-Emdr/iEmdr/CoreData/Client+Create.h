@@ -7,11 +7,8 @@
 //
 
 #import "Client.h"
-#import <AddressBook/AddressBook.h>
-
 @interface Client (Create)
 + (Client *)clientWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
-+ (ABAddressBookRef)theABRef;
 
 
 

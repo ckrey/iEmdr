@@ -7,7 +7,7 @@
 //
 
 #import "IEMDRPersonTVC.h"
-#import <AddressBook/AddressBook.h>
+#import <Contacts/Contacts.h>
 
 @interface IemdrPersonTVC ()
 @property (strong, nonatomic) NSMutableDictionary *sections;
@@ -17,46 +17,56 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.sections = [[NSMutableDictionary alloc] init];
-    
-    ABAddressBookRef ab = [Client theABRef];
-    if (ab) {
-        CFArrayRef records = ABAddressBookCopyArrayOfAllPeople(ab);
-        
-        if (records) {
-            for (int i = 0; i < CFArrayGetCount(records); i++)
-            {
-                ABRecordRef person = CFArrayGetValueAtIndex(records, i);
-                NSString *name = CFBridgingRelease(ABRecordCopyCompositeName(person));
-                NSString *key = [[name substringToIndex:1] uppercaseString];
-                if (key) {
-                    NSMutableArray *array = [self.sections valueForKey:key];
-                    if (!array) {
-                        array = [[NSMutableArray alloc] init];
-                    }
-                    [array addObject:@(ABRecordGetRecordID(person))];
-                    [self.sections setValue:array forKey:key];
-                }
+
+    NSArray *keys = @[[CNContactFormatter
+                       descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName],
+                      CNContactThumbnailImageDataKey,
+                      CNContactImageDataAvailableKey
+    ];
+    CNContactFetchRequest *contactFetchRequest = [[CNContactFetchRequest alloc]
+                                                  initWithKeysToFetch:keys];
+    CNContactStore *contactStore = [[CNContactStore alloc] init];
+    [contactStore enumerateContactsWithFetchRequest:contactFetchRequest
+                                              error:nil
+                                         usingBlock:
+     ^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+        NSString *name = [CNContactFormatter
+                          stringFromContact:contact
+                          style:CNContactFormatterStyleFullName];
+
+        NSLog(@"contact %@: %@",
+              contact.identifier,
+              name);
+
+        NSString *key = [name substringToIndex:1].uppercaseString;
+        if (key) {
+            NSMutableArray *array = (self.sections)[key];
+            if (!array) {
+                array = [[NSMutableArray alloc] init];
             }
-            CFRelease(records);
+            [array addObject:contact];
+            (self.sections)[key] = array;
         }
-        
-        for (NSString *key in self.sections.allKeys) {
-            NSArray *persons = [[self.sections valueForKey:key] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                ABRecordRef ABRecordRef1 = ABAddressBookGetPersonWithRecordID(ab, [obj1 intValue]);
-                ABRecordRef ABRecordRef2 = ABAddressBookGetPersonWithRecordID(ab, [obj2 intValue]);
-                CFComparisonResult r = ABPersonComparePeopleByName(ABRecordRef1, ABRecordRef2, ABPersonGetSortOrdering());
-                return (NSComparisonResult)r;
-            }];
-            
-            [self.sections setValue:persons forKey:key];
-        }
-    } else {
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Addressbook Access blocked"
-                                                                    message:@"please adjust Settings/Privacy/Contacts"
-                                                             preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:ac animated:TRUE completion:nil];
+
+    }];
+
+    for (NSString *key in self.sections.allKeys) {
+        NSArray *persons = [(self.sections)[key] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            CNContact *contact1 = obj1;
+            CNContact *contact2 = obj2;
+            NSString *name1 = [CNContactFormatter
+                               stringFromContact:contact1
+                               style:CNContactFormatterStyleFullName];
+            NSString *name2 = [CNContactFormatter
+                               stringFromContact:contact2
+                               style:CNContactFormatterStyleFullName];
+
+            return [name1 localizedCaseInsensitiveCompare:name2];
+        }];
+
+        (self.sections)[key] = persons;
     }
-    
+
     self.tableView.sectionIndexMinimumDisplayRowCount = 8;
     [super viewWillAppear:animated];
 }
@@ -90,25 +100,19 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"person" forIndexPath:indexPath];
     
     NSArray *persons = [self sortedPersonsInSection: indexPath.section];
-    ABRecordRef person = NULL;
-    ABAddressBookRef ab = [Client theABRef];
-    if (ab) {
-        person = ABAddressBookGetPersonWithRecordID([Client theABRef], [persons[indexPath.row] intValue]);
-        NSString *name = CFBridgingRelease(ABRecordCopyCompositeName(person));
-        cell.textLabel.text = name;
-    }
+    CNContact *contact = persons[indexPath.row];
+    cell.textLabel.text =
+    [CNContactFormatter stringFromContact:contact
+                                    style:CNContactFormatterStyleFullName];
     return cell;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *persons = [self sortedPersonsInSection: indexPath.section];
-    ABRecordRef person = NULL;
-    ABAddressBookRef ab = [Client theABRef];
-    if (ab) {
-        person = ABAddressBookGetPersonWithRecordID([Client theABRef], [persons[indexPath.row] intValue]);
-        NSString *name = CFBridgingRelease(ABRecordCopyCompositeName(person));
-        self.selectedPersonName = name;
-    }
+    CNContact *contact = persons[indexPath.row];
+    self.selectedPersonName =
+    [CNContactFormatter stringFromContact:contact
+                                    style:CNContactFormatterStyleFullName];
     return indexPath;
 }
 
@@ -117,7 +121,5 @@
     NSArray *persons = [self.sections valueForKey:keys[index]];
     return persons;
 }
-
-
 
 @end

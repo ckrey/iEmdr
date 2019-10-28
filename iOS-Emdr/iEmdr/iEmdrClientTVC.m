@@ -14,9 +14,19 @@
 #import "IEMDRPersonTVC.h"
 #import "IemdrVC.h"
 #import "CocoaLumberjack.h"
+#import <Contacts/Contacts.h>
+
+@interface iEmdrClientTVC ()
+@property (nonatomic) BOOL once;
+@end
 
 @implementation iEmdrClientTVC
 static const DDLogLevel ddLogLevel = DDLogLevelError;
+
+- (void)restrictUI {
+    self.navigationItem.rightBarButtonItem = nil;
+    self.navigationItem.prompt = @"Start Anonymously";
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -30,6 +40,69 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                                                                         managedObjectContext:delegate.data.managedObjectContext
                                                                           sectionNameKeyPath:nil
                                                                                     cacheName:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    if (self.once) {
+        return;
+    }
+
+    self.once = TRUE;
+    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    switch (status) {
+        case CNAuthorizationStatusRestricted: {
+            DDLogVerbose(@"CNAuthorizationStatus: CNAuthorizationStatusRestricted");
+            UIAlertController *ac =
+            [UIAlertController alertControllerWithTitle:@"Addressbook Access"
+                                                message:@"has been restricted, possibly due to restrictions such as parental controls."
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *ok =
+            [UIAlertAction actionWithTitle:@"Continue"
+                                     style:UIAlertActionStyleDefault
+                                   handler:nil];
+            [ac addAction:ok];
+            [self presentViewController:ac animated:TRUE completion:nil];
+            break;
+        }
+
+        case CNAuthorizationStatusDenied: {
+            DDLogVerbose(@"CNAuthorizationStatus: CNAuthorizationStatusDenied");
+            UIAlertController *ac =
+            [UIAlertController alertControllerWithTitle:@"Addressbook Access"
+                                                message:@"has been denied by user. Go to Settings/Privacy/Contacts to change"
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *ok =
+            [UIAlertAction actionWithTitle:@"Continue"
+                                     style:UIAlertActionStyleDefault
+                                   handler:nil];
+            [ac addAction:ok];
+            [self presentViewController:ac animated:TRUE completion:^{
+                [self restrictUI];
+            }];
+            break;
+        }
+
+        case CNAuthorizationStatusAuthorized:
+            DDLogVerbose(@"CNAuthorizationStatus: CNAuthorizationStatusAuthorized");
+            break;
+
+        case CNAuthorizationStatusNotDetermined:
+        default:
+            DDLogVerbose(@"CNAuthorizationStatus: CNAuthorizationStatusNotDetermined");
+            CNContactStore *contactStore = [[CNContactStore alloc] init];
+            [contactStore requestAccessForEntityType:CNEntityTypeContacts
+                                   completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                       if (granted) {
+                                           DDLogVerbose(@"requestAccessForEntityType granted");
+                                       } else {
+                                           DDLogVerbose(@"requestAccessForEntityType denied %@", error);
+                                           [self restrictUI];
+                                       }
+                                   }];
+            break;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

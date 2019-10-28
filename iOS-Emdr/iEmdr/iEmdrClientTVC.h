@@ -8,8 +8,9 @@
 
 #import "CoreDataTVC.h"
 #import "Session+Create.h"
+#if !TARGET_OS_MACCATALYST
 #import <AddressBookUI/AddressBookUI.h>
-
+#endif
 
 @interface iEmdrClientTVC : CoreDataTVC
 @end
