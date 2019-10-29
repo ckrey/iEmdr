@@ -1,21 +1,18 @@
 PODS:
-  - CocoaLumberjack (3.4.2):
-    - CocoaLumberjack/Default (= 3.4.2)
-    - CocoaLumberjack/Extensions (= 3.4.2)
-  - CocoaLumberjack/Default (3.4.2)
-  - CocoaLumberjack/Extensions (3.4.2):
-    - CocoaLumberjack/Default
+  - CocoaLumberjack (3.6.0):
+    - CocoaLumberjack/Core (= 3.6.0)
+  - CocoaLumberjack/Core (3.6.0)
 
 DEPENDENCIES:
   - CocoaLumberjack
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - CocoaLumberjack
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
 
 PODFILE CHECKSUM: e5e6300733839bbb405c88b88bd8c6174f7f8d58
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.3
