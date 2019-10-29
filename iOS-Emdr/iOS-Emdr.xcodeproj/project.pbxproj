@@ -25,12 +25,8 @@
 		8479A0461BC2E1CC00EE144E /* iEmdrSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A03F1BC2E1CC00EE144E /* iEmdrSessionTVC.m */; };
 		8479A0471BC2E1CC00EE144E /* iEmdrShowOnlyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A0411BC2E1CC00EE144E /* iEmdrShowOnlyVC.m */; };
 		8479A0481BC2E1CC00EE144E /* iEmdrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A0431BC2E1CC00EE144E /* iEmdrView.m */; };
-		8479A0551BC2E25E00EE144E /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A04A1BC2E25E00EE144E /* Client.m */; };
-		8479A0561BC2E25E00EE144E /* Client+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A04C1BC2E25E00EE144E /* Client+Create.m */; };
 		8479A0571BC2E25E00EE144E /* CoreDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A04E1BC2E25E00EE144E /* CoreDataTVC.m */; };
 		8479A0581BC2E25E00EE144E /* iEmdrCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A0501BC2E25E00EE144E /* iEmdrCoreData.m */; };
-		8479A0591BC2E25E00EE144E /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A0521BC2E25E00EE144E /* Session.m */; };
-		8479A05A1BC2E25E00EE144E /* Session+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8479A0541BC2E25E00EE144E /* Session+Create.m */; };
 		84AF6DA5181AA93B0087D2B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA4181AA93B0087D2B5 /* Foundation.framework */; };
 		84AF6DA7181AA93B0087D2B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */; };
 		84AF6DA9181AA93B0087D2B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DA8181AA93B0087D2B5 /* UIKit.framework */; };
@@ -42,9 +38,13 @@
 		84AF6DDE181AACF10087D2B5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6DDC181AACF10087D2B5 /* Model.xcdatamodeld */; };
 		84AF6DEF181AAE470087D2B5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DEE181AAE470087D2B5 /* CoreData.framework */; };
 		84AF6DF5181AAE8B0087D2B5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AF6DF4181AAE8B0087D2B5 /* MessageUI.framework */; };
+		84D0640D2368B19A00797839 /* Client+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0640B2368B19A00797839 /* Client+CoreDataClass.m */; };
+		84D0640E2368B19A00797839 /* Client+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0640C2368B19A00797839 /* Client+CoreDataProperties.m */; };
+		84D064132368B22600797839 /* Session+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D064112368B22600797839 /* Session+CoreDataClass.m */; };
+		84D064142368B22600797839 /* Session+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D064122368B22600797839 /* Session+CoreDataProperties.m */; };
 		84D7558B18402CB5002613E2 /* IemdrBigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D7558A18402CB5002613E2 /* IemdrBigVC.m */; };
 		84E4BC8A1BB6F833005E0B54 /* big.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E4BC891BB6F833005E0B54 /* big.storyboard */; };
-		84E81CA41A10920700E82A68 /* IemdrPersonTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E81CA31A10920700E82A68 /* IemdrPersonTVC.m */; };
+		84E81CA41A10920700E82A68 /* iEmdrPersonTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E81CA31A10920700E82A68 /* iEmdrPersonTVC.m */; };
 		84F4001123649EE700D6992E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F4001023649EE700D6992E /* Contacts.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,18 +77,10 @@
 		8479A0411BC2E1CC00EE144E /* iEmdrShowOnlyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iEmdrShowOnlyVC.m; sourceTree = "<group>"; };
 		8479A0421BC2E1CC00EE144E /* iEmdrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iEmdrView.h; sourceTree = "<group>"; };
 		8479A0431BC2E1CC00EE144E /* iEmdrView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iEmdrView.m; sourceTree = "<group>"; };
-		8479A0491BC2E25E00EE144E /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = CoreData/Client.h; sourceTree = "<group>"; };
-		8479A04A1BC2E25E00EE144E /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Client.m; path = CoreData/Client.m; sourceTree = "<group>"; };
-		8479A04B1BC2E25E00EE144E /* Client+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Client+Create.h"; path = "CoreData/Client+Create.h"; sourceTree = "<group>"; };
-		8479A04C1BC2E25E00EE144E /* Client+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Client+Create.m"; path = "CoreData/Client+Create.m"; sourceTree = "<group>"; };
 		8479A04D1BC2E25E00EE144E /* CoreDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataTVC.h; path = CoreData/CoreDataTVC.h; sourceTree = "<group>"; };
 		8479A04E1BC2E25E00EE144E /* CoreDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataTVC.m; path = CoreData/CoreDataTVC.m; sourceTree = "<group>"; };
 		8479A04F1BC2E25E00EE144E /* iEmdrCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iEmdrCoreData.h; path = CoreData/iEmdrCoreData.h; sourceTree = "<group>"; };
 		8479A0501BC2E25E00EE144E /* iEmdrCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iEmdrCoreData.m; path = CoreData/iEmdrCoreData.m; sourceTree = "<group>"; };
-		8479A0511BC2E25E00EE144E /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = CoreData/Session.h; sourceTree = "<group>"; };
-		8479A0521BC2E25E00EE144E /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = CoreData/Session.m; sourceTree = "<group>"; };
-		8479A0531BC2E25E00EE144E /* Session+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Session+Create.h"; path = "CoreData/Session+Create.h"; sourceTree = "<group>"; };
-		8479A0541BC2E25E00EE144E /* Session+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Session+Create.m"; path = "CoreData/Session+Create.m"; sourceTree = "<group>"; };
 		84AF6DA1181AA93B0087D2B5 /* iEmdr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iEmdr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AF6DA4181AA93B0087D2B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84AF6DA6181AA93B0087D2B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -106,6 +98,14 @@
 		84AF6DDD181AACF10087D2B5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		84AF6DEE181AAE470087D2B5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		84AF6DF4181AAE8B0087D2B5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		84D064092368B19A00797839 /* Client+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Client+CoreDataProperties.h"; sourceTree = SOURCE_ROOT; };
+		84D0640A2368B19A00797839 /* Client+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Client+CoreDataClass.h"; sourceTree = SOURCE_ROOT; };
+		84D0640B2368B19A00797839 /* Client+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Client+CoreDataClass.m"; sourceTree = SOURCE_ROOT; };
+		84D0640C2368B19A00797839 /* Client+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Client+CoreDataProperties.m"; sourceTree = SOURCE_ROOT; };
+		84D0640F2368B22600797839 /* Session+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Session+CoreDataProperties.h"; sourceTree = SOURCE_ROOT; };
+		84D064102368B22600797839 /* Session+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Session+CoreDataClass.h"; sourceTree = SOURCE_ROOT; };
+		84D064112368B22600797839 /* Session+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Session+CoreDataClass.m"; sourceTree = SOURCE_ROOT; };
+		84D064122368B22600797839 /* Session+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Session+CoreDataProperties.m"; sourceTree = SOURCE_ROOT; };
 		84D7558918402CB5002613E2 /* IemdrBigVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IemdrBigVC.h; sourceTree = "<group>"; };
 		84D7558A18402CB5002613E2 /* IemdrBigVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IemdrBigVC.m; sourceTree = "<group>"; };
 		84E4BC891BB6F833005E0B54 /* big.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = big.storyboard; sourceTree = "<group>"; };
@@ -113,8 +113,8 @@
 		84E4BC931BB707E2005E0B54 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		84E4BC951BB707EE005E0B54 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/SpriteKit.framework; sourceTree = DEVELOPER_DIR; };
 		84E4BC971BB82F3C005E0B54 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
-		84E81CA21A10920700E82A68 /* IemdrPersonTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IemdrPersonTVC.h; sourceTree = "<group>"; };
-		84E81CA31A10920700E82A68 /* IemdrPersonTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IemdrPersonTVC.m; sourceTree = "<group>"; };
+		84E81CA21A10920700E82A68 /* iEmdrPersonTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iEmdrPersonTVC.h; sourceTree = "<group>"; };
+		84E81CA31A10920700E82A68 /* iEmdrPersonTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iEmdrPersonTVC.m; sourceTree = "<group>"; };
 		84F4000F23641A6B00D6992E /* iEmdr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = iEmdr.entitlements; path = iEmdr/iEmdr.entitlements; sourceTree = "<group>"; };
 		84F4001023649EE700D6992E /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Contacts.framework; sourceTree = DEVELOPER_DIR; };
 		A7278E109F17EBB52AA36755 /* Pods-iEmdr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iEmdr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iEmdr/Pods-iEmdr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -141,18 +141,18 @@
 		84235930183E340700782AD1 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				8479A0491BC2E25E00EE144E /* Client.h */,
-				8479A04A1BC2E25E00EE144E /* Client.m */,
-				8479A04B1BC2E25E00EE144E /* Client+Create.h */,
-				8479A04C1BC2E25E00EE144E /* Client+Create.m */,
+				84D0640F2368B22600797839 /* Session+CoreDataProperties.h */,
+				84D064102368B22600797839 /* Session+CoreDataClass.h */,
+				84D064112368B22600797839 /* Session+CoreDataClass.m */,
+				84D064122368B22600797839 /* Session+CoreDataProperties.m */,
+				84D064092368B19A00797839 /* Client+CoreDataProperties.h */,
+				84D0640A2368B19A00797839 /* Client+CoreDataClass.h */,
+				84D0640B2368B19A00797839 /* Client+CoreDataClass.m */,
+				84D0640C2368B19A00797839 /* Client+CoreDataProperties.m */,
 				8479A04D1BC2E25E00EE144E /* CoreDataTVC.h */,
 				8479A04E1BC2E25E00EE144E /* CoreDataTVC.m */,
 				8479A04F1BC2E25E00EE144E /* iEmdrCoreData.h */,
 				8479A0501BC2E25E00EE144E /* iEmdrCoreData.m */,
-				8479A0511BC2E25E00EE144E /* Session.h */,
-				8479A0521BC2E25E00EE144E /* Session.m */,
-				8479A0531BC2E25E00EE144E /* Session+Create.h */,
-				8479A0541BC2E25E00EE144E /* Session+Create.m */,
 				84AF6DDC181AACF10087D2B5 /* Model.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -237,8 +237,8 @@
 				8479A0411BC2E1CC00EE144E /* iEmdrShowOnlyVC.m */,
 				8479A0421BC2E1CC00EE144E /* iEmdrView.h */,
 				8479A0431BC2E1CC00EE144E /* iEmdrView.m */,
-				84E81CA21A10920700E82A68 /* IemdrPersonTVC.h */,
-				84E81CA31A10920700E82A68 /* IemdrPersonTVC.m */,
+				84E81CA21A10920700E82A68 /* iEmdrPersonTVC.h */,
+				84E81CA31A10920700E82A68 /* iEmdrPersonTVC.m */,
 				84AF6DB3181AA93B0087D2B5 /* IemdrAD.h */,
 				84AF6DB4181AA93B0087D2B5 /* IemdrAD.m */,
 				84E4BC891BB6F833005E0B54 /* big.storyboard */,
@@ -402,20 +402,20 @@
 			files = (
 				84AF6DBE181AA93B0087D2B5 /* IemdrVC.m in Sources */,
 				8479A0361BC2E06D00EE144E /* IEMDRScene.m in Sources */,
-				8479A0591BC2E25E00EE144E /* Session.m in Sources */,
 				8479A0581BC2E25E00EE144E /* iEmdrCoreData.m in Sources */,
-				84E81CA41A10920700E82A68 /* IemdrPersonTVC.m in Sources */,
+				84E81CA41A10920700E82A68 /* iEmdrPersonTVC.m in Sources */,
 				8479A0441BC2E1CC00EE144E /* iEmdrClientTVC.m in Sources */,
 				84AF6DB5181AA93B0087D2B5 /* IemdrAD.m in Sources */,
 				84D7558B18402CB5002613E2 /* IemdrBigVC.m in Sources */,
-				8479A05A1BC2E25E00EE144E /* Session+Create.m in Sources */,
+				84D0640E2368B19A00797839 /* Client+CoreDataProperties.m in Sources */,
+				84D064142368B22600797839 /* Session+CoreDataProperties.m in Sources */,
 				84AF6DB1181AA93B0087D2B5 /* main.m in Sources */,
 				8479A0481BC2E1CC00EE144E /* iEmdrView.m in Sources */,
-				8479A0561BC2E25E00EE144E /* Client+Create.m in Sources */,
+				84D0640D2368B19A00797839 /* Client+CoreDataClass.m in Sources */,
 				8479A0471BC2E1CC00EE144E /* iEmdrShowOnlyVC.m in Sources */,
 				8479A0461BC2E1CC00EE144E /* iEmdrSessionTVC.m in Sources */,
-				8479A0551BC2E25E00EE144E /* Client.m in Sources */,
 				8479A0571BC2E25E00EE144E /* CoreDataTVC.m in Sources */,
+				84D064132368B22600797839 /* Session+CoreDataClass.m in Sources */,
 				84AF6DDE181AACF10087D2B5 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

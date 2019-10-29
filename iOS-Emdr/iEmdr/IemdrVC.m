@@ -3,13 +3,13 @@
 //  iEmdr
 //
 //  Created by Christoph Krey on 25.10.13.
-//  Copyright © 2013-2018 Christoph Krey. All rights reserved.
+//  Copyright © 2013-2019 Christoph Krey. All rights reserved.
 //
 
 #import "IemdrVC.h"
 #import "IemdrAD.h"
-#import "Client+Create.h"
-#import "Session+Create.h"
+#import "Client+CoreDataClass.h"
+#import "Session+CoreDataClass.h"
 #include <math.h>
 
 #import <SpriteKit/SpriteKit.h>
@@ -175,6 +175,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 }
 
 - (void)setup {
+    SKView *spriteView = (SKView *)self.view;
+    IemdrScene *scene = [[IemdrScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
+    [spriteView presentScene:scene];
+
+
     [self soundChanged:self.soundSegment];
     [self formChanged:self.formSegment];
     [self durationChanged:self.durationSlider];
@@ -184,7 +189,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     [self speedChanged:self.speedSlider];
     
     [self resetSprites];
-    [self.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    [self.toolbar setBackgroundImage:[UIImage new]
+                  forToolbarPosition:UIToolbarPositionAny
+                          barMetrics:UIBarMetricsDefault];
 }
 
 - (IBAction)durationChanged:(UISlider *)sender {
@@ -192,8 +199,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     self.durationText.text = [NSString stringWithFormat:@"%3.0f", self.duration];
 }
 
-- (void)timePassed:(NSTimer *)timer
-{
+- (void)timePassed:(NSTimer *)timer {
     float value = [[NSDate date] timeIntervalSinceDate:self.started] / self.durationSlider.value;
     DDLogVerbose(@"ticker %f", value);
     [self.progress setProgress:value animated:YES];
@@ -221,8 +227,14 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     self.backgroundText.text = [NSString stringWithFormat:@"%2.1f", sender.value];
     
     SKView *spriteView = (SKView *)self.view;
-    spriteView.scene.backgroundColor = [UIColor colorWithHue:1.0 saturation:0.0 brightness:sender.value alpha:1.0];
-    self.big.scene.backgroundColor = [UIColor colorWithHue:1.0 saturation:0.0 brightness:sender.value alpha:1.0];
+    spriteView.scene.backgroundColor = [UIColor colorWithHue:1.0
+                                                  saturation:0.0
+                                                  brightness:sender.value
+                                                       alpha:1.0];
+    self.big.scene.backgroundColor = [UIColor colorWithHue:1.0
+                                                saturation:0.0
+                                                brightness:sender.value
+                                                     alpha:1.0];
     
 }
 - (IBAction)paused:(UIBarButtonItem *)sender {
@@ -298,7 +310,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     
     SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
     nodeBig.speed = sender.value / 6;
-    
 }
 
 - (IBAction)played:(UIBarButtonItem *)sender {
@@ -321,9 +332,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     [self resetSprites];
 }
 
-- (void)resetSprites
-{
-    if (self.passingTimer) {
+- (void)resetSprites {
+    if (self.passingTimer && self.passingTimer.isValid) {
         [self.passingTimer invalidate];
     }
     
@@ -349,16 +359,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 }
 
 - (IBAction)soundChanged:(UISegmentedControl *)sender {
-    [self resetSprites];
+    [self stopped:nil];
 }
 
 - (IBAction)formChanged:(UISegmentedControl *)sender {
-    [self resetSprites];
+    [self stopped:nil];
 }
 
 #define FLAT 0.75
-- (void)setNode:(SKView *)view
-{
+- (void)setNode:(SKView *)view {
     SKNode *node = [view.scene childNodeWithName:@"node"];
     [node removeAllActions];
     float w = view.scene.frame.size.width;
@@ -462,8 +471,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     [node runAction:[SKAction repeatActionForever:sequence]];
 }
 
-- (void)sessionFinished
-{
+- (void)sessionFinished {
     if (self.clientToRun) {
         (void)[Session sessionWithTimestamp:[NSDate date]
                                    duration:@(self.durationSlider.value)
@@ -482,20 +490,19 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    SKView *spriteView = (SKView *) self.view;
-    IemdrScene *scene = [[IemdrScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
-    [spriteView presentScene:scene];
-    
-    [self soundChanged:self.soundSegment];
-    [self formChanged:self.formSegment];
+
+    SKView *spriteView = (SKView *)self.view;
+    spriteView.scene.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+
+    //[self soundChanged:self.soundSegment];
+    //[self formChanged:self.formSegment];
     [self durationChanged:self.durationSlider];
     [self backgroundChanged:self.backgroundSlider];
     [self sizeChanged:self.sizeSlider];
     [self hueChanged:self.hueSlider];
     [self speedChanged:self.speedSlider];
     
-    [self resetSprites];
+    return;
 }
 
 - (void)handleScreenConnectNotification:(NSNotification *)notification {

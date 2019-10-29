@@ -1,19 +1,19 @@
 //
-//  IEMDRPersonTVC.m
+//  iEmdrPersonTVC.m
 //  iEmdr
 //
 //  Created by Christoph Krey on 10.11.14.
-//  Copyright © 2014-2018 Christoph Krey. All rights reserved.
+//  Copyright © 2014-2019 Christoph Krey. All rights reserved.
 //
 
-#import "IEMDRPersonTVC.h"
+#import "iEmdrPersonTVC.h"
 #import <Contacts/Contacts.h>
 
-@interface IemdrPersonTVC ()
+@interface iEmdrPersonTVC ()
 @property (strong, nonatomic) NSMutableDictionary *sections;
 @end
 
-@implementation IemdrPersonTVC
+@implementation iEmdrPersonTVC
 
 - (void)viewWillAppear:(BOOL)animated {
     self.sections = [[NSMutableDictionary alloc] init];

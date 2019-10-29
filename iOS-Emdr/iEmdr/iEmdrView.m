@@ -3,7 +3,7 @@
 //  iEmdr
 //
 //  Created by Christoph Krey on 02.07.13.
-//  Copyright © 2013-2018 Christoph Krey. All rights reserved.
+//  Copyright © 2013-2019 Christoph Krey. All rights reserved.
 //
 
 #import "iEmdrView.h"
@@ -25,28 +25,25 @@
 #define BPM_MIN 10.0
 #define BPM_DEFAULT 93.0
 
-- (void)setBpm:(float)bpm
-{
+- (void)setBpm:(float)bpm {
     if ((bpm >= BPM_MIN) && (bpm <= BPM_MAX)) _bpm = bpm;
     if (!self.animating) [self setNeedsDisplay];
 }
 
-- (float)bpm
-{
+- (float)bpm {
     if ((_bpm < BPM_MIN) || (_bpm > BPM_MAX)) [self setBpm:BPM_DEFAULT];
     return _bpm;
 }
 
-+ (float)minBpm
-{
++ (float)minBpm {
     return BPM_MIN;
 }
-+ (float)maxBpm
-{
+
++ (float)maxBpm {
     return BPM_MAX;
 }
-+ (float)defaultBpm
-{
+
++ (float)defaultBpm {
     return BPM_DEFAULT;
 }
 
@@ -56,28 +53,25 @@
 #define RADIUS_MIN 5.0
 #define RADIUS_DEFAULT 25.0
 
-- (void)setRadius:(float)radius
-{
+- (void)setRadius:(float)radius {
     if ((radius >= RADIUS_MIN) && (radius <= RADIUS_MAX)) _radius = radius;
     if (!self.animating) [self setNeedsDisplay];
 }
 
-- (float)radius
-{
+- (float)radius {
     if ((_radius < RADIUS_MIN) || (_radius > RADIUS_MAX)) [self setRadius:RADIUS_DEFAULT];
     return _radius;
 }
 
-+ (float)minRadius
-{
++ (float)minRadius {
     return RADIUS_MIN;
 }
-+ (float)maxRadius
-{
+
++ (float)maxRadius {
     return RADIUS_MAX;
 }
-+ (float)defaultRadius
-{
+
++ (float)defaultRadius {
     return RADIUS_DEFAULT;
 }
 
@@ -87,29 +81,26 @@
 #define BACKGROUND_MIN 0.0
 #define BACKGROUND_DEFAULT 0.9
 
-- (void)setBackground:(float)background
-{
+- (void)setBackground:(float)background {
     if ((background >= BACKGROUND_MIN) && (background <= BACKGROUND_MAX)) _background = background;
     UIColor *backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:background alpha:1.0];
     self.superview.backgroundColor = backgroundColor;
 }
 
-- (float)background
-{
+- (float)background {
     if ((_background < BACKGROUND_MIN) || (_background > BACKGROUND_MAX)) [self setBackground:BACKGROUND_DEFAULT];
     return _background;
 }
 
-+ (float)minBackground
-{
++ (float)minBackground {
     return BACKGROUND_MIN;
 }
-+ (float)maxBackground
-{
+
++ (float)maxBackground {
     return BACKGROUND_MAX;
 }
-+ (float)defaultBackground
-{
+
++ (float)defaultBackground {
     return BACKGROUND_DEFAULT;
 }
 
@@ -120,35 +111,31 @@
 #define DURATION_MIN 10.0
 #define DURATION_DEFAULT 60.0
 
-- (void)setDuration:(float)duration
-{
+- (void)setDuration:(float)duration {
     if ((duration >= DURATION_MIN) && (duration <= DURATION_MAX)) {
         _duration = duration;
     }
 }
 
-- (float)duration
-{
+- (float)duration {
     if ((_duration < DURATION_MIN) || (_duration > DURATION_MAX)) [self setDuration:DURATION_DEFAULT];
     return _duration;
 }
 
-+ (float)minDuration
-{
++ (float)minDuration {
     return DURATION_MIN;
 }
-+ (float)maxDuration
-{
+
++ (float)maxDuration {
     return DURATION_MAX;
 }
-+ (float)defaultDuration
-{
+
++ (float)defaultDuration {
     return DURATION_DEFAULT;
 }
 
 // onOff
-- (void)setOn:(BOOL)on
-{
+- (void)setOn:(BOOL)on {
     _on = on;
     if (on) {
         self.startTime = [NSDate date];
@@ -163,15 +150,13 @@
 
 // color
 #define COLOR_DEFAULT [UIColor redColor]
-- (void)setColor:(UIColor *)color
-{
+- (void)setColor:(UIColor *)color {
     _color = color;
     if (!self.animating) [self setNeedsDisplay];
 }
 
 // progress
-- (float)progress
-{
+- (float)progress {
     if (self.endTime && self.startTime) {
         return [self.endTime timeIntervalSinceDate:self.startTime] / self.duration;
     }
@@ -181,13 +166,11 @@
     return 0.0;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     if (!self.animating) [self setNeedsDisplay];
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
     
     [circle addClip];

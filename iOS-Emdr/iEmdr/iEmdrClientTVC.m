@@ -3,15 +3,15 @@
 //  iEmdr
 //
 //  Created by Christoph Krey on 07.09.13.
-//  Copyright © 2013-2018 Christoph Krey. All rights reserved.
+//  Copyright © 2013-2019 Christoph Krey. All rights reserved.
 //
 
 #import "iEmdrClientTVC.h"
 #import "iEmdrSessionTVC.h"
 #import "IemdrAD.h"
-#import "Client+Create.h"
-#import "Session+Create.h"
-#import "IEMDRPersonTVC.h"
+#import "Client+CoreDataClass.h"
+#import "Session+CoreDataClass.h"
+#import "iEmdrPersonTVC.h"
 #import "IemdrVC.h"
 #import "CocoaLumberjack.h"
 #import <Contacts/Contacts.h>
@@ -36,10 +36,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Client"];
     
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                                        managedObjectContext:delegate.data.managedObjectContext
-                                                                          sectionNameKeyPath:nil
-                                                                                    cacheName:nil];
+    self.fetchedResultsController =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                        managedObjectContext:delegate.data.managedObjectContext
+                                          sectionNameKeyPath:nil
+                                                   cacheName:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -134,13 +135,13 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Client *client = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:client];

@@ -3,12 +3,12 @@
 //  iEmdr
 //
 //  Created by Christoph Krey on 25.10.13.
-//  Copyright © 2013-2018 Christoph Krey. All rights reserved.
+//  Copyright © 2013-2019 Christoph Krey. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "Client+Create.h"
-#import "Session+Create.h"
+#import "Client+CoreDataClass.h"
+#import "Session+CoreDataClass.h"
 #import <SpriteKit/SpriteKit.h>
 
 

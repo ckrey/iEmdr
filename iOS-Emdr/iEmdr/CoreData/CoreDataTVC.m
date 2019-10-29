@@ -2,7 +2,7 @@
 //  CoreDataTableViewController.m
 //
 //  Created for Stanford CS193p Winter 2013.
-//  Copyright 2013-2018 Stanford University. All rights reserved.
+//  Copyright 2013-2019 Stanford University. All rights reserved.
 //
 
 #import "CoreDataTVC.h"
