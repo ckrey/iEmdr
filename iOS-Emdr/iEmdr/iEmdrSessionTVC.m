@@ -11,12 +11,54 @@
 
 @interface iEmdrSessionTVC ()
 @property (strong, nonatomic) UIDocumentInteractionController *dic;
+#if TARGET_OS_MACCATALYST
+@property (strong, nonatomic) UIBarButtonItem *editButton;
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
+#endif
+
 @end
 
 @implementation iEmdrSessionTVC
 
-- (void)setClient:(Client *)client
-{
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+#if TARGET_OS_MACCATALYST
+    self.editButton =
+    [[UIBarButtonItem alloc]
+     initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+     target:self
+     action:@selector(editToggle:)];
+    self.doneButton =
+    [[UIBarButtonItem alloc]
+     initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+     target:self
+     action:@selector(editToggle:)];
+
+    NSMutableArray<UIBarButtonItem *> *a = [self.navigationItem.rightBarButtonItems mutableCopy];
+    if (!a) {
+        a = [[NSMutableArray alloc] init];
+    }
+    [a addObject:self.editButton];
+    [self.navigationItem setRightBarButtonItems:a animated:TRUE];
+#endif
+}
+
+#if TARGET_OS_MACCATALYST
+- (IBAction)editToggle:(id)sender {
+    [self.tableView setEditing:!self.tableView.editing animated:TRUE];
+    NSMutableArray<UIBarButtonItem *> *a = [self.navigationItem.rightBarButtonItems mutableCopy];
+    [a removeLastObject];
+    if (self.tableView.editing) {
+        [a addObject:self.doneButton];
+    } else {
+        [a addObject:self.editButton];
+    }
+    [self.navigationItem setRightBarButtonItems:a animated:TRUE];
+}
+#endif
+
+- (void)setClient:(Client *)client {
     _client = client;
     
     if (client.managedObjectContext) {
@@ -35,8 +77,8 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"session"];
     
     Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -58,13 +100,11 @@
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:session];
@@ -72,8 +112,7 @@
     }
 }
 
-- (IBAction)action:(UIBarButtonItem *)sender
-{
+- (IBAction)action:(UIBarButtonItem *)sender {
     NSError *error;
     NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
                                                                  inDomain:NSUserDomainMask
