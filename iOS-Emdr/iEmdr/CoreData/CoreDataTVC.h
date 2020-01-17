@@ -2,7 +2,7 @@
 //  CoreDataTableViewController.h
 //
 //  Created for Stanford CS193p Winter 2013.
-//  Copyright 2013-2019 Stanford University. All rights reserved.
+//  Copyright 2013-2020 Stanford University. All rights reserved.
 //
 // This class mostly just copies the code from NSFetchedResultsController's documentation page
 //   into a subclass of UITableViewController.
