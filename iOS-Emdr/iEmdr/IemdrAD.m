@@ -18,7 +18,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDLog addLogger:[DDOSLogger sharedInstance]];
 
     self.data = [[iEmdrCoreData alloc] init];
     UIDocumentState state;

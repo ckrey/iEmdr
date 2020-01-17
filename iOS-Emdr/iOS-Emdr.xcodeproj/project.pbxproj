@@ -548,7 +548,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iEmdr/iEmdr-Prefix.pch";
 				INFOPLIST_FILE = "iEmdr/iEmdr-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -572,7 +572,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iEmdr/iEmdr-Prefix.pch";
 				INFOPLIST_FILE = "iEmdr/iEmdr-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cky6201.iEmdr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
