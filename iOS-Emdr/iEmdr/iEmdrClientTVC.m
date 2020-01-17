@@ -142,7 +142,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                                            DDLogVerbose(@"requestAccessForEntityType granted");
                                        } else {
                                            DDLogVerbose(@"requestAccessForEntityType denied %@", error);
-                                           [self restrictUI];
+                                           [self performSelectorOnMainThread:@selector(restrictUI)
+                                                                  withObject:nil
+                                                               waitUntilDone:NO];
                                        }
                                    }];
             break;
