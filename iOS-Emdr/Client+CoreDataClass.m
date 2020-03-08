@@ -11,7 +11,8 @@
 
 @implementation Client
 
-+ (Client *)clientWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context {
++ (Client *)clientWithName:(NSString *)name
+    inManagedObjectContext:(NSManagedObjectContext *)context {
     Client *client = nil;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Client"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];

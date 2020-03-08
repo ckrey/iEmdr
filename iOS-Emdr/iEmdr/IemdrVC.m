@@ -48,6 +48,9 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *playButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *stopButton;
+@property (weak, nonatomic) IBOutlet UILabel *offsetLabel;
+@property (weak, nonatomic) IBOutlet UITextField *offsetText;
+@property (weak, nonatomic) IBOutlet UISlider *offsetSlider;
 
 @property (nonatomic) NSTimeInterval duration;
 @property (strong, nonatomic) NSTimer *passingTimer;
@@ -68,6 +71,10 @@
 #define RADIUS_MIN 5.0
 #define RADIUS_DEFAULT 25.0
 
+#define OFFSET_MAX 0.5
+#define OFFSET_MIN -0.5
+#define OFFSET_DEFAULT 0.0
+
 #define BACKGROUND_MAX 1.0
 #define BACKGROUND_MIN 0.0
 #define BACKGROUND_DEFAULT 1.0
@@ -81,8 +88,10 @@
 #define FORM_DEFAULT 0
 #define SOUND_DEFAULT 0
 
+#define FLAT 0.75
+
 @implementation IemdrVC
-static const DDLogLevel ddLogLevel = DDLogLevelError;
+static const DDLogLevel ddLogLevel = DDLogLevelInfo;
 
 - (void)setClientName {
     NSString *name = self.clientToRun ? self.clientToRun.name : @">>";
@@ -100,7 +109,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     self.sizeSlider.minimumValue = RADIUS_MIN;
     self.sizeSlider.maximumValue = RADIUS_MAX;
     self.sizeSlider.value = RADIUS_DEFAULT;
-    
+
+    self.offsetSlider.minimumValue = OFFSET_MIN;
+    self.offsetSlider.maximumValue = OFFSET_MAX;
+    self.offsetSlider.value = OFFSET_DEFAULT;
+
     self.hueSlider.value = HUE_DEFAULT;
     
     self.speedSlider.minimumValue = BPM_MIN;
@@ -110,7 +123,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     self.formSegment.selectedSegmentIndex = FORM_DEFAULT;
     self.soundSegment.selectedSegmentIndex = SOUND_DEFAULT;
     
-    if (self.clientToRun && self.clientToRun.hasSessions && [self.clientToRun.hasSessions count]) {
+    if (self.clientToRun &&
+        self.clientToRun.hasSessions &&
+        [self.clientToRun.hasSessions count]) {
         Session *newestSession;
         
         for (Session *session in self.clientToRun.hasSessions) {
@@ -127,13 +142,37 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         self.durationSlider.value = [newestSession.duration intValue];
         self.backgroundSlider.value = [newestSession.canvas floatValue];
         self.sizeSlider.value = [newestSession.size intValue];
+        self.offsetSlider.value = [newestSession.offset floatValue];
         self.hueSlider.value = [newestSession.hue floatValue];
         self.speedSlider.value = [newestSession.frequency intValue];
+    } else {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud registerDefaults:@{
+            @"sound": @(SOUND_DEFAULT),
+            @"form": @(FORM_DEFAULT),
+            @"duration": @(DURATION_DEFAULT),
+            @"canvas": @(BACKGROUND_DEFAULT),
+            @"size": @(RADIUS_DEFAULT),
+            @"offset": @(OFFSET_DEFAULT),
+            @"hue": @(HUE_DEFAULT),
+            @"frequency": @(BPM_DEFAULT),
+        }];
+        self.soundSegment.selectedSegmentIndex = [ud integerForKey:@"sound"];
+        self.formSegment.selectedSegmentIndex = [ud integerForKey:@"form"];
+        self.durationSlider.value = [ud integerForKey:@"duration"];
+        self.backgroundSlider.value = [ud floatForKey:@"canvas"];
+        self.sizeSlider.value = [ud integerForKey:@"size"];
+        self.offsetSlider.value = [ud floatForKey:@"offset"];
+        self.hueSlider.value = [ud floatForKey:@"hue"];
+        self.speedSlider.value = [ud integerForKey:@"frequency"];
     }
-    [self backgroundChanged:self.backgroundSlider];
+
+    [self setup];
     [self.view setNeedsDisplay];
-    
+
+#if !TARGET_OS_MACCATALYST
     [self checkForExistingScreenAndInitializeIfPresent];
+#endif
 }
 
 - (void)setClientToRun:(Client *)clientToRun {
@@ -143,13 +182,14 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+#if !TARGET_OS_MACCATALYST
     NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-    
     [center addObserver:self selector:@selector(handleScreenConnectNotification:)
                    name:UIScreenDidConnectNotification object:nil];
     [center addObserver:self selector:@selector(handleScreenDisconnectNotification:)
                    name:UIScreenDidDisconnectNotification object:nil];
+#endif
     
     [self setClientName];
 }
@@ -179,12 +219,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     IemdrScene *scene = [[IemdrScene alloc] initWithSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
     [spriteView presentScene:scene];
 
-
     [self soundChanged:self.soundSegment];
     [self formChanged:self.formSegment];
     [self durationChanged:self.durationSlider];
     [self backgroundChanged:self.backgroundSlider];
     [self sizeChanged:self.sizeSlider];
+    [self offsetChanged:self.offsetSlider];
     [self hueChanged:self.hueSlider];
     [self speedChanged:self.speedSlider];
     
@@ -197,6 +237,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 - (IBAction)durationChanged:(UISlider *)sender {
     self.duration = sender.value;
     self.durationText.text = [NSString stringWithFormat:@"%3.0f", self.duration];
+    [self stopped:nil];
 }
 
 - (void)timePassed:(NSTimer *)timer {
@@ -214,6 +255,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     
     self.sizeLabel.textColor = textColor;
     self.sizeText.textColor = textColor;
+    self.offsetLabel.textColor = textColor;
+    self.offsetText.textColor = textColor;
     self.speedLabel.textColor = textColor;
     self.speedText.textColor = textColor;
     self.backgroundLabel.textColor = textColor;
@@ -225,25 +268,23 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     self.toolbarTitle.tintColor = textColor;
     
     self.backgroundText.text = [NSString stringWithFormat:@"%2.1f", sender.value];
-    
-    SKView *spriteView = (SKView *)self.view;
-    spriteView.scene.backgroundColor = [UIColor colorWithHue:1.0
-                                                  saturation:0.0
-                                                  brightness:sender.value
-                                                       alpha:1.0];
-    self.big.scene.backgroundColor = [UIColor colorWithHue:1.0
-                                                saturation:0.0
-                                                brightness:sender.value
-                                                     alpha:1.0];
-    
+
+    [self stopped:nil];
 }
+
+- (void)offsetHidden {
+    self.offsetLabel.hidden = self.formSegment.hidden || self.formSegment.selectedSegmentIndex != 0;
+    self.offsetText.hidden = self.formSegment.hidden || self.formSegment.selectedSegmentIndex != 0;
+    self.offsetSlider.hidden = self.formSegment.hidden || self.formSegment.selectedSegmentIndex != 0;
+}
+
 - (IBAction)paused:(UIBarButtonItem *)sender {
     BOOL hidden = self.sizeLabel.isHidden ? FALSE : TRUE;
     
     self.sizeLabel.hidden = hidden;
     self.sizeText.hidden = hidden;
     self.sizeSlider.hidden = hidden;
-    
+
     self.speedLabel.hidden = hidden;
     self.speedText.hidden = hidden;
     self.speedSlider.hidden = hidden;
@@ -262,6 +303,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     
     self.formSegment.hidden = hidden;
     self.soundSegment.hidden = hidden;
+
+    [self offsetHidden];
     
     if (self.splitViewController.isCollapsed) {
         self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryOverlay;
@@ -277,85 +320,27 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 }
 
 - (IBAction)sizeChanged:(UISlider *)sender {
+    DDLogInfo(@"sizeChanged");
     self.sizeText.text = [NSString stringWithFormat:@"%3.0f", self.sizeSlider.value];
-    
-    SKView *spriteView = (SKView *) self.view;
-    SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
-    node.path = CGPathCreateWithEllipseInRect(CGRectMake(-sender.value, -sender.value, sender.value*2, sender.value*2), NULL);
-    
-    SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
-    nodeBig.path = CGPathCreateWithEllipseInRect(CGRectMake(-sender.value, -sender.value, sender.value*2, sender.value*2), NULL);
+    [self stopped:nil];
+}
+
+- (IBAction)offsetChanged:(UISlider *)sender {
+    DDLogInfo(@"offsetChanged");
+    self.offsetText.text = [NSString stringWithFormat:@"%.2f", self.offsetSlider.value];
+    [self stopped:nil];
 }
 
 - (IBAction)hueChanged:(UISlider *)sender {
+    DDLogInfo(@"hueChanged");
     self.hueText.text = [NSString stringWithFormat:@"%2.1f", sender.value];
-    
-    SKView *spriteView = (SKView *) self.view;
-    SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
-    node.fillColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
-    //node.strokeColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
-    
-    SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
-    nodeBig.fillColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
-    //nodeBig.strokeColor = [UIColor colorWithHue:sender.value saturation:1.0 brightness:1.0 alpha:1.0];
-    
+    [self stopped:nil];
 }
 
 - (IBAction)speedChanged:(UISlider *)sender {
+    DDLogInfo(@"speedChanged");
     self.speedText.text = [NSString stringWithFormat:@"%3.0f", sender.value];
-    
-    SKView *spriteView = (SKView *) self.view;
-    SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
-    node.speed = sender.value / 6;
-    
-    SKShapeNode *nodeBig = (SKShapeNode *)[self.big.scene childNodeWithName:@"node"];
-    nodeBig.speed = sender.value / 6;
-}
-
-- (IBAction)played:(UIBarButtonItem *)sender {
-    [self resetSprites];
-    self.passingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                         target:self
-                                                       selector:@selector(timePassed:)
-                                                       userInfo:nil
-                                                        repeats:YES];
-    self.playButton.enabled = FALSE;
-    self.stopButton.enabled = TRUE;
-    self.started = [NSDate date];
-    
-    [self setNode:(SKView *)self.view];
-    [self setNode:self.big];
-}
-
-- (IBAction)stopped:(UIBarButtonItem *)sender {
-    [self sessionFinished];
-    [self resetSprites];
-}
-
-- (void)resetSprites {
-    if (self.passingTimer && self.passingTimer.isValid) {
-        [self.passingTimer invalidate];
-    }
-    
-    self.playButton.enabled = TRUE;
-    self.stopButton.enabled = FALSE;
-    
-    SKView *spriteView = (SKView *)self.view;
-    SKNode *node = [spriteView.scene childNodeWithName:@"node"];
-    [node removeAllActions];
-    
-    float w = spriteView.scene.frame.size.width;
-    float h = spriteView.scene.frame.size.height;
-    SKAction *reset = [SKAction moveTo:CGPointMake(w/2, h/2) duration:0.25];
-    [node runAction:reset];
-    
-    SKNode *nodeBig = [self.big.scene childNodeWithName:@"node"];
-    [nodeBig removeAllActions];
-    
-    float wBig = self.big.scene.frame.size.width;
-    float hBig = self.big.scene.frame.size.height;
-    SKAction *resetBig = [SKAction moveTo:CGPointMake(wBig/2, hBig/2) duration:0.25];
-    [nodeBig runAction:resetBig];
+    [self stopped:nil];
 }
 
 - (IBAction)soundChanged:(UISegmentedControl *)sender {
@@ -364,114 +349,66 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
 
 - (IBAction)formChanged:(UISegmentedControl *)sender {
     [self stopped:nil];
+    [self offsetHidden];
 }
 
-#define FLAT 0.75
-- (void)setNode:(SKView *)view {
-    SKNode *node = [view.scene childNodeWithName:@"node"];
-    [node removeAllActions];
-    float w = view.scene.frame.size.width;
-    float h = view.scene.frame.size.height;
-    
-    struct CGPath *pathl = CGPathCreateMutable();
-    CGPathMoveToPoint(pathl, NULL, 0, 0);
-    
-    struct CGPath *pathr = CGPathCreateMutable();
-    CGPathMoveToPoint(pathr, NULL, 0, 0);
-    
-    SKAction *reset;
-    
-    switch (self.formSegment.selectedSegmentIndex) {
-        case 5:
-            reset = [SKAction moveTo:CGPointMake(w/2, 0) duration:0];
-            
-            CGPathAddLineToPoint(pathl, NULL, 0, h);
-            
-            CGPathAddLineToPoint(pathr, NULL, 0, -h);
-            break;
-            
-        case 4:
-            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
-            
-            CGPathAddArc(pathl, NULL, +w/4, 0, w/4, M_PI, 2*M_PI, NO);
-            CGPathAddArc(pathl, NULL, +w/4*3, 0, w/4, M_PI, 0, YES);
-            
-            CGPathAddArc(pathr, NULL, -w/4, 0, w/4, 0, M_PI, YES);
-            CGPathAddArc(pathr, NULL, -w/4*3, 0, w/4, 2*M_PI, M_PI, NO);
-            
-            break;
-        case 3:
-            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
-            
-            CGPathAddArc(pathl, NULL, w*FLAT/4, 0, w*FLAT/4, M_PI, M_PI/2*3, NO);
-            CGPathAddLineToPoint(pathl, NULL, w-w*FLAT/4, w*FLAT/4);
-            CGPathAddArc(pathl, NULL, w-w*FLAT/4, 0, w*FLAT/4, M_PI/2, 0, YES);
-            
-            CGPathAddArc(pathr, NULL, -w*FLAT/4, 0, w*FLAT/4, 0, M_PI*3/2, YES);
-            CGPathAddLineToPoint(pathr, NULL, -(w-w*FLAT/4), w*FLAT/4);
-            CGPathAddArc(pathr, NULL, -(w-w*FLAT/4), 0, w*FLAT/4, M_PI/2, M_PI, NO);
-            
-            break;
-        case 2:
-            reset = [SKAction moveTo:CGPointMake(0, h-h/2*(1-FLAT)) duration:0];
-            
-            CGPathAddLineToPoint(pathl, NULL, w, -h*FLAT);
-            
-            CGPathAddLineToPoint(pathr, NULL, -w, h*FLAT);
-            break;
-        case 1:
-            reset = [SKAction moveTo:CGPointMake(0, h/2*(1-FLAT)) duration:0];
-            
-            CGPathAddLineToPoint(pathl, NULL, w, h*FLAT);
-            
-            CGPathAddLineToPoint(pathr, NULL, -w, -h*FLAT);
-            break;
-        case 0:
-        default:
-            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
-            
-            CGPathAddLineToPoint(pathl, NULL, w, 0);
-            
-            CGPathAddLineToPoint(pathr, NULL, -w, 0);
-            break;
+
+- (IBAction)played:(UIBarButtonItem *)sender {
+    [self resetSprites];
+    self.started = [NSDate date];
+    self.playButton.enabled = FALSE;
+    self.stopButton.enabled = TRUE;
+
+    self.passingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                         target:self
+                                                       selector:@selector(timePassed:)
+                                                       userInfo:nil
+                                                        repeats:YES];
+    [IemdrScene setNode:(SKView *)self.view
+                   form:self.formSegment.selectedSegmentIndex
+                 offset:self.offsetSlider.value
+                  sound:self.soundSegment.selectedSegmentIndex];
+    [IemdrScene setNode:self.big
+                   form:self.formSegment.selectedSegmentIndex
+                 offset:self.offsetSlider.value
+                  sound:self.soundSegment.selectedSegmentIndex];
+}
+
+- (IBAction)stopped:(UIBarButtonItem *)sender {
+    [self resetSprites];
+    self.started = nil;
+    self.playButton.enabled = TRUE;
+    self.stopButton.enabled = FALSE;
+}
+
+- (void)resetSprites {
+    DDLogInfo(@"resetSprites");
+    [self resetNodes];
+    if (self.passingTimer && self.passingTimer.isValid) {
+        [self.passingTimer invalidate];
+        [self sessionFinished];
     }
-    
-    SKAction *soundl;
-    SKAction *soundr;
-    
-    switch (self.soundSegment.selectedSegmentIndex) {
-        case 4:
-            soundl = [SKAction playSoundFileNamed:@"snipl.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"snipr.m4a" waitForCompletion:NO];
-            break;
-        case 3:
-            soundl = [SKAction playSoundFileNamed:@"dingl.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"dingr.m4a" waitForCompletion:NO];
-            break;
-        case 2:
-            soundl = [SKAction playSoundFileNamed:@"bassdrum.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"snaire.m4a" waitForCompletion:NO];
-            break;
-        case 1:
-            soundl = [SKAction playSoundFileNamed:@"pingl.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"pingr.m4a" waitForCompletion:NO];
-            break;
-        case 0:
-        default:
-            soundl = [SKAction playSoundFileNamed:@"tick.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"tock.m4a" waitForCompletion:NO];
-            break;
-    }
-    
-    SKAction *actionl = [SKAction followPath:pathl duration:5.0];
-    SKAction *actionr = [SKAction followPath:pathr duration:5.0];
-    
-    SKAction *sequence = [SKAction sequence:@[reset, soundl, actionl, soundr, actionr]];
-    
-    [node runAction:[SKAction repeatActionForever:sequence]];
+}
+
+- (void)resetNodes {
+    [IemdrScene resetNode:(SKView *)self.view
+                     form:self.formSegment.selectedSegmentIndex
+                   offset:self.offsetSlider.value
+                   canvas:self.backgroundSlider.value
+                   radius:self.sizeSlider.value
+                      hue:self.hueSlider.value
+                      bpm:self.speedSlider.value];
+    [IemdrScene resetNode:self.big
+                     form:self.formSegment.selectedSegmentIndex
+                   offset:self.offsetSlider.value
+                   canvas:self.backgroundSlider.value
+                   radius:self.sizeSlider.value
+                      hue:self.hueSlider.value
+                      bpm:self.speedSlider.value];
 }
 
 - (void)sessionFinished {
+    DDLogInfo(@"sessionFinished");
     if (self.clientToRun) {
         (void)[Session sessionWithTimestamp:[NSDate date]
                                    duration:@(self.durationSlider.value)
@@ -479,12 +416,23 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
                                      canvas:@(self.backgroundSlider.value)
                                         hue:@(self.hueSlider.value)
                                        size:@(self.sizeSlider.value)
+                                     offset:@(self.offsetSlider.value)
                                   frequency:@(self.speedSlider.value)
                                        form:@(self.formSegment.selectedSegmentIndex)
                                       sound:@(self.soundSegment.selectedSegmentIndex)
                                      client:self.clientToRun
                      inManagedObjectContext:self.clientToRun.managedObjectContext];
         [self.clientToRun.managedObjectContext save:nil];
+    } else {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud setInteger:self.soundSegment.selectedSegmentIndex forKey:@"sound"];
+        [ud setInteger:self.formSegment.selectedSegmentIndex forKey:@"form"];
+        [ud setInteger:self.durationSlider.value forKey:@"duration"];
+        [ud setFloat:self.backgroundSlider.value forKey:@"canvas"];
+        [ud setInteger:self.sizeSlider.value forKey:@"size"];
+        [ud setFloat:self.offsetSlider.value forKey:@"offset"];
+        [ud setFloat:self.hueSlider.value forKey:@"hue"];
+        [ud setInteger:self.speedSlider.value forKey:@"frequency"];
     }
 }
 
@@ -494,17 +442,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
     SKView *spriteView = (SKView *)self.view;
     spriteView.scene.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
 
-    //[self soundChanged:self.soundSegment];
-    //[self formChanged:self.formSegment];
-    [self durationChanged:self.durationSlider];
-    [self backgroundChanged:self.backgroundSlider];
-    [self sizeChanged:self.sizeSlider];
-    [self hueChanged:self.hueSlider];
-    [self speedChanged:self.speedSlider];
-    
     return;
 }
 
+#if !TARGET_OS_MACCATALYST
+#pragma Second Screen
 - (void)handleScreenConnectNotification:(NSNotification *)notification {
     UIScreen *screen = (UIScreen *)notification.object;
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Second Screen"
@@ -553,5 +495,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelError;
         [self setup];
     }
 }
+#endif
 
 @end

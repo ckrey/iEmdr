@@ -2,8 +2,8 @@
 //  Session+CoreDataProperties.h
 //  iEmdr
 //
-//  Created by Christoph Krey on 29.10.19.
-//  Copyright © 2019-2020 Christoph Krey. All rights reserved.
+//  Created by Christoph Krey on 06.03.20.
+//  Copyright © 2020 Christoph Krey. All rights reserved.
 //
 //
 
@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSNumber *size;
 @property (nullable, nonatomic, copy) NSNumber *sound;
 @property (nullable, nonatomic, copy) NSDate *timestamp;
+@property (nullable, nonatomic, copy) NSNumber *offset;
 @property (nullable, nonatomic, retain) Client *hasClient;
 
 @end

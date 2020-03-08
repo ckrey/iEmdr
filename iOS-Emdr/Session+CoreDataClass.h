@@ -17,16 +17,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Session : NSManagedObject
 
 + (Session *)sessionWithTimestamp:(NSDate *)timestamp
-              duration:(NSNumber *)duration
-        actualDuration:(NSNumber *)actualDuration
-                canvas:(NSNumber *)canvas
-                   hue:(NSNumber *)hue
-                  size:(NSNumber *)size
-             frequency:(NSNumber *)frequency
-                  form:(NSNumber *)form
-                 sound:(NSNumber *)sound
-                client:(Client *)client
-inManagedObjectContext:(NSManagedObjectContext *)context;
+                         duration:(NSNumber *)duration
+                   actualDuration:(NSNumber *)actualDuration
+                           canvas:(NSNumber *)canvas
+                              hue:(NSNumber *)hue
+                             size:(NSNumber *)size
+                           offset:(NSNumber *)offset
+                        frequency:(NSNumber *)frequency
+                             form:(NSNumber *)form
+                            sound:(NSNumber *)sound
+                           client:(Client *)client
+           inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
 

@@ -85,11 +85,12 @@
     cell.textLabel.text = [NSDateFormatter localizedStringFromDate:session.timestamp
                                            dateStyle:NSDateFormatterShortStyle
                                            timeStyle:NSDateFormatterMediumStyle];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%3ds %3.0f%% %3dhz %3dpx h%4.2f c%4.2f f#%1d s#%1d",
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%3ds %3.0f%% %3dhz %3dpx ±%.2f h%4.2f c%4.2f f#%1d s#%1d",
                                  [session.duration intValue],
                                  [session.actualDuration floatValue] * 100,
                                  [session.frequency intValue],
                                  [session.size intValue],
+                                 [session.offset floatValue],
                                  [session.hue floatValue],
                                  [session.canvas floatValue],
                                  [session.form intValue],
@@ -123,10 +124,10 @@
     NSString *fileName = [NSString stringWithFormat:@"iEmdr-Sessions-%@.csv", self.client.name];
     NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
     
-    NSString *string = @"Date,Duration(s),Actual_Duration(%),Frequency(hz),Size(points),Hue(%),Canvas(%),Form#,Sound#\n";
+    NSString *string = @"Date,Duration(s),Actual_Duration(%),Frequency(hz),Size(points),Offset,Hue(%),Canvas(%),Form#,Sound#\n";
     
     for (Session *session in self.fetchedResultsController.fetchedObjects) {
-        string = [string  stringByAppendingFormat:@"\"%@\",\"%d\",\"%@\",\"%d\",\"%d\",\"%@\",\"%@\",\"%d\",\"%d\"\n",
+        string = [string  stringByAppendingFormat:@"\"%@\",\"%d\",\"%@\",\"%d\",\"%d\",\"%@\",\"%@\",\"%@\",\"%d\",\"%d\"\n",
                   [NSDateFormatter localizedStringFromDate:session.timestamp
                                                  dateStyle:NSDateFormatterShortStyle
                                                  timeStyle:NSDateFormatterMediumStyle],
@@ -134,6 +135,7 @@
                   [session.actualDuration descriptionWithLocale:[NSLocale currentLocale]],
                   [session.frequency intValue],
                   [session.size intValue],
+                  [session.offset descriptionWithLocale:[NSLocale currentLocale]],
                   [session.hue descriptionWithLocale:[NSLocale currentLocale]],
                   [session.canvas descriptionWithLocale:[NSLocale currentLocale]],
                   [session.form intValue],

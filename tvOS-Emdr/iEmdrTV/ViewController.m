@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *form;
 @property (weak, nonatomic) IBOutlet UIButton *formSelect;
 @property (weak, nonatomic) IBOutlet UIButton *soundSelect;
+@property (weak, nonatomic) IBOutlet UIButton *offsetPlus;
+@property (weak, nonatomic) IBOutlet UIButton *offsetMinus;
 
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *UIGesture;
 
@@ -49,6 +51,8 @@
 @property (nonatomic) BOOL menuStop;
 
 @end
+
+#define FLAT 0.75
 
 @implementation ViewController
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
@@ -150,7 +154,14 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     self.form.hidden = false;
     self.formSelect.hidden = false;
 
+    [self offsetHidden];
     [self.view setNeedsFocusUpdate];
+}
+
+- (void)offsetHidden {
+    NSInteger form = [[NSUserDefaults standardUserDefaults] integerForKey:@"FormVal"];
+    self.offsetPlus.hidden = self.form.hidden || form != 0;
+    self.offsetMinus.hidden = self.form.hidden || form != 0;
 }
 
 - (void)startEmdr {
@@ -184,12 +195,17 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     self.form.hidden = true;
     self.formSelect.hidden = true;
 
+    [self offsetHidden];
+
     self.passingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                          target:self
                                                        selector:@selector(timePassed:)
                                                        userInfo:nil
                                                         repeats:YES];
-    [self setNode:(SKView *)self.view];
+    [IemdrScene setNode:(SKView *)self.view
+                   form:[[NSUserDefaults standardUserDefaults] integerForKey:@"FormVal"]
+                 offset:[[NSUserDefaults standardUserDefaults] floatForKey:@"OffsetVal"]
+                  sound:[[NSUserDefaults standardUserDefaults] integerForKey:@"SoundVal"]];
     [self.view setNeedsFocusUpdate];
 }
 
@@ -204,33 +220,19 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)resetSprites {
     DDLogVerbose(@"resetSprites");
-    if (self.passingTimer) {
+    [IemdrScene resetNode:(SKView *)self.view
+                     form:[[NSUserDefaults standardUserDefaults] integerForKey:@"FormVal"]
+                   offset:[[NSUserDefaults standardUserDefaults] floatForKey:@"OffsetVal"]
+                   canvas:[[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasVal"]
+                   radius:[[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusVal"]
+                      hue:[[NSUserDefaults standardUserDefaults] doubleForKey:@"HueVal"]
+                      bpm:[[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"]];
+
+    if (self.passingTimer && self.passingTimer.isValid) {
         [self.passingTimer invalidate];
     }
 
-    SKView *spriteView = (SKView *)self.view;
-    SKShapeNode *node = (SKShapeNode *)[spriteView.scene childNodeWithName:@"node"];
-    [node removeAllActions];
-
-    float w = spriteView.scene.frame.size.width;
-    float h = spriteView.scene.frame.size.height;
-    SKAction *reset = [SKAction moveTo:CGPointMake(w/2, h/2) duration:0.25];
-    [node runAction:reset];
-
-    spriteView.scene.backgroundColor = [UIColor colorWithHue:1.0
-                                                  saturation:0.0
-                                                  brightness:[[NSUserDefaults standardUserDefaults] doubleForKey:@"CanvasVal"]
-                                                       alpha:1.0];
-
-    double radius = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusVal"];
-    node.path = CGPathCreateWithEllipseInRect(CGRectMake(-radius, -radius, radius*2, radius*2), NULL);
-
-    node.fillColor = [UIColor colorWithHue:[[NSUserDefaults standardUserDefaults] doubleForKey:@"HueVal"]
-                                saturation:1.0
-                                brightness:1.0
-                                     alpha:1.0];
-    node.speed = [[NSUserDefaults standardUserDefaults] doubleForKey:@"BPMVal"] / 6;
-
+    [self offsetHidden];
 }
 
 - (IBAction)canvasPlus:(id)sender {
@@ -283,6 +285,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"RadiusVal"];
     [self.view setNeedsLayout];
 }
+- (IBAction)offsetPlus:(id)sender {
+    double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetVal"];
+    double max = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetMax"];
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetFac"];
+    val = MIN(max,(val / fac + inc));
+    [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"OffsetVal"];
+    [self.view setNeedsLayout];
+}
 - (IBAction)sizeMinus:(id)sender {
     double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusVal"];
     double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusMin"];
@@ -290,6 +301,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"RadiusFac"];
     val = MAX(min,(val / fac - inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"RadiusVal"];
+    [self.view setNeedsLayout];
+}
+- (IBAction)offsetMinus:(id)sender {
+    double val = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetVal"];
+    double min = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetMin"];
+    double inc = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetInc"];
+    double fac = [[NSUserDefaults standardUserDefaults] doubleForKey:@"OffsetFac"];
+    val = MAX(min,(val / fac - inc));
+    [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"OffsetVal"];
     [self.view setNeedsLayout];
 }
 
@@ -329,112 +349,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     val = MAX(min,(val / fac - inc));
     [[NSUserDefaults standardUserDefaults] setObject:@(val) forKey:@"DurationVal"];
     [self.view setNeedsLayout];
-}
-
-#define FLAT 0.75
-- (void)setNode:(SKView *)view
-{
-    SKNode *node = [view.scene childNodeWithName:@"node"];
-    [node removeAllActions];
-    float w = view.scene.frame.size.width;
-    float h = view.scene.frame.size.height;
-
-    struct CGPath *pathl = CGPathCreateMutable();
-    CGPathMoveToPoint(pathl, NULL, 0, 0);
-
-    struct CGPath *pathr = CGPathCreateMutable();
-    CGPathMoveToPoint(pathr, NULL, 0, 0);
-
-    SKAction *reset;
-
-    switch ([[NSUserDefaults standardUserDefaults] integerForKey:@"FormVal"]) {
-        case 5:
-            reset = [SKAction moveTo:CGPointMake(w/2, 0) duration:0];
-
-            CGPathAddLineToPoint(pathl, NULL, 0, h);
-
-            CGPathAddLineToPoint(pathr, NULL, 0, -h);
-            break;
-
-        case 4:
-            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
-
-            CGPathAddArc(pathl, NULL, +w/4, 0, w/4, M_PI, 2*M_PI, NO);
-            CGPathAddArc(pathl, NULL, +w/4*3, 0, w/4, M_PI, 0, YES);
-
-            CGPathAddArc(pathr, NULL, -w/4, 0, w/4, 0, M_PI, YES);
-            CGPathAddArc(pathr, NULL, -w/4*3, 0, w/4, 2*M_PI, M_PI, NO);
-
-            break;
-        case 3:
-            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
-
-            CGPathAddArc(pathl, NULL, w*FLAT/4, 0, w*FLAT/4, M_PI, M_PI/2*3, NO);
-            CGPathAddLineToPoint(pathl, NULL, w-w*FLAT/4, w*FLAT/4);
-            CGPathAddArc(pathl, NULL, w-w*FLAT/4, 0, w*FLAT/4, M_PI/2, 0, YES);
-
-            CGPathAddArc(pathr, NULL, -w*FLAT/4, 0, w*FLAT/4, 0, M_PI*3/2, YES);
-            CGPathAddLineToPoint(pathr, NULL, -(w-w*FLAT/4), w*FLAT/4);
-            CGPathAddArc(pathr, NULL, -(w-w*FLAT/4), 0, w*FLAT/4, M_PI/2, M_PI, NO);
-
-            break;
-        case 2:
-            reset = [SKAction moveTo:CGPointMake(0, h-h/2*(1-FLAT)) duration:0];
-
-            CGPathAddLineToPoint(pathl, NULL, w, -h*FLAT);
-
-            CGPathAddLineToPoint(pathr, NULL, -w, h*FLAT);
-            break;
-        case 1:
-            reset = [SKAction moveTo:CGPointMake(0, h/2*(1-FLAT)) duration:0];
-
-            CGPathAddLineToPoint(pathl, NULL, w, h*FLAT);
-
-            CGPathAddLineToPoint(pathr, NULL, -w, -h*FLAT);
-            break;
-        case 0:
-        default:
-            reset = [SKAction moveTo:CGPointMake(0, h/2) duration:0];
-
-            CGPathAddLineToPoint(pathl, NULL, w, 0);
-
-            CGPathAddLineToPoint(pathr, NULL, -w, 0);
-            break;
-    }
-
-    SKAction *soundl;
-    SKAction *soundr;
-
-    switch ([[NSUserDefaults standardUserDefaults] integerForKey:@"SoundVal"]) {
-        case 4:
-            soundl = [SKAction playSoundFileNamed:@"snipl.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"snipr.m4a" waitForCompletion:NO];
-            break;
-        case 3:
-            soundl = [SKAction playSoundFileNamed:@"dingl.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"dingr.m4a" waitForCompletion:NO];
-            break;
-        case 2:
-            soundl = [SKAction playSoundFileNamed:@"bassdrum.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"snaire.m4a" waitForCompletion:NO];
-            break;
-        case 1:
-            soundl = [SKAction playSoundFileNamed:@"pingl.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"pingr.m4a" waitForCompletion:NO];
-            break;
-        case 0:
-        default:
-            soundl = [SKAction playSoundFileNamed:@"tick.m4a" waitForCompletion:NO];
-            soundr = [SKAction playSoundFileNamed:@"tock.m4a" waitForCompletion:NO];
-            break;
-    }
-
-    SKAction *actionl = [SKAction followPath:pathl duration:5.0];
-    SKAction *actionr = [SKAction followPath:pathr duration:5.0];
-
-    SKAction *sequence = [SKAction sequence:@[reset, soundl, actionl, soundr, actionr]];
-
-    [node runAction:[SKAction repeatActionForever:sequence]];
 }
 
 - (void)viewDidLayoutSubviews {

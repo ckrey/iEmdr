@@ -10,4 +10,17 @@
 
 @interface IemdrScene : SKScene
 
++ (void)resetNode:(SKView *)spriteView
+             form:(NSInteger)form
+           offset:(double)offset
+           canvas:(double)canvas
+           radius:(NSInteger)radius
+              hue:(double)hue
+              bpm:(double)bpm;
+
++ (void)setNode:(SKView *)spriteView
+           form:(NSInteger)form
+         offset:(double)offset
+          sound:(NSInteger)sound;
+
 @end

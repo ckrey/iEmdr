@@ -17,6 +17,7 @@
                            canvas:(NSNumber *)canvas
                               hue:(NSNumber *)hue
                              size:(NSNumber *)size
+                           offset:(NSNumber *)offset
                         frequency:(NSNumber *)frequency
                              form:(NSNumber *)form
                             sound:(NSNumber *)sound
@@ -46,6 +47,7 @@
         session.canvas = canvas;
         session.hue = hue;
         session.size = size;
+        session.offset = offset;
         session.frequency = frequency;
         session.form = form;
         session.sound = sound;

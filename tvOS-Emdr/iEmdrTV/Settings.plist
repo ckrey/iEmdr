@@ -42,6 +42,16 @@
 	<integer>0</integer>
 	<key>RadiusFac</key>
 	<real>1.5</real>
+	<key>OffsetMax</key>
+	<real>0.5</real>
+	<key>OffsetMin</key>
+	<real>-0.5</real>
+	<key>OffsetVal</key>
+	<integer>0</integer>
+	<key>OffsetInc</key>
+	<real>0.1</real>
+	<key>OffsetFac</key>
+	<integer>1</integer>
 	<key>SoundVal</key>
 	<integer>0</integer>
 	<key>FormVal</key>

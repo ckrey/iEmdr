@@ -2,8 +2,8 @@
 //  Session+CoreDataProperties.m
 //  iEmdr
 //
-//  Created by Christoph Krey on 29.10.19.
-//  Copyright © 2019-2020 Christoph Krey. All rights reserved.
+//  Created by Christoph Krey on 06.03.20.
+//  Copyright © 2020 Christoph Krey. All rights reserved.
 //
 //
 
@@ -24,6 +24,7 @@
 @dynamic size;
 @dynamic sound;
 @dynamic timestamp;
+@dynamic offset;
 @dynamic hasClient;
 
 @end
