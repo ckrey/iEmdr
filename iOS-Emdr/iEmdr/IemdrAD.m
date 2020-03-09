@@ -16,6 +16,10 @@
 @implementation IemdrAD
 static const DDLogLevel ddLogLevel = DDLogLevelError;
 
+- (void)buildMenuWithBuilder:(id<UIMenuBuilder>)builder  API_AVAILABLE(ios(13.0)){
+    [builder removeMenuForIdentifier:UIMenuHelp];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [DDLog addLogger:[DDOSLogger sharedInstance]];
