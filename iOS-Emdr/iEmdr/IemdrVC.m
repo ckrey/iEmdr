@@ -280,6 +280,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelInfo;
 
 - (IBAction)paused:(UIBarButtonItem *)sender {
     BOOL hidden = self.sizeLabel.isHidden ? FALSE : TRUE;
+
+    NSString *name = self.clientToRun ? self.clientToRun.name : @">>";
+
+    self.toolbarTitle.title = hidden ? @"" : name;
     
     self.sizeLabel.hidden = hidden;
     self.sizeText.hidden = hidden;
