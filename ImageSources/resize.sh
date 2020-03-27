@@ -1,6 +1,7 @@
 #!/bin/bash
 
-INK=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+#INK=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+INK="/Applications/Inkscape.app/Contents/MacOS/inkscape --batch-process --export-background=ffffff"
 IMAGEW=imagew
 
 if [[ -z "$1" ]] 
@@ -14,12 +15,13 @@ SVG="$1"
 MYPWD=`pwd`
 
 # need to use absolute paths in OSX
-$INK -z -D -e "$MYPWD/$BASE-1024.png" -f 	$MYPWD/$SVG -w 1024 -h 1024
-$INK -z -D -e "$MYPWD/$BASE-1334.png" -f 	$MYPWD/$SVG -w 1334 -h 1334
-$INK -z -D -e "$MYPWD/$BASE-2048.png" -f 	$MYPWD/$SVG -w 2048 -h 2048
-$INK -z -D -e "$MYPWD/$BASE-2208.png" -f 	$MYPWD/$SVG -w 2208 -h 2208
-$INK -z -D -e "$MYPWD/$BASE-3840.png" -f 	$MYPWD/$SVG -w 3840 -h 3840
-$INK -z -D -e "$MYPWD/$BASE-4640.png" -f 	$MYPWD/$SVG -w 4640 -h 4640
+$INK -z -D -o "$MYPWD/$BASE-1024.png" -w 1024 -h 1024 $MYPWD/$SVG
+$INK -z -D -o "$MYPWD/$BASE-1334.png" -w 1334 -h 1334 $MYPWD/$SVG
+$INK -z -D -o "$MYPWD/$BASE-2048.png" -w 2048 -h 2048 $MYPWD/$SVG
+$INK -z -D -o "$MYPWD/$BASE-2208.png" -w 2208 -h 2208 $MYPWD/$SVG
+$INK -z -D -o "$MYPWD/$BASE-3072.png" -w 3072 -h 3072 $MYPWD/$SVG
+$INK -z -D -o "$MYPWD/$BASE-3840.png" -w 3840 -h 3840 $MYPWD/$SVG
+$INK -z -D -o "$MYPWD/$BASE-4640.png" -w 4640 -h 4640 $MYPWD/$SVG
 
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-3840.png" "$MYPWD/$BASE-2320.png" -w 2320 -h 2320
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-3840.png" "$MYPWD/$BASE-2560.png" -w 2560 -h 2560
@@ -35,6 +37,9 @@ $IMAGEW -bkgd 000 "$MYPWD/$BASE-1024.png" "$MYPWD/iTunesArtwork.png"
 
 # App Icons
 
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-16.png" -w 16 -h 16
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-16@2x.png" -w 32 -h 32
+
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-20.png" -w 20 -h 20
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-20@2x.png" -w 40 -h 40
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-20@3x.png" -w 60 -h 60
@@ -42,6 +47,9 @@ $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-20@3x.png" -w 60 -h 60
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-29.png" -w 29 -h 29
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-29@2x.png" -w 58 -h 58
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-29@3x.png" -w 87 -h 87
+
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-32.png" -w 32 -h 32
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-32@2x.png" -w 64 -h 64
 
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-40.png" -w 40 -h 40
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-40@2x.png" -w 80 -h 80
@@ -54,6 +62,15 @@ $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-76.png" -w 76 -h 76
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-76@2x.png" -w 152 -h 152
 
 $IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-83-5@2x.png" -w 167 -h 167
+
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-128.png" -w 128 -h 128
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-128@2x.png" -w 256 -h 256
+
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-256.png" -w 256 -h 256
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-256@2x.png" -w 512 -h 512
+
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-512.png" -w 512 -h 512
+$IMAGEW -bkgd 000 "$MYPWD/$BASE-2048.png" "$MYPWD/$BASE-512@2x.png" -w 1024 -h 1024
 
 # App Store Image
 $IMAGEW -bkgd 000 -crop 0,0,1024,1024 "$MYPWD/$BASE-1024.png" "$MYPWD/$BASE-1024x1024.png" -w 1024 -h 1024
