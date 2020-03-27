@@ -48,6 +48,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *playButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *stopButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *pauseButton;
 @property (weak, nonatomic) IBOutlet UILabel *offsetLabel;
 @property (weak, nonatomic) IBOutlet UITextField *offsetText;
 @property (weak, nonatomic) IBOutlet UISlider *offsetSlider;
@@ -190,7 +191,34 @@ static const DDLogLevel ddLogLevel = DDLogLevelInfo;
     [center addObserver:self selector:@selector(handleScreenDisconnectNotification:)
                    name:UIScreenDidDisconnectNotification object:nil];
 #endif
-    
+    if (@available(iOS 13.0, *)) {
+    } else {
+        NSMutableArray <UIBarButtonItem *> *toolbarItems = [[self.toolbar items] mutableCopy];
+        for (int i = 0; i < toolbarItems.count; i++) {
+            if (toolbarItems[i].tag == 1) {
+                toolbarItems[i] = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                                   target:self
+                                   action:@selector(played:)];
+                self.playButton = toolbarItems[i];
+            }
+            if (toolbarItems[i].tag == 2) {
+                toolbarItems[i] = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                   target:self
+                                   action:@selector(stopped:)];
+                self.stopButton = toolbarItems[i];
+            }
+            if (toolbarItems[i].tag == 4) {
+                toolbarItems[i] = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemPause
+                                   target:self
+                                   action:@selector(paused:)];
+                self.pauseButton = toolbarItems[i];
+            }
+        }
+        [self.toolbar setItems:toolbarItems];
+    }
     [self setClientName];
 }
 
