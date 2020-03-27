@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="2fJ-HE-UfN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="2fJ-HE-UfN">
     <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,12 +22,12 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qy-Iu-oi8">
                                 <rect key="frame" x="0.0" y="1316" width="1024" height="50"/>
                                 <items>
-                                    <barButtonItem systemItem="play" id="fKC-ol-6Fr">
+                                    <barButtonItem image="play.fill" catalog="system" id="fKC-ol-6Fr">
                                         <connections>
                                             <action selector="played:" destination="OO1-SX-4Mg" id="bk0-36-ahd"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem systemItem="stop" id="3Gc-6b-txm">
+                                    <barButtonItem image="stop.fill" catalog="system" id="3Gc-6b-txm">
                                         <connections>
                                             <action selector="stopped:" destination="OO1-SX-4Mg" id="t1t-kk-kJ4"/>
                                         </connections>
@@ -35,7 +35,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Sln-M0-EAE"/>
                                     <barButtonItem enabled="NO" title="Client" id="pLJ-LA-Up8"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SHb-Iu-hPi"/>
-                                    <barButtonItem systemItem="pause" id="8ER-BJ-akm">
+                                    <barButtonItem image="viewfinder" catalog="system" id="8ER-BJ-akm">
                                         <connections>
                                             <action selector="paused:" destination="OO1-SX-4Mg" id="pu0-ON-uI1"/>
                                         </connections>
@@ -499,4 +499,9 @@
             <point key="canvasLocation" x="229.6875" y="-342.1875"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="stop.fill" catalog="system" width="128" height="113"/>
+        <image name="viewfinder" catalog="system" width="128" height="114"/>
+    </resources>
 </document>
