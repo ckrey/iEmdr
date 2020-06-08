@@ -25,7 +25,7 @@
 }
 
 - (void)show {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryNone;

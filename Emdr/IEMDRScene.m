@@ -187,16 +187,24 @@ static const DDLogLevel ddLogLevel = DDLogLevelWarning;
             soundr = [SKAction playSoundFileNamed:@"pingr.m4a" waitForCompletion:NO];
             break;
         case 0:
-        default:
             soundl = [SKAction playSoundFileNamed:@"tick.m4a" waitForCompletion:NO];
             soundr = [SKAction playSoundFileNamed:@"tock.m4a" waitForCompletion:NO];
+            break;
+        default:
+            soundl = nil;
+            soundr = nil;
             break;
     }
 
     SKAction *actionl = [SKAction followPath:pathl duration:5.0];
     SKAction *actionr = [SKAction followPath:pathr duration:5.0];
+    SKAction *sequence;
 
-    SKAction *sequence = [SKAction sequence:@[reset, soundl, actionl, soundr, actionr]];
+    if (!soundl || !soundr) {
+        sequence = [SKAction sequence:@[reset, actionl, actionr]];
+    } else {
+        sequence = [SKAction sequence:@[reset, soundl, actionl, soundr, actionr]];
+    }
 
     [node runAction:[SKAction repeatActionForever:sequence]];
 }

@@ -34,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 @property (weak, nonatomic) IBOutlet UIButton *durationMinus;
 @property (weak, nonatomic) IBOutlet UIButton *durationPlus;
+@property (weak, nonatomic) IBOutlet UILabel *soundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *formLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *sound;
 @property (weak, nonatomic) IBOutlet UILabel *form;
@@ -149,8 +151,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     self.durationMinus.hidden = false;
     self.durationPlus.hidden = false;
 
+    self.soundLabel.hidden = false;
     self.sound.hidden = false;
     self.soundSelect.hidden = false;
+    self.formLabel.hidden = false;
     self.form.hidden = false;
     self.formSelect.hidden = false;
 
@@ -190,8 +194,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     self.durationMinus.hidden = true;
     self.durationPlus.hidden = true;
 
+    self.soundLabel.hidden = true;
     self.sound.hidden = true;
     self.soundSelect.hidden = true;
+    self.formLabel.hidden = true;
     self.form.hidden = true;
     self.formSelect.hidden = true;
 
@@ -368,7 +374,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
                                ];
 
     NSInteger sound = [[NSUserDefaults standardUserDefaults] integerForKey:@"SoundVal"];
-    NSArray *sounds = @[@"Tic Toc",@"Dong",@"Drums",@"Ding",@"Snip"];
+    NSArray *sounds = @[@"Tic Toc",@"Dong",@"Drums",@"Ding",@"Snip",@"None"];
     self.sound.text = sounds[sound];
 
     NSInteger form = [[NSUserDefaults standardUserDefaults] integerForKey:@"FormVal"];
