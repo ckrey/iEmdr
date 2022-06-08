@@ -114,18 +114,8 @@
 }
 
 - (IBAction)action:(UIBarButtonItem *)sender {
-    NSError *error;
-    NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
-                                                                 inDomain:NSUserDomainMask
-                                                        appropriateForURL:nil
-                                                                   create:YES
-                                                                    error:&error];
-    
-    NSString *fileName = [NSString stringWithFormat:@"iEmdr-Sessions-%@.csv", self.client.name];
-    NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
-    
     NSString *string = @"Date,Duration(s),Actual_Duration(%),Frequency(hz),Size(points),Offset,Hue(%),Canvas(%),Form#,Sound#\n";
-    
+
     for (Session *session in self.fetchedResultsController.fetchedObjects) {
         string = [string  stringByAppendingFormat:@"\"%@\",\"%d\",\"%@\",\"%d\",\"%d\",\"%@\",\"%@\",\"%@\",\"%d\",\"%d\"\n",
                   [NSDateFormatter localizedStringFromDate:session.timestamp
@@ -142,16 +132,49 @@
                   [session.sound intValue]
                   ];
     }
-    
-    NSData *myData =  [string dataUsingEncoding:NSUTF8StringEncoding];
 
+    NSError *error;
+
+#if TARGET_OS_MACCATALYST
+    NSURL *directoryURL =
+    [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory
+                                           inDomain:NSUserDomainMask
+                                  appropriateForURL:nil
+                                             create:YES
+                                              error:&error];
+#else
+    NSURL *directoryURL =
+    [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
+                                           inDomain:NSUserDomainMask
+                                  appropriateForURL:nil
+                                             create:YES
+                                              error:&error];
+#endif
+
+    NSString *fileName = [NSString stringWithFormat:@"iEmdr-Sessions-%@.csv", self.client.name];
+    NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
+    NSData *myData = [string dataUsingEncoding:NSUTF8StringEncoding];
     [[NSFileManager defaultManager] createFileAtPath:[fileURL path]
                                             contents:myData
                                           attributes:nil];
-    
+
+#if TARGET_OS_MACCATALYST
+    UIAlertController *ac =
+    [UIAlertController alertControllerWithTitle:@"Download"
+                                        message:[NSString stringWithFormat:@"\"%@\" saved to your Downloads folder",
+                                                 fileName]
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:nil];
+    [ac addAction:ok];
+    [self presentViewController:ac animated:TRUE completion:nil];
+#else
     self.dic = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
     self.dic.delegate = self;
     [self.dic presentOptionsMenuFromBarButtonItem:sender animated:YES];
+#endif
+
 }
 
 @end
