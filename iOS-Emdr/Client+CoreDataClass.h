@@ -3,7 +3,7 @@
 //  iEmdr
 //
 //  Created by Christoph Krey on 29.10.19.
-//  Copyright © 2019-2020 Christoph Krey. All rights reserved.
+//  Copyright © 2019-2022 Christoph Krey. All rights reserved.
 //
 //
 
