@@ -114,20 +114,40 @@
 }
 
 - (IBAction)action:(UIBarButtonItem *)sender {
-    NSString *string = @"Date,Duration(s),Actual_Duration(%),Frequency(hz),Size(points),Offset,Hue(%),Canvas(%),Form#,Sound#\n";
+    NSString *string = @"Name;Date;Duration(s);Actual_Duration(%);Frequency(hz);Size(points);Offset;Hue(%);Canvas(%);Form#;Sound#\n";
+
+    NSISO8601DateFormatter *dateFormatter = [[NSISO8601DateFormatter alloc] init];
+    dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
+    dateFormatter.formatOptions =
+        ((NSISO8601DateFormatWithFullDate |
+        NSISO8601DateFormatWithDashSeparatorInDate |
+        NSISO8601DateFormatWithFullTime |
+        NSISO8601DateFormatWithColonSeparatorInTime |
+        NSISO8601DateFormatWithSpaceBetweenDateAndTime) ^
+         NSISO8601DateFormatWithTimeZone);
 
     for (Session *session in self.fetchedResultsController.fetchedObjects) {
-        string = [string  stringByAppendingFormat:@"\"%@\",\"%d\",\"%@\",\"%d\",\"%d\",\"%@\",\"%@\",\"%@\",\"%d\",\"%d\"\n",
-                  [NSDateFormatter localizedStringFromDate:session.timestamp
-                                                 dateStyle:NSDateFormatterShortStyle
-                                                 timeStyle:NSDateFormatterMediumStyle],
+        string = [string  stringByAppendingFormat:@"\"%@\";"
+                  "\"%@\";"
+                  "%d;"
+                  "%f;"
+                  "%d;"
+                  "%d;"
+                  "%f;"
+                  "%f;"
+                  "%f;"
+                  "%d;"
+                  "%d\n",
+                  [self.client.name stringByReplacingOccurrencesOfString:@"\""
+                                                              withString:@"\"\""],
+                  [dateFormatter stringFromDate:session.timestamp],
                   [session.duration intValue],
-                  [session.actualDuration descriptionWithLocale:[NSLocale currentLocale]],
+                  session.actualDuration.doubleValue * 100.0,
                   [session.frequency intValue],
                   [session.size intValue],
-                  [session.offset descriptionWithLocale:[NSLocale currentLocale]],
-                  [session.hue descriptionWithLocale:[NSLocale currentLocale]],
-                  [session.canvas descriptionWithLocale:[NSLocale currentLocale]],
+                  session.offset.doubleValue,
+                  session.hue.doubleValue * 100.0,
+                  session.canvas.doubleValue * 100.0,
                   [session.form intValue],
                   [session.sound intValue]
                   ];
@@ -151,8 +171,28 @@
                                               error:&error];
 #endif
 
-    NSString *fileName = [NSString stringWithFormat:@"iEmdr-Sessions-%@.csv", self.client.name];
+    NSMutableCharacterSet *invalidCharacters = [[NSMutableCharacterSet alloc] init];
+    [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet illegalCharacterSet]];
+    [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet controlCharacterSet]];
+    [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [invalidCharacters formUnionWithCharacterSet:[NSCharacterSet characterSetWithCharactersInString:@"/:;,"]];
+    NSString *saveClientName = [[self.client.name componentsSeparatedByCharactersInSet:invalidCharacters] componentsJoinedByString:@"_"];
+
+    NSString *fileName = [NSString stringWithFormat:@"iEmdr-Sessions-%@.csv",
+                          saveClientName];
     NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
+
+#if TARGET_OS_MACCATALYST
+    NSInteger fileVersion = 0;
+    while ([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path]) {
+        fileVersion++;
+        fileName = [NSString stringWithFormat:@"iEmdr-Sessions-%@-%ld.csv",
+                    saveClientName,
+                    (long)fileVersion];
+        fileURL = [directoryURL URLByAppendingPathComponent:fileName];
+    }
+#endif
+
     NSData *myData = [string dataUsingEncoding:NSUTF8StringEncoding];
     [[NSFileManager defaultManager] createFileAtPath:[fileURL path]
                                             contents:myData
